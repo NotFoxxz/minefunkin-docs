@@ -1,0 +1,89 @@
+format 1.1
+-- Event Showcase 23/31: the lanes spread out over the whole width of the screen and slide along it,
+-- wrapping round at the edge - the modchart's scroller. Each one bobs toward the middle of the screen
+-- while it travels. Switched off, they stop and glide home.
+-- Shows: a lane's real spot on the screen (screen.width, strums.spacing), % to wrap round, an ease
+-- written by hand (inOut) for values that aren't properties, the strum background faded meanwhile.
+
+event {
+    name = "Scroller",
+    color = #5CFFB0,
+    category = "Lanes",
+    description = "The lanes spread across the screen and slide sideways, wrapping round at the edges.",
+}
+
+params {
+    on    = bool   { from = "value1", default = true, label = "On" },
+    speed = number { from = "value2", default = 1, min = -2, max = 2, step = 0.25, label = "Screens per 2 bars" },
+}
+
+-- 0 = idle, 1 = scrolling, 2 = gliding home.
+local state = 0
+local speed = 1
+local onAt = 0
+local offAt = 0
+-- How far it has scrolled, in screen widths.
+local pos = 0
+-- The strum background's opacity before it faded.
+local under = 0.65
+
+local function inOut(t)
+    t = clamp(t, 0, 1)
+    return t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
+end
+
+function onEvent(p)
+    speed = p.speed
+
+    if p.on and state != 1 then
+        state = 1
+        onAt = time
+        pos = 0
+        under = underlay.alpha
+        tween(underlay.alpha, 0, beats(4))
+    elseif not p.on and state == 1 then
+        state = 2
+        offAt = time
+        tween(underlay.alpha, under, beats(2))
+    end
+end
+
+function onFrame(dt)
+    if state == 0 then return end
+
+    local w = screen.width
+    local s = strums.spacing
+
+    -- A screen width every two bars, like the modchart (frozen while gliding home, so no lane wraps
+    -- round on its way back).
+    if state == 1 then pos += dt / beats(8) * speed end
+
+    -- Spread from their own spacing to a quarter of the screen each, over a bar.
+    local spread = inOut((time - onAt) / beats(4))
+    local leave = state == 2 ? inOut((time - offAt) / beats(2)) : 0
+    local gap = lerp(s, w / 4, spread)
+    local left = lerp(w / 2 - 1.5 * s, w / 8, spread)
+    local b = time / beats(1)
+
+    for lane = 0, 3 do
+        local home = w / 2 + (lane - 1.5) * s
+        local x = (left + lane * gap + pos * w) % w
+        local toMiddle = strum[lane].isDown ? -1 : 1
+        local bob = toMiddle * screen.height * 0.05 * (1 + sin(b * pi + lane * pi / 2))
+
+        strum[lane].x = (x - home) * (1 - leave)
+        strum[lane].y = bob * spread * (1 - leave)
+        -- A little see-through right at the edges, where a lane jumps round.
+        strum[lane].alpha = lerp(1, clamp(0.35 + min(x, w - x) / 40, 0.35, 1), spread * (1 - leave))
+    end
+
+    if state == 2 and leave >= 1 then
+        state = 0
+
+        for lane = 0, 3 do
+            strum[lane].x = 0
+            strum[lane].y = 0
+            strum[lane].alpha = 1
+        end
+    end
+end

@@ -1,0 +1,52 @@
+format 1.1
+-- Event Showcase 2/31: names what's on screen. Each caption slides in from the left with its number and
+-- slides out again; a newer one takes the place of an older one.
+-- Shows: a counter kept for the whole song, a closure that checks whether it's still the newest.
+
+event {
+    name = "Caption",
+    color = #B9A6FF,
+    category = "Text",
+    description = "A numbered caption top left: the event and what it uses.",
+}
+
+params {
+    title = text { from = "value1", label = "Event" },
+    line  = text { from = "value2", label = "What it uses" },
+}
+
+local count = 0
+
+local function slideIn(slot, delay)
+    text[slot].x = -0.5
+    text[slot].alpha = 1
+    after(delay, function() tween(text[slot].x, 0.03, beats(0.6), "backOut") end)
+end
+
+function onEvent(p)
+    count += 1
+    local mine = count
+
+    text[5].value = (count < 10 ? "0" : "") .. count .. "  " .. upper(p.title ?? "?")
+    text[5].align = "left"
+    text[5].y = 0.11
+    text[5].size = 1.1
+    text[5].color = #5CF2FF
+    text[5].layer = "top"
+    slideIn(5, 0)
+
+    text[6].value = p.line ?? ""
+    text[6].align = "left"
+    text[6].y = 0.11 + 0.065
+    text[6].size = 0.7
+    text[6].color = #F2ECFF
+    text[6].layer = "top"
+    slideIn(6, beats(0.15))
+
+    after(beats(7), function()
+        if count == mine then
+            tween(text[5].x, -0.6, beats(0.6), "backIn")
+            tween(text[6].x, -0.6, beats(0.6), "backIn")
+        end
+    end)
+end

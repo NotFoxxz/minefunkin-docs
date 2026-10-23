@@ -1,0 +1,49 @@
+format 1.1
+-- Event Showcase 21/31: the lanes leave and come back like in the modchart. Out: one after the other
+-- they hop up and fall off the bottom of the screen. In: they shoot up from below past their spot, drop
+-- back a little and wobble into place - three beats, so place it three beats before your next note.
+-- Shows: a sequence of tweens per lane with after(), the loop variable kept in each closure, the strum
+-- background fading with them.
+
+event {
+    name = "Drop Out",
+    color = #FF5C7A,
+    category = "Lanes",
+    description = "Out: the lanes fall off the screen one by one. In: they fly back and wobble into place (3 beats).",
+}
+
+params {
+    way = choice { from = "value1", options = { "out", "in" }, label = "Way" },
+}
+
+-- The strum background's opacity before it went.
+local under = 0.65
+
+function onEvent(p)
+    local far = screen.height * 1.15
+
+    if p.way == "out" then
+        under = underlay.alpha
+        tween(underlay.alpha, 0, beats(2))
+    else
+        tween(underlay.alpha, under, beats(2))
+    end
+
+    for lane = 0, 3 do
+        local d = beats(lane * 0.125)
+
+        if p.way == "out" then
+            after(d, function() tween(strum[lane].y, -40, beats(0.5), "expoOut") end)
+            after(d + beats(0.5), function() tween(strum[lane].y, far, beats(1.25), "expoIn") end)
+            after(d + beats(1.75), function() strum[lane].alpha = 0 end)
+        else
+            after(d, function()
+                strum[lane].y = far
+                strum[lane].alpha = 1
+                tween(strum[lane].y, -40, beats(1), "expoOut")
+            end)
+            after(d + beats(1), function() tween(strum[lane].y, 30, beats(1), "expoIn") end)
+            after(d + beats(2), function() tween(strum[lane].y, 0, beats(1.25), "elasticOut") end)
+        end
+    end
+end

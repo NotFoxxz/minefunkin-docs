@@ -1,0 +1,32 @@
+format 1.1
+-- Event Showcase 31/31: the end - the old TV comes back and switches off. The picture squeezes into a
+-- glowing line, the line into a dot, the dot fades out.
+-- Shows: the same shader as Power On, played backwards, ending on screen.color.
+
+event {
+    name = "Power Off",
+    color = #5CF2FF,
+    category = "Screen",
+    description = "The screen curves into an old TV and switches off into a dot (the collapse comes after one beat).",
+}
+
+function onEvent(p)
+    shader[0].file = "crt.fsh"
+    shader[0].amount = 1
+    shader[0].a = 0
+    shader[0].b = 1
+    shader[0].c = 1
+    shader[0].d = 0
+    tween(shader[0].a, 1, beats(1), "sineOut")
+    tween(shader[0].d, 1, beats(1), "sineOut")
+
+    -- Pressed into a line (glowing brighter the thinner it gets), then into a dot.
+    after(beats(1), function() tween(shader[0].c, 0, beats(0.4), "expoIn") end)
+    after(beats(1.4), function() tween(shader[0].b, 0, beats(0.35), "expoIn") end)
+
+    -- Black under the shader: the dot has nothing left to show and fades.
+    after(beats(1.75), function()
+        screen.color = #000000
+        tween(screen.alpha, 1, beats(1))
+    end)
+end

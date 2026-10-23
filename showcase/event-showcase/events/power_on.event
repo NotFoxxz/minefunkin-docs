@@ -1,0 +1,78 @@
+format 1.1
+-- Event Showcase 1/31: the song switches on like an old TV - a dot, a line, then the picture - with the
+-- title flickering in on the curved screen. After two bars the TV look fades away.
+-- Shows: a song's own shader (shaders/crt.fsh) driven by its four numbers, after() for a sequence.
+
+event {
+    name = "Power On",
+    color = #5CF2FF,
+    category = "Screen",
+    description = "The screen opens from a dot like an old TV, with the title on it.",
+}
+
+params {
+    title    = text { from = "value1", default = "EVENT SHOWCASE", label = "Title" },
+    subtitle = text { from = "value2", label = "Subtitle" },
+}
+
+local glowing = false
+
+function onEvent(p)
+    -- crt.fsh: a = curvature, b = open sideways, c = open up and down, d = scanlines.
+    shader[0].file = "crt.fsh"
+    shader[0].amount = 1
+    shader[0].a = 1
+    shader[0].b = 0
+    shader[0].c = 0
+    shader[0].d = 1
+
+    -- A dot grows into a line, the line opens into the picture.
+    tween(shader[0].b, 1, beats(1), "expoOut")
+    after(beats(1), function() tween(shader[0].c, 1, beats(2), "expoOut") end)
+
+    text[0].value = upper(p.title)
+    text[0].x = 0.5
+    text[0].y = 0.34
+    text[0].size = 3.2
+    text[0].color = #5CF2FF
+    text[0].layer = "top"
+    text[0].alpha = 0
+
+    text[1].value = p.subtitle ?? ""
+    text[1].x = 0.5
+    text[1].y = 0.46
+    text[1].size = 1
+    text[1].color = #FF6EC7
+    text[1].layer = "top"
+    text[1].alpha = 0
+
+    -- The title warms up with the tube: it flickers for a beat, then holds.
+    after(beats(2.5), function() glowing = true end)
+    after(beats(3.5), function()
+        glowing = false
+        text[0].alpha = 1
+        tween(text[1].alpha, 1, beats(1))
+    end)
+
+    -- Two and a half bars later the TV look fades out and the title goes.
+    after(beats(10), function()
+        tween(shader[0].a, 0, beats(2), "sineInOut")
+        tween(shader[0].d, 0, beats(2), "sineInOut")
+        tween(shader[0].amount, 0, beats(2), "sineInOut")
+        tween(text[0].alpha, 0, beats(1))
+        tween(text[0].size, 4, beats(1), "expoIn")
+        tween(text[1].alpha, 0, beats(1))
+    end)
+
+    after(beats(12), function()
+        shader[0].file = ""
+        text[0].value = ""
+        text[1].value = ""
+    end)
+end
+
+function onFrame(dt)
+    if glowing then
+        text[0].alpha = chance(0.6) ? random(0.5, 1) : 0.1
+    end
+end

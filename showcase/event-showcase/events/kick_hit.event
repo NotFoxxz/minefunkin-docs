@@ -1,0 +1,36 @@
+format 1.1
+-- Event Showcase 26/31: every kick hits the picture - the colours split apart and the bright parts
+-- flare up, a little harder on the first beat of a bar.
+-- Shows: two built-in effects (fx.chromatic, fx.bloom) set and tweened back on every beat.
+
+event {
+    name = "Kick Hit",
+    color = #FF6EC7,
+    category = "Screen",
+    description = "Every beat hits the picture: the colours split and it glows (0 = off).",
+}
+
+params {
+    strength = number { from = "value1", default = 1, min = 0, max = 2, step = 0.1, label = "Strength" },
+}
+
+local strength = 0
+
+function onEvent(p)
+    strength = p.strength
+
+    if strength == 0 then
+        tween(fx.chromatic, 0, beats(0.5))
+        tween(fx.bloom, 0, beats(0.5))
+    end
+end
+
+function onBeat(b)
+    if strength == 0 then return end
+
+    local down = b % 4 == 0
+    fx.chromatic = (down ? 6 : 3.5) * strength
+    tween(fx.chromatic, 0, beats(0.5), "quadOut")
+    fx.bloom = (down ? 0.7 : 0.4) * strength
+    tween(fx.bloom, 0, beats(0.6), "quadOut")
+end

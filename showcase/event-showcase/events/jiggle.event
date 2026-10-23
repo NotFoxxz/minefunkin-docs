@@ -1,0 +1,60 @@
+format 1.1
+-- Event Showcase 9/31: the receptors get kicked around on the rhythm and settle again - the modchart
+-- "kick": a sideways jolt on 0, 0.75, 1.5 and 2.25 of every bar, an up-and-down jolt on 3 and 3.5, each
+-- the other way round than the last.
+-- Shows: onStep(n) as a rhythm grid, the wobble channels (they stack on .x / .y), local functions.
+
+event {
+    name = "Jiggle",
+    color = #5CF2FF,
+    category = "Lanes",
+    description = "The receptors jolt on a rhythm and settle (pixels, 0 = off).",
+}
+
+params {
+    amount = number { from = "value1", default = 24, min = 0, max = 60, step = 1, label = "Pixels" },
+    rhythm = choice { from = "value2", options = { "kick", "beat", "eighths" }, label = "Rhythm" },
+}
+
+local amount = 0
+local rhythm = "kick"
+local flipX = 1
+local flipY = 1
+
+-- The whole row sideways.
+local function side()
+    flipX = -flipX
+    for lane = 0, 3 do
+        strum[lane].wobbleX = amount * flipX
+        tween(strum[lane].wobbleX, 0, beats(0.75), "cubicOut")
+    end
+end
+
+-- Up and down, every lane a bit differently (the cosine of the lane), so the row zigzags.
+local function updown()
+    flipY = -flipY
+    for lane = 0, 3 do
+        strum[lane].wobbleY = amount * 0.8 * flipY * cos(lane * 2)
+        tween(strum[lane].wobbleY, 0, beats(0.75), "cubicOut")
+    end
+end
+
+function onEvent(p)
+    amount = p.amount
+    rhythm = p.rhythm
+end
+
+function onStep(n)
+    if amount == 0 then return end
+
+    local s = n % 16
+
+    if rhythm == "kick" then
+        if s == 0 or s == 3 or s == 6 or s == 9 then side() end
+        if s == 12 or s == 14 then updown() end
+    elseif rhythm == "beat" then
+        if s % 4 == 0 then side() end
+    elseif s % 2 == 0 then
+        if s % 4 == 0 then side() else updown() end
+    end
+end

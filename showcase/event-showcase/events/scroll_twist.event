@@ -1,0 +1,32 @@
+format 1.1
+-- Event Showcase 25/31: lanes turn around.
+-- Shows: text properties (strum[lane].scroll = "up" / "down" / "auto"), reading the player's own
+-- setting (player.downscroll) so it works for both, and a little wiggle on every switch.
+
+event {
+    name = "Scroll Twist",
+    color = #FF9F1C,
+    category = "Lanes",
+    description = "zigzag = lanes 2 and 4 scroll the other way, flip = all of them, normal = back to the player's setting.",
+}
+
+params {
+    mode = choice { from = "value1", options = { "zigzag", "flip", "normal" }, default = "zigzag", label = "Mode" },
+}
+
+function onEvent(p)
+    -- The other way from what the player plays with.
+    local other = player.downscroll ? "up" : "down"
+
+    for lane = 0, 3 do
+        local turns = p.mode == "flip" or (p.mode == "zigzag" and lane % 2 == 1)
+        strum[lane].scroll = turns ? other : "auto"
+
+        strum[lane].scale = 0.7
+        tween(strum[lane].scale, 1, beats(0.5), "backOut")
+    end
+
+    flash.color = #FF9F1C
+    flash.alpha = 0.2
+    tween(flash.alpha, 0, beats(0.5))
+end

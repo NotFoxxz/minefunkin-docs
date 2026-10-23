@@ -1,0 +1,62 @@
+format 1.1
+-- Event Showcase 13/31: the drop.
+-- Shows: an impact (flash, zoom punch, shake that dies down), onBeat(beat) with a kick / snare pattern,
+-- a colour per bar from hsv(), and setting the shared "hype" for everyone else.
+
+event {
+    name = "The Drop",
+    color = #FF3D6E,
+    category = "Screen",
+    description = "On: a big impact, then the playfield punches on every kick and tilts on every snare. Off: calms down.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+}
+
+shared hype = 0
+
+local active = false
+local bars = 0
+
+function onEvent(p)
+    active = p.enabled
+
+    if not active then
+        hype = 0.3
+        tween(hud.angle, 0, beats(1))
+        return
+    end
+
+    hype = 1
+    bars = 0
+
+    flash.color = #FFFFFF
+    flash.alpha = 1
+    tween(flash.alpha, 0, beats(2), "quadOut")
+    camera.bump += 0.14
+    camera.shake = 0.012
+    tween(camera.shake, 0, beats(2), "quadOut")
+end
+
+function onBeat(b)
+    if not active then return end
+
+    -- Kick on every beat: a zoom punch.
+    camera.bump += 0.022 * hype
+
+    -- Snare on 2 and 4: the playfield tilts, left on one bar, right on the next.
+    if b % 2 == 1 then
+        local side = floor(b / 4) % 2 == 0 ? 1 : -1
+        hud.angle = side * 1.8
+        tween(hud.angle, 0, beats(0.9), "backOut")
+    end
+
+    -- New bar: a soft flash in the next colour round the wheel.
+    if b % 4 == 0 then
+        bars += 1
+        flash.color = hsv(bars * 67, 0.75, 1)
+        flash.alpha = 0.16
+        tween(flash.alpha, 0, beats(1))
+    end
+end

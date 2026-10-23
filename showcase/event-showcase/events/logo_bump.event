@@ -1,0 +1,48 @@
+format 1.1
+-- Event Showcase 27/31: a picture from the song folder, bumped on the beat.
+-- Shows: image slots (file, size, position, angle), LAYERS - "lanes" puts it on the strum background
+-- but under the notes - onBeat, and "backOut" pops.
+-- The picture is logo.png next to the chart; any .png in the song folder (or its events/) works.
+
+event {
+    name = "Logo Bump",
+    color = #C77DFF,
+    category = "Text",
+    description = "Shows a picture on the strum background, under the notes, that bumps and rocks on every beat. Hide = it shrinks away.",
+}
+
+params {
+    mode = choice { from = "value1", options = { "show", "hide" }, default = "show", label = "Mode" },
+    file = text   { from = "value2", default = "logo.png", label = "Picture (.png)" },
+}
+
+local showing = false
+local size = 0.3
+
+function onEvent(p)
+    if p.mode == "hide" then
+        showing = false
+        tween(image[1].width, 0, beats(1), "backIn")
+        return
+    end
+
+    showing = true
+    image[1].file = p.file
+    -- On the strum background, under the notes: "back" would hide it behind the dark stripe,
+    -- "front" would cover the notes.
+    image[1].layer = "lanes"
+    image[1].x = 0.5
+    image[1].y = 0.45
+    image[1].alpha = 1
+    image[1].width = 0
+    tween(image[1].width, size, beats(1), "backOut")
+end
+
+function onBeat(b)
+    if not showing then return end
+
+    image[1].width = size * 1.12
+    tween(image[1].width, size, beats(0.6), "quadOut")
+    image[1].angle = b % 2 == 0 ? 5 : -5
+    tween(image[1].angle, 0, beats(0.9), "backOut")
+end

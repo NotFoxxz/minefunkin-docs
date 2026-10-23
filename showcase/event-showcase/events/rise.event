@@ -1,0 +1,38 @@
+format 1.1
+-- Event Showcase 22/31: ...and it gets back up. Huge. For two bars.
+-- Shows: opponent.pose back to "none", opponent.scale with "elasticOut", a white flash, the colour
+-- back.
+
+event {
+    name = "Rise",
+    color = #FF2E63,
+    category = "Fighters",
+    description = "The opponent stands up again, grows, then shrinks back two bars later.",
+}
+
+params {
+    size = number { from = "value1", default = 2, min = 1, max = 3, step = 0.1, label = "Size" },
+}
+
+function onEvent(p)
+    opponent.pose = "none"
+    opponent.scale = 1
+    tween(opponent.scale, p.size, beats(1.5), "elasticOut")
+
+    flash.color = #FFFFFF
+    flash.alpha = 0.85
+    tween(flash.alpha, 0, beats(1), "quadOut")
+    tween(fx.saturation, 1, beats(1))
+    tween(fx.contrast, 1, beats(1))
+    tween(vignette.alpha, 0, beats(1))
+    tween(camera.fov, 0, beats(1))
+    tween(camera.yaw, 0, beats(1), "backOut")
+    tween(camera.pitch, 7, beats(1), "backOut")
+    camera.shake = 0.02
+    tween(camera.shake, 0, beats(1.5))
+
+    after(beats(8), function()
+        tween(opponent.scale, 1, beats(1), "elasticOut")
+        tween(camera.pitch, 0, beats(1))
+    end)
+end

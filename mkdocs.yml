@@ -1,0 +1,146 @@
+site_name: MineFunkin Docs
+site_url: https://notfoxxz.github.io/minefunkin-docs/
+site_description: Event scripts and the addon API of MineFunkin - Friday Night Funkin' in Minecraft.
+site_author: NotFoxxz
+repo_url: https://github.com/NotFoxxz/minefunkin-docs
+repo_name: minefunkin-docs
+copyright: MineFunkin by NotFoxxz · <a href="https://notfoxxz.github.io/minefunkin-docs/license/">License</a>
+
+theme:
+  name: material
+  logo: assets/icon.png
+  favicon: assets/icon.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: [showcase]
+      check_paths: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+hooks:
+  - hooks/sidebar_logos.py
+
+nav:
+  - Home: index.md
+  - Event scripts:
+      - guides/index.md
+      - Get started:
+          - Your first event: guides/tutorial.md
+          - Templates: guides/templates.md
+          - In the chart editor: guides/editor.md
+      - Guides:
+          - Song scripts: guides/song-scripts.md
+          - Modcharts: guides/modcharts.md
+          - Modifiers: guides/modifiers.md
+          - Stages and sprites: guides/stages.md
+          - The fight camera: guides/camera.md
+          - The fighters: guides/fighters.md
+          - Effects: guides/effects.md
+          - Your own shaders: guides/shaders.md
+          - Sounds and music: guides/sound.md
+          - Game window and pop-outs: guides/windows.md
+      - From another engine:
+          - Psych Engine: guides/psych.md
+          - Kade Engine: guides/kade.md
+      - Examples:
+          - Cookbook: guides/cookbook.md
+          - The Event Showcase: guides/showcase.md
+      - Help:
+          - FAQ: help/faq.md
+          - Errors and fixes: help/troubleshooting.md
+          - Built-in events: help/builtins.md
+          - Limits, log, versions: help/limits.md
+  - Event API:
+      - api/index.md
+      - Basics:
+          - Frequently used: api/frequently-used.md
+          - Files and code: api/language.md
+          - Parameters: api/parameters.md
+          - Choices: api/choices.md
+      - Calls:
+          - Callbacks: api/callbacks.md
+          - Actions and timers: api/actions.md
+          - Shortcuts: api/shortcuts.md
+          - Functions and values: api/functions.md
+      - Properties:
+          - How properties work: api/properties.md
+          - camera: api/camera.md
+          - hud: api/hud.md
+          - judgments: api/judgments.md
+          - screen, flash, vignette: api/screen.md
+          - strums: api/strums.md
+          - strum[lane]: api/strum.md
+          - underlay: api/underlay.md
+          - note[i]: api/notes.md
+          - text[n]: api/text.md
+          - image[n]: api/image.md
+          - Fighters: api/fighters.md
+          - Body parts: api/parts.md
+          - fx: api/fx.md
+          - shader[n]: api/shader.md
+          - volume: api/volume.md
+          - window: api/window.md
+          - popout[n]: api/popout.md
+          - monitor: api/monitor.md
+          - song: api/song.md
+          - player (your run): api/player.md
+      - Modifiers: api/modifiers.md
+  - Songs:
+      - songs/index.md
+      - Song files: songs/files.md
+  - Addon API:
+      - addon-api/index.md
+      - Getting started:
+          - Set up your mod: addon-api/setup.md
+          - Recipes: addon-api/recipes.md
+      - The API:
+          - Server side: addon-api/server.md
+          - Client side: addon-api/client.md
+          - Types: addon-api/types.md
+      - More:
+          - Versions and loaders: addon-api/versions.md

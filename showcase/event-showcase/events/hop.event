@@ -1,0 +1,42 @@
+format 1.1
+-- Event Showcase 16/31: the lanes hop in turns - two jump on one beat and land on the next kick, the
+-- other two jump on the next. Always toward the middle of the screen, so they never hop off it.
+-- Shows: max(0, sin()) as a bouncing ball, strum[lane].isDown to know which way is "in".
+
+event {
+    name = "Hop",
+    color = #9BFF5C,
+    category = "Lanes",
+    description = "The lanes hop in turns on the beat (pixels, 0 = off).",
+}
+
+params {
+    amount = number { from = "value1", default = 22, min = 0, max = 60, step = 1, label = "Pixels" },
+}
+
+local amount = 22
+local target = 0
+local level = 0
+
+function onEvent(p)
+    if p.amount > 0 then amount = p.amount end
+    target = p.amount > 0 ? 1 : 0
+end
+
+function onFrame(dt)
+    if target == 0 and level < 0.001 then return end
+
+    level += (target - level) * min(1, dt / 200)
+    local b = time / beats(1)
+
+    for lane = 0, 3 do
+        -- Half a sine: up and down again within one beat. Even lanes on even beats, odd on odd.
+        local arc = max(0, sin((b + lane) * pi))
+        local toMiddle = strum[lane].isDown ? -1 : 1
+        strum[lane].y = toMiddle * level * amount * arc
+    end
+
+    if target == 0 and level < 0.001 then
+        for lane = 0, 3 do strum[lane].y = 0 end
+    end
+end

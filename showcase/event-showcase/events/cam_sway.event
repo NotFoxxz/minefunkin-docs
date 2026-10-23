@@ -1,0 +1,46 @@
+format 1.1
+-- Event Showcase 3/31: a handheld-camera drift.
+-- Shows: onFrame(dt), noise() (smooth and repeatable), easing a script variable by hand, and reading
+-- the shared "hype" value other events write - the louder the song gets, the more it sways.
+
+event {
+    name = "Cam Sway",
+    color = #7CC8FF,
+    category = "Screen",
+    description = "The playfield drifts like a handheld camera. Off eases it back to rest.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+    amount  = number { from = "value2", default = 6, min = 0, max = 40, step = 1, label = "Drift (px)" },
+}
+
+shared hype = 0
+
+local target = 0
+local amp = 0
+local moving = false
+
+function onEvent(p)
+    target = p.enabled ? p.amount : 0
+end
+
+function onFrame(dt)
+    local goal = target * (0.6 + hype)
+
+    -- Ease toward the goal at the same speed whatever the frame rate is.
+    amp += (goal - amp) * min(1, dt / 500)
+
+    if amp < 0.05 and goal == 0 then
+        if moving then
+            moving = false
+            hud.x = 0
+            hud.y = 0
+        end
+        return
+    end
+
+    moving = true
+    hud.x = noise(time / 1100) * amp
+    hud.y = noise(time / 1400 + 37) * amp * 0.6
+end

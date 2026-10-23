@@ -1,0 +1,52 @@
+format 1.1
+-- Event Showcase 24/31: the fighters jump over each other and swap places - and back, as often as you
+-- like.
+-- Shows: player.x / .z and opponent.x / .z in the fight's frame, .turn by 180 so they still face each
+-- other, a jump arc from two tweens, a variable that remembers which side they're on.
+
+event {
+    name = "Switcheroo",
+    color = #5CFFB5,
+    category = "Fighters",
+    description = "The fighters jump and swap places. swap = to the other side, on / off = swapped / home.",
+}
+
+params {
+    mode = choice { from = "value1", options = { "swap", "on", "off" }, label = "Mode" },
+}
+
+-- Where the opponent stands from you, in blocks: the default fight layout (7.4 ahead, 3 to the left).
+local ahead = 7.4
+local side = -3
+local swapped = false
+
+local function hop(who, x, z, turn)
+    local dur = beats(1)
+    tween(puppet[who].x, x, dur, "sineInOut")
+    tween(puppet[who].z, z, dur, "sineInOut")
+    tween(puppet[who].turn, turn, dur, "sineInOut")
+    -- The arc: up for half the time, down for the other half; stretched in the air, squashed on landing.
+    tween(puppet[who].y, 2.5, dur / 2, "quadOut")
+    after(dur / 2, function() tween(puppet[who].y, 0, dur / 2, "quadIn") end)
+    puppet[who].squash = -0.2
+    after(dur, function()
+        puppet[who].squash = 0.3
+        tween(puppet[who].squash, 0, beats(1), "elasticOut")
+    end)
+end
+
+function onEvent(p)
+    local want = p.mode == "swap" ? not swapped : p.mode == "on"
+
+    if want == swapped then return end
+
+    swapped = want
+
+    if swapped then
+        hop(0, side, ahead, 180)
+        hop(1, -side, -ahead, 180)
+    else
+        hop(0, 0, 0, 0)
+        hop(1, 0, 0, 0)
+    end
+end

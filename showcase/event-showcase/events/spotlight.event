@@ -1,0 +1,54 @@
+format 1.1
+-- Event Showcase 8/31: a spotlight that follows the melody.
+-- Shows: onHit and onOpponentHit sharing one function, per-lane tweens in a loop, a darker strum
+-- background (underlay.alpha), and the shared "hype" turned down for the quiet part.
+
+event {
+    name = "Spotlight",
+    color = #FFF27A,
+    category = "Lanes",
+    description = "Darkens the screen; only the lane of the note just sung (by you or the opponent) stays lit.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+    dim     = number { from = "value2", default = 0.25, min = 0, max = 1, step = 0.05, label = "Unlit lanes" },
+}
+
+shared hype = 0
+
+local active = false
+local dim = 0.25
+
+local function light(lit)
+    for lane = 0, 3 do
+        tween(strum[lane].alpha, lane == lit ? 1 : dim, steps(2), "sineOut")
+    end
+end
+
+function onEvent(p)
+    active = p.enabled
+    dim = p.dim
+
+    if active then
+        hype = 0.15
+        vignette.color = #000000
+        tween(vignette.alpha, 0.8, beats(1))
+        tween(underlay.alpha, 0.9, beats(1))
+        light(-1)
+    else
+        tween(vignette.alpha, 0, beats(1))
+        tween(underlay.alpha, 0.65, beats(1))
+        for lane = 0, 3 do
+            tween(strum[lane].alpha, 1, beats(1))
+        end
+    end
+end
+
+function onHit(note)
+    if active then light(note.lane) end
+end
+
+function onOpponentHit(note)
+    if active then light(note.lane) end
+end

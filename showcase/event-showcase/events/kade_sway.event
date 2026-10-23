@@ -1,0 +1,58 @@
+format 1.1
+-- Event Showcase 11/31: the lanes sway in a wave, each a quarter beat behind the one before - the
+-- modchart's "kade sway". Gentle: they bob up and down a little. Wild: the up-and-down is a tangent, so
+-- once a bar they shoot off the screen (half up, half down) and come back from the other side.
+-- Shows: the song position in beats with fractions (time / beats(1)), tan(), a level faded in and out.
+
+event {
+    name = "Kade Sway",
+    color = #8F7CFF,
+    category = "Lanes",
+    description = "The lanes sway in a wave. Wild = they fly off the screen once a bar (keep it to bars without your notes).",
+}
+
+params {
+    mode   = choice { from = "value1", options = { "off", "gentle", "wild" }, label = "Mode" },
+    amount = number { from = "value2", default = 20, min = 0, max = 60, step = 1, label = "Pixels" },
+}
+
+local mode = "off"
+local amount = 20
+local target = 0
+local level = 0
+
+function onEvent(p)
+    if p.mode != "off" then
+        mode = p.mode
+        amount = p.amount
+    end
+
+    target = p.mode == "off" ? 0 : 1
+end
+
+function onFrame(dt)
+    if target == 0 and level < 0.001 then return end
+
+    level += (target - level) * min(1, dt / 300)
+    local b = time / beats(1)
+    -- Far enough to be off the screen, not further.
+    local far = screen.height * 1.2
+
+    for lane = 0, 3 do
+        local mu = lane % 2 == 0 ? 1 : -1
+        strum[lane].x = level * amount * sin((b + lane * 0.25) * pi)
+
+        if mode == "wild" then
+            strum[lane].y = level * clamp(amount * 1.5 * mu * tan(b * 0.25 * pi), -far, far)
+        else
+            strum[lane].y = level * amount * 0.5 * mu * sin(b * 0.25 * pi)
+        end
+    end
+
+    if target == 0 and level < 0.001 then
+        for lane = 0, 3 do
+            strum[lane].x = 0
+            strum[lane].y = 0
+        end
+    end
+end

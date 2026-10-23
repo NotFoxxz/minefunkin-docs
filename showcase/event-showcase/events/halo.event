@@ -1,0 +1,68 @@
+format 1.1
+-- Event Showcase 29/31: the lanes ride round in a ring like a carousel - the modchart's halo. The ones
+-- at the back are smaller and fainter, so it reads as a ring seen from the front. Fall: the ring keeps
+-- turning and the lanes drop off the screen one by one.
+-- Shows: x / y / scale / alpha from one angle per lane, a ring centred on the screen however the lanes
+-- are spaced.
+
+event {
+    name = "Halo",
+    color = #FFE35C,
+    category = "Lanes",
+    description = "The lanes ride round in a ring. Fall = they drop off the screen from it.",
+}
+
+params {
+    mode = choice { from = "value1", options = { "on", "fall", "off" }, label = "Mode" },
+}
+
+local mode = "off"
+local onAt = 0
+local fallAt = 0
+local level = 0
+
+function onEvent(p)
+    if p.mode == "on" and mode == "off" then onAt = time end
+    if p.mode == "fall" then fallAt = time end
+    mode = p.mode
+end
+
+function onFrame(dt)
+    if mode == "off" and level < 0.001 then return end
+
+    level += ((mode == "off" ? 0 : 1) - level) * min(1, dt / 350)
+
+    local s = strums.spacing
+    local rx = s * 2.4
+    local ry = s * 0.55
+    -- One turn a bar.
+    local turn = (time - onAt) / beats(4) * 2 * pi
+
+    for lane = 0, 3 do
+        -- Starts with lanes 0 and 1 on the left, 2 and 3 on the right.
+        local ang = 2 * pi * lane / 4 - 0.75 * pi + turn
+        -- 1 = at the front, -1 = at the back.
+        local depth = cos(ang)
+        local toMiddle = strum[lane].isDown ? -1 : 1
+        local fall = 0
+
+        if mode == "fall" then
+            fall = pow(clamp((time - fallAt - beats(lane * 0.25)) / beats(3), 0, 1), 3) * screen.height * 1.3
+        end
+
+        -- Around the middle of the screen: undo the lane's own place, then the ring.
+        strum[lane].x = level * (rx * sin(ang) - (lane - 1.5) * s)
+        strum[lane].y = level * (ry * depth + toMiddle * ry) + fall
+        strum[lane].scale = 1 - level * 0.2 * (1 - depth)
+        strum[lane].alpha = 1 - level * 0.25 * (1 - depth)
+    end
+
+    if mode == "off" and level < 0.001 then
+        for lane = 0, 3 do
+            strum[lane].x = 0
+            strum[lane].y = 0
+            strum[lane].scale = 1
+            strum[lane].alpha = 1
+        end
+    end
+end

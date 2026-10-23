@@ -1,0 +1,54 @@
+format 1.1
+-- Event Showcase 4/31: every hit pops its lane, every miss shakes it.
+-- Shows: onHit(note) and onMiss(note) with note.lane / note.judgment / note.offset, a function of your
+-- own that returns a value, and the shared "hype" making the pops bigger in the drops.
+
+event {
+    name = "Judge Glow",
+    color = #FFD166,
+    category = "Lanes",
+    description = "Hit notes pop their lane (bigger for better judgments), misses flash red and shake the lane.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+}
+
+shared hype = 0
+
+local active = false
+
+-- How far a judgment pops its lane.
+local function popFor(judgment)
+    if judgment == "sick" then return 0.3 end
+    if judgment == "good" then return 0.18 end
+    return 0.08
+end
+
+function onEvent(p)
+    active = p.enabled
+end
+
+function onHit(note)
+    if not active then return end
+
+    local lane = note.lane
+    strum[lane].scale = 1 + popFor(note.judgment) * (0.7 + 0.5 * hype)
+    tween(strum[lane].scale, 1, steps(3), "backOut")
+
+    -- A dead-on hit (within 15 ms) also nudges the camera.
+    if abs(note.offset) < 15 then
+        camera.bump += 0.006
+    end
+end
+
+function onMiss(note)
+    if not active then return end
+
+    flash.color = #FF2050
+    flash.alpha = 0.22
+    tween(flash.alpha, 0, beats(0.5), "quadOut")
+
+    strum[note.lane].wobbleX = 12
+    tween(strum[note.lane].wobbleX, 0, beats(0.6), "elasticOut")
+end

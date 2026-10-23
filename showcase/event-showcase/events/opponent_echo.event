@@ -1,0 +1,55 @@
+format 1.1
+-- Event Showcase 6/31: the strumline leans toward every note the opponent sings.
+-- Shows: onOpponentHit(note), turning a lane into a direction with a function that returns early, and a
+-- coloured vignette pulse.
+
+event {
+    name = "Opponent Echo",
+    color = #A78BFA,
+    category = "Lanes",
+    description = "Each opponent note pushes your strumline a little in its arrow's direction.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+    push    = number { from = "value2", default = 8, min = 0, max = 40, step = 1, label = "Push (px)" },
+}
+
+local active = false
+local push = 8
+
+-- Left, down, up, right as x / y steps.
+local function stepX(lane)
+    if lane == 0 then return -1 end
+    if lane == 3 then return 1 end
+    return 0
+end
+
+local function stepY(lane)
+    if lane == 1 then return 1 end
+    if lane == 2 then return -1 end
+    return 0
+end
+
+function onEvent(p)
+    active = p.enabled
+    push = p.push
+
+    if not active then
+        tween(strums.x, 0, beats(0.5))
+        tween(strums.y, 0, beats(0.5))
+    end
+end
+
+function onOpponentHit(note)
+    if not active then return end
+
+    strums.x = stepX(note.lane) * push
+    strums.y = stepY(note.lane) * push
+    tween(strums.x, 0, beats(0.75), "quadOut")
+    tween(strums.y, 0, beats(0.75), "quadOut")
+
+    vignette.color = #7C3AED
+    vignette.alpha = note.hold ? 0.5 : 0.3
+    tween(vignette.alpha, 0, beats(0.75))
+end

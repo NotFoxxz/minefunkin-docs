@@ -1,0 +1,65 @@
+format 1.1
+-- Event Showcase 30/31: the ending.
+-- Shows: reading the game live (player.score, player.accuracy, player.misses) in onFrame, round(),
+-- fading the HUD, the strumline and its background, the "top" layer - the score stays readable while
+-- the screen fades to black under it - and onEnd.
+
+event {
+    name = "Finale",
+    color = #E2E8F0,
+    category = "Text",
+    description = "Fades the playfield, shows the live score and accuracy, and cuts to black at the very end.",
+}
+
+shared hype = 0
+
+local active = false
+local startTime = 0
+
+function onEvent(p)
+    active = true
+    startTime = time
+    hype = 0
+
+    tween(hud.alpha, 0, beats(8), "sineInOut")
+    tween(strums.alpha, 0.55, beats(8), "sineInOut")
+    tween(underlay.alpha, 0, beats(8), "sineInOut")
+
+    -- Layer "top": over the flash and screen colours, so the cut to black below doesn't hide it.
+    text[0].layer = "top"
+    text[1].layer = "top"
+
+    text[0].value = "THAT'S ALL"
+    text[0].x = 0.5
+    text[0].y = 0.34
+    text[0].angle = 0
+    text[0].color = #FFFFFF
+    text[0].alpha = 0
+    text[0].size = 2
+    tween(text[0].alpha, 1, beats(2))
+
+    text[1].x = 0.5
+    text[1].y = 0.44
+    text[1].size = 0.9
+    text[1].color = #FFE066
+    text[1].alpha = 0
+    tween(text[1].alpha, 1, beats(2))
+
+    -- Cut to black over the last two beats of the song.
+    local left = song.length - time
+    after(left - beats(4), function()
+        screen.color = #000000
+        tween(screen.alpha, 1, beats(2), "quadIn")
+    end)
+end
+
+function onFrame(dt)
+    if not active then return end
+
+    local accuracy = round(player.accuracy * 10) / 10
+    text[1].value = "score " .. player.score .. "   accuracy " .. accuracy .. "%   misses " .. player.misses
+end
+
+function onEnd()
+    log("showcase finished: score", player.score, "accuracy", player.accuracy, "misses", player.misses)
+end

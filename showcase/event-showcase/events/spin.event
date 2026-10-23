@@ -1,0 +1,48 @@
+format 1.1
+-- Event Showcase 12/31: the receptors spin round and slow down into place - the modchart's "confusion"
+-- spin. Once, or on every bar / every other bar, each time the other way.
+-- Shows: onBeat(b) counted in bars from where the event sits, a guard so a beat never spins twice.
+
+event {
+    name = "Spin",
+    color = #C45CFF,
+    category = "Lanes",
+    description = "The receptors spin round and settle: once, or on every (other) bar until Stop.",
+}
+
+params {
+    mode  = choice { from = "value1", options = { "once", "every bar", "every 2 bars", "stop" }, label = "When" },
+    turns = number { from = "value2", default = 1, min = 1, max = 3, step = 1, label = "Turns" },
+}
+
+local every = 0
+local turns = 1
+local dir = 1
+local fromBar = 0
+local lastBeat = -1
+
+local function spinAt(b)
+    if b == lastBeat then return end
+
+    lastBeat = b
+    dir = -dir
+
+    for lane = 0, 3 do
+        strum[lane].angle = 360 * turns * dir
+        tween(strum[lane].angle, 0, beats(2), "cubicOut")
+    end
+end
+
+function onEvent(p)
+    turns = p.turns
+    every = p.mode == "every bar" ? 1 : p.mode == "every 2 bars" ? 2 : 0
+    fromBar = round(time / beats(4))
+
+    if p.mode != "stop" then spinAt(round(time / beats(1))) end
+end
+
+function onBeat(b)
+    if every == 0 or b % 4 != 0 then return end
+
+    if (b / 4 - fromBar) % every == 0 then spinAt(b) end
+end

@@ -1,0 +1,78 @@
+format 1.1
+-- Event Showcase 10/31: the build-up before the drop.
+-- Shows: onStep(step) with patterns that speed up (every 4th step, then every 2nd, then every one), a
+-- for loop that schedules a 3-2-1 with after(), writing the shared "hype" value, and a beat of silence
+-- at the end.
+
+event {
+    name = "Build Up",
+    color = #FF8A3D,
+    category = "Screen",
+    description = "Zoom, dark edges, shake and flashes build up over the given beats; 3-2-1 at the end.",
+}
+
+params {
+    length = number { from = "value1", default = 16, min = 4, max = 64, step = 1, label = "Length (beats)" },
+}
+
+shared hype = 0
+
+local active = false
+local startBeat = 0
+local total = 16
+
+function onEvent(p)
+    active = true
+    startBeat = beat
+    total = p.length
+
+    tween(camera.zoom, 1.12, beats(total - 1), "quadIn")
+    vignette.color = #000000
+    tween(vignette.alpha, 0.7, beats(total - 1), "quadIn")
+
+    -- 3, 2, 1 on the last three beats.
+    for i = 1, 3 do
+        after(beats(total - 4 + i), function()
+            text[3].value = str(4 - i)
+            text[3].x = 0.5
+            text[3].y = 0.42
+            text[3].color = i == 3 ? #FF5050 : #FFFFFF
+            text[3].alpha = 1
+            text[3].size = 5
+            tween(text[3].size, 3, beats(1), "expoOut")
+            tween(text[3].alpha, 0, beats(1), "quadIn")
+        end)
+    end
+
+    -- The end: everything drops away at once (the drop takes it from there).
+    after(beats(total), function()
+        active = false
+        text[3].value = ""
+        camera.shake = 0
+        tween(camera.zoom, 1, steps(2))
+        tween(vignette.alpha, 0, beats(1))
+    end)
+end
+
+function onStep(s)
+    if not active then return end
+
+    local progress = clamp((beat - startBeat) / total, 0, 1)
+    hype = progress
+
+    -- The last beat is silence before the drop - nothing moves.
+    if beat - startBeat >= total - 1 then
+        camera.shake = 0
+        return
+    end
+
+    camera.shake = 0.004 * progress ^ 2
+    local every = progress < 0.5 ? 4 : progress < 0.75 ? 2 : 1
+
+    if s % every == 0 then
+        camera.bump += 0.008 + 0.02 * progress
+        flash.color = #FFFFFF
+        flash.alpha = 0.1 * progress
+        tween(flash.alpha, 0, steps(1))
+    end
+end

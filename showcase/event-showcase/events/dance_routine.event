@@ -1,0 +1,144 @@
+format 1.1
+-- Event Showcase 17/31: both fighters drop MineFunkin's own animation and dance a routine of eight
+-- moves, one per beat - the opponent mirrored, so they dance like a reflection.
+-- Shows: player.animate = false, body parts (pitch / yaw / roll), your own functions as moves, a mirror
+-- flag that swaps left and right, puppet[i] with a variable index.
+
+event {
+    name = "Dance Routine",
+    color = #FFD15C,
+    category = "Fighters",
+    description = "Both fighters stop their own animation and dance eight moves, one per beat.",
+}
+
+params {
+    on = bool { from = "value1", default = true, label = "On" },
+}
+
+local active = false
+local moveTime = 0
+
+-- One arm: side 0 = left, 1 = right. pitch + = forward, roll + = outward (see the docs).
+local function arm(who, side, pitch, roll)
+    if side == 0 then
+        tween(puppet[who].leftArm.pitch, pitch, moveTime, "backOut")
+        tween(puppet[who].leftArm.roll, roll, moveTime, "backOut")
+    else
+        tween(puppet[who].rightArm.pitch, pitch, moveTime, "backOut")
+        tween(puppet[who].rightArm.roll, roll, moveTime, "backOut")
+    end
+end
+
+local function leg(who, side, pitch, roll)
+    if side == 0 then
+        tween(puppet[who].leftLeg.pitch, pitch, moveTime, "backOut")
+        tween(puppet[who].leftLeg.roll, roll, moveTime, "backOut")
+    else
+        tween(puppet[who].rightLeg.pitch, pitch, moveTime, "backOut")
+        tween(puppet[who].rightLeg.roll, roll, moveTime, "backOut")
+    end
+end
+
+local function lean(who, roll, nod)
+    tween(puppet[who].body.roll, roll, moveTime, "backOut")
+    tween(puppet[who].head.roll, -roll * 0.6, moveTime, "backOut")
+    tween(puppet[who].head.pitch, nod, moveTime, "backOut")
+end
+
+-- The moves. `m` mirrors: the opponent uses its other arm and leans the other way.
+local function clap(who, m)
+    arm(who, 0, 75, -18)
+    arm(who, 1, 75, -18)
+    leg(who, 0, 0, 4)
+    leg(who, 1, 0, 4)
+    lean(who, 0, 10)
+end
+
+local function spread(who, m)
+    arm(who, 0, 0, 90)
+    arm(who, 1, 0, 90)
+    lean(who, 0, -12)
+end
+
+local function reach(who, m)
+    local up = m ? 0 : 1
+    arm(who, up, 10, 165)
+    arm(who, 1 - up, 0, 15)
+    lean(who, m ? 10 : -10, -8)
+end
+
+local function point(who, m)
+    local hand = m ? 0 : 1
+    arm(who, hand, 95, 5)
+    arm(who, 1 - hand, -25, 30)
+    lean(who, m ? -6 : 6, 0)
+end
+
+local function squat(who, m)
+    arm(who, 0, 50, 25)
+    arm(who, 1, 50, 25)
+    leg(who, 0, 0, 16)
+    leg(who, 1, 0, 16)
+    puppet[who].squash = 0.25
+    tween(puppet[who].squash, 0, beats(1), "elasticOut")
+    lean(who, 0, 15)
+end
+
+local function jump(who, m)
+    arm(who, 0, 0, 165)
+    arm(who, 1, 0, 165)
+    leg(who, 0, 0, 0)
+    leg(who, 1, 0, 0)
+    lean(who, 0, -15)
+    tween(puppet[who].y, 0.5, beats(0.25), "quadOut")
+    after(beats(0.25), function() tween(puppet[who].y, 0, beats(0.25), "quadIn") end)
+end
+
+local function spin(who, m)
+    arm(who, 0, 0, 70)
+    arm(who, 1, 0, 70)
+    lean(who, 0, 0)
+    puppet[who].turn = 0
+    tween(puppet[who].turn, m ? -360 : 360, beats(0.9), "quadInOut")
+end
+
+local function kick(who, m)
+    local foot = m ? 0 : 1
+    leg(who, foot, 70, 0)
+    leg(who, 1 - foot, -10, 0)
+    arm(who, foot, -30, 25)
+    arm(who, 1 - foot, 40, 25)
+    lean(who, 0, 0)
+end
+
+local function move(who, n)
+    local m = who == 1
+    local k = n % 8
+    if k == 0 then clap(who, m)
+    elseif k == 1 then spread(who, m)
+    elseif k == 2 then reach(who, m)
+    elseif k == 3 then point(who, m)
+    elseif k == 4 then squat(who, m)
+    elseif k == 5 then kick(who, m)
+    elseif k == 6 then jump(who, m)
+    else spin(who, m) end
+end
+
+function onEvent(p)
+    active = p.on
+    moveTime = beats(0.25)
+
+    if p.on then
+        player.animate = false
+        opponent.animate = false
+    else
+        resetPuppet("both", beats(1))
+    end
+end
+
+function onBeat(b)
+    if not active then return end
+
+    move(0, b)
+    move(1, b)
+end

@@ -1,0 +1,58 @@
+format 1.1
+-- Event Showcase 18/31: the camera swings around the fighters (fights only).
+-- Shows: camera.x / .y / .z / .yaw / .pitch together - moving and turning so the point between the
+-- fighters stays in the middle, pulling back and rising the further it swings so both stay in view.
+
+event {
+    name = "Orbit Cam",
+    color = #7C6BFF,
+    category = "Camera",
+    description = "Swings the fight camera around the fighters to an angle (0 = home).",
+}
+
+params {
+    angle  = number { from = "value1", default = 30, min = -60, max = 60, step = 1, label = "Angle" },
+    length = number { from = "value2", default = 8, min = 0, max = 32, step = 0.5, label = "Beats" },
+}
+
+-- The point it circles, from the camera, in blocks (right, ahead): halfway between the fighters in the
+-- default fight layout. Positive angles swing it to the left side, away from the line through both
+-- fighters - around -25 the opponent would hide right behind you.
+local pivotX = 0.55
+local pivotZ = 7.25
+local from = 0
+local to = 0
+local duration = 0
+local elapsed = 0
+local moving = false
+
+function onEvent(p)
+    from = camera.yaw
+    to = p.angle
+    duration = max(1, beats(p.length))
+    elapsed = 0
+    moving = true
+end
+
+function onFrame(dt)
+    if not moving then return end
+
+    elapsed += dt
+    local t = clamp(elapsed / duration, 0, 1)
+    -- sineInOut by hand: the angle eases, and x / z follow it on the circle.
+    local k = 0.5 - 0.5 * cos(t * 3.14159265)
+    local angle = lerp(from, to, k)
+    local a = angle * 3.14159265 / 180
+    -- Further round = further back (up to 1.6 times the distance at 30 degrees) and higher.
+    local back = 1 + 0.02 * abs(angle)
+    local rx = -pivotX * cos(a) - pivotZ * sin(a)
+    local rz = pivotX * sin(a) - pivotZ * cos(a)
+
+    camera.yaw = angle
+    camera.x = pivotX + rx * back
+    camera.z = pivotZ + rz * back
+    camera.y = 0.04 * abs(angle)
+    camera.pitch = -0.15 * abs(angle)
+
+    if t >= 1 then moving = false end
+end

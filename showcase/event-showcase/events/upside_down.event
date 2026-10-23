@@ -1,0 +1,36 @@
+format 1.1
+-- Event Showcase 28/31: the whole playfield turns over in one bar - the modchart's "rotationz 180". The
+-- notes come from the other side, but the lanes swap back into their order and the arrows turn back
+-- upright on the way, so it plays like the other scroll direction. The world stays upright: in a fight
+-- the camera rolls with hud.angle, and camera.roll turns it back.
+-- Shows: hud.angle + camera.roll cancelling out, hud.extras, the lanes mirrored with strums.spacing.
+
+event {
+    name = "Upside Down",
+    color = #FF9B5C,
+    category = "Lanes",
+    description = "The playfield turns over in one bar (and back). Place it on a bar without your notes.",
+}
+
+params {
+    on = bool { from = "value1", default = true, label = "Upside down" },
+}
+
+function onEvent(p)
+    local dur = beats(4)
+    -- The fighters and the judgments shouldn't turn over too.
+    hud.extras = false
+
+    tween(hud.angle, p.on ? 180 : 0, dur, "cubicInOut")
+    tween(camera.roll, p.on ? -180 : 0, dur, "cubicInOut")
+
+    for lane = 0, 3 do
+        -- Turned over, lane 0 would sit on the right: each lane moves to its mirror spot.
+        tween(strum[lane].x, p.on ? (3 - 2 * lane) * strums.spacing : 0, dur, "cubicInOut")
+        tween(strum[lane].angle, p.on ? -180 : 0, dur, "cubicInOut")
+    end
+
+    if not p.on then
+        after(dur, function() hud.extras = true end)
+    end
+end

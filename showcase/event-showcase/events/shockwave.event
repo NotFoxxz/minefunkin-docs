@@ -1,0 +1,55 @@
+format 1.1
+-- Event Showcase 14/31: an impact. A ring runs out over the screen (shaders/shockwave.fsh) and knocks
+-- both fighters back: tipped over their heels, squashed, pushed apart - then they spring back.
+-- Shows: handing a shader its start time, a shader slot switched off again once it's done, the
+-- fighters' pitch / squash / z with "elasticOut".
+
+event {
+    name = "Shockwave",
+    color = #5CF2FF,
+    category = "Screen",
+    description = "A ring runs out over the screen and knocks both fighters back.",
+}
+
+params {
+    strength = number { from = "value1", default = 1, min = 0.2, max = 2, step = 0.1, label = "Strength" },
+}
+
+local count = 0
+
+function onEvent(p)
+    local s = p.strength
+    count += 1
+    local mine = count
+
+    -- shockwave.fsh: a = strength, b = speed, c = when it started (song seconds).
+    shader[1].file = "shockwave.fsh"
+    shader[1].amount = 1
+    shader[1].a = s
+    shader[1].b = 1.3
+    shader[1].c = time / 1000
+    after(seconds(1.5), function()
+        if count == mine then shader[1].file = "" end
+    end)
+
+    camera.shake = 0.012 * s
+    tween(camera.shake, 0, beats(1), "quadOut")
+
+    -- Both get pushed apart from wherever they stand right now (Switcheroo may have swapped them).
+    local pz = player.z
+    local oz = opponent.z
+    local apart = player.z <= opponent.z ? 1 : -1
+    player.pitch = -14 * s
+    player.squash = 0.3 * s
+    player.z = pz - 0.35 * s * apart
+    opponent.pitch = -14 * s
+    opponent.squash = 0.3 * s
+    opponent.z = oz + 0.35 * s * apart
+
+    tween(player.pitch, 0, beats(1.5), "elasticOut")
+    tween(player.squash, 0, beats(1.2), "elasticOut")
+    tween(player.z, pz, beats(1), "cubicOut")
+    tween(opponent.pitch, 0, beats(1.5), "elasticOut")
+    tween(opponent.squash, 0, beats(1.2), "elasticOut")
+    tween(opponent.z, oz, beats(1), "cubicOut")
+end

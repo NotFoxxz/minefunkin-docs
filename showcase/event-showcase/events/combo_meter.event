@@ -1,0 +1,47 @@
+format 1.1
+-- Event Showcase 7/31: a song script. The chart never calls this event - it runs from the first note to
+-- the last just because the file is in the song folder, like a Psych song script.
+-- Shows: onHit / onMiss without any chart event, player.combo, keeping state between callbacks, and a
+-- colour that climbs the wheel with the combo.
+
+event {
+    name = "Combo Meter",
+    color = #4ADE80,
+    category = "Text",
+    description = "No chart event needed: shouts every 25 combo, and tells you when a long combo breaks.",
+}
+
+local every = 25
+local nextShout = 25
+local lastCombo = 0
+
+local function shout(message, tint)
+    text[4].value = message
+    text[4].x = 0.84
+    text[4].y = 0.58
+    text[4].color = tint
+    text[4].alpha = 1
+    text[4].angle = -8
+    text[4].size = 1.8
+    tween(text[4].size, 1.2, beats(0.5), "backOut")
+    tween(text[4].angle, 0, beats(0.5), "backOut")
+    tween(text[4].alpha, 0, beats(1.5), "quadIn")
+end
+
+function onHit(note)
+    lastCombo = player.combo
+
+    if player.combo >= nextShout then
+        shout(nextShout .. " COMBO!", hsv(nextShout * 3 % 360, 0.7, 1))
+        nextShout += every
+    end
+end
+
+function onMiss(note)
+    if lastCombo >= every then
+        shout("COMBO BROKEN (" .. lastCombo .. ")", #FF4060)
+    end
+
+    lastCombo = 0
+    nextShout = every
+end

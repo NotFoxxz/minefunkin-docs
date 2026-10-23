@@ -1,0 +1,51 @@
+format 1.1
+-- Event Showcase 15/31: the strum background as a light panel.
+-- Shows: the strum background (underlay.color, underlay.alpha, underlay.width), colour tweens that
+-- blend channel by channel, and a beat pattern that alternates two colours with the bar.
+
+event {
+    name = "Lane Lights",
+    color = #FF7AE0,
+    category = "Lanes",
+    description = "The strum background lights up on every beat in the song's colours. Off = back to the plain dark stripe.",
+}
+
+params {
+    enabled = switch { from = "value1", label = "On" },
+    first   = color  { from = "value2.1", default = #6A1B9A, label = "Colour A" },
+    second  = color  { from = "value2.2", default = #00838F, label = "Colour B" },
+}
+
+local active = false
+local first = #6A1B9A
+local second = #00838F
+
+-- Colour A for one bar, colour B for the next; every beat flares up and dims again.
+local function flare(b)
+    local lit = floor(b / 4) % 2 == 0 ? first : second
+    underlay.color = mix(lit, #FFFFFF, 0.25)
+    underlay.alpha = 0.95
+    tween(underlay.color, lit, beats(0.8), "quadOut")
+    tween(underlay.alpha, 0.7, beats(0.8), "quadOut")
+end
+
+function onEvent(p)
+    active = p.enabled
+    first = p.first
+    second = p.second
+
+    if active then
+        -- The first flare at once; onBeat takes over from the next beat.
+        flare(beat)
+        tween(underlay.width, 1.15, beats(0.5), "backOut")
+        return
+    end
+
+    tween(underlay.color, #000000, beats(1))
+    tween(underlay.alpha, 0.65, beats(1))
+    tween(underlay.width, 1, beats(1))
+end
+
+function onBeat(b)
+    if active then flare(b) end
+end

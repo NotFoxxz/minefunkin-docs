@@ -1,0 +1,23 @@
+format 1.1
+-- Event Showcase 20/31: the opponent drops dead in the middle of the song - for now.
+-- Shows: opponent.pose = "death" (MineFunkin's own death), the colour draining, the camera looking
+-- down.
+
+event {
+    name = "Fake Death",
+    color = #6E6E8F,
+    category = "Fighters",
+    description = "The opponent dies (until Rise), the world loses its colour.",
+}
+
+function onEvent(p)
+    opponent.pose = "death"
+    tween(fx.saturation, 0.15, beats(2))
+    tween(fx.contrast, 1.25, beats(2))
+    -- The camera turns to the body on the ground.
+    tween(camera.yaw, -9, beats(4), "sineInOut")
+    tween(camera.fov, -4, beats(4), "sineInOut")
+    tween(camera.pitch, -4, beats(4), "sineInOut")
+    tween(vignette.alpha, 0.6, beats(2))
+    vignette.color = #000000
+end
