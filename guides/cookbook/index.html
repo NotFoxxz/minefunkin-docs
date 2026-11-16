@@ -1360,6 +1360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sprite-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprite characters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sound" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2138,6 +2149,8 @@
       
         
       
+        
+      
     
     
     
@@ -2530,6 +2543,36 @@
     
   
     image[n]
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/character/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m3.9 6.1c-.4-.4-1.1-1.1-2.4-1.1H11C8.2 7 6 4.8 6 2H4c0 3.2 2.1 5.8 5 6.7V22h2v-6h2v6h2V10.1l4 3.9 1.4-1.4z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    character[n]
   
 
     
@@ -3708,6 +3751,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sprite-characters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprite characters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sound" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4000,72 +4054,93 @@
 </code></pre></div>
 </details>
 <p>More in <a href="../fighters/">The fighters</a>.</p>
+<h2 id="sprite-characters">Sprite characters<a class="headerlink" href="#sprite-characters" title="Permanent link">&para;</a></h2>
+<details class="example">
+<summary>A dancing GF that cheers every 25 notes (uses onStart)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="nv">character</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"characters/gf.png"</span><span class="w">     </span><span class="c1">-- + gf.xml next to it</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="nv">character</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nv">character</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.8</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nv">character</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">cheerEvery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nf">characterPose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s2">"danceLeft"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GF Dancing Beat"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s2">"30, 0-14"</span><span class="p">)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="nf">characterPose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s2">"danceRight"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GF Dancing Beat"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s2">"15-29"</span><span class="p">)</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="nf">characterPose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s2">"cheer"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GF Cheer"</span><span class="p">)</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="kr">end</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>The opponent sprite jumps on the drop (uses onSection)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">characterPlay</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"hey"</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="kr">end</span>
+</code></pre></div>
+</details>
 <h2 id="sound">Sound<a class="headerlink" href="#sound" title="Permanent link">&para;</a></h2>
 <details class="example">
 <summary>A Minecraft bell on every fourth beat (uses onBeat)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"block.note_block.bell"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"block.note_block.bell"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>A sound on the drop</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="nf">playSound</span><span class="p">(</span><span class="s2">"impact.ogg"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span><span class="w">   </span><span class="c1">-- a file in the song folder or events/</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nv">camera</span><span class="p">.</span><span class="py">bump</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">0.08</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="nf">playSound</span><span class="p">(</span><span class="s2">"impact.ogg"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span><span class="w">   </span><span class="c1">-- a file in the song folder or events/</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nv">camera</span><span class="p">.</span><span class="py">bump</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">0.08</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>The opponent's voice drops out for a bar</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">volume</span><span class="p">.</span><span class="py">opponent</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span><span class="w"> </span><span class="nf">tween</span><span class="p">(</span><span class="nv">volume</span><span class="p">.</span><span class="py">opponent</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span><span class="w"> </span><span class="kr">end</span><span class="p">)</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">volume</span><span class="p">.</span><span class="py">opponent</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span><span class="w"> </span><span class="nf">tween</span><span class="p">(</span><span class="nv">volume</span><span class="p">.</span><span class="py">opponent</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span><span class="w"> </span><span class="kr">end</span><span class="p">)</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 <h2 id="the-game-window">The game window<a class="headerlink" href="#the-game-window" title="Permanent link">&para;</a></h2>
 <p>More in <a href="../windows/">Game window and pop-outs</a>.</p>
 <details class="example">
 <summary>The window shakes on every miss</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onMiss</span><span class="p">(</span><span class="nv">note</span><span class="p">)</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="nv">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">window</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="s2">"elasticOut"</span><span class="p">)</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onMiss</span><span class="p">(</span><span class="nv">note</span><span class="p">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="nv">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">window</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="s2">"elasticOut"</span><span class="p">)</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>The judgments in a window of their own, floating above the game</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"judgments"</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">260</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="s2">"sineInOut"</span><span class="p">)</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"judgments"</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nf">tween</span><span class="p">(</span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">260</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="s2">"sineInOut"</span><span class="p">)</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 <details class="example">
 <summary>Each lane flies out into its own window and circles the screen</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left"</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"down"</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"up"</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">    </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">    </span><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span>
-<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="w">        </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">        </span><span class="nf">resetWindow</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w">    </span><span class="c1">-- glide home, then close</span>
-<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="w">    </span><span class="kr">end</span><span class="p">)</span>
-<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="kr">end</span>
-<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
-<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onFrame</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
-<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">circling</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="kr">end</span>
-<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">do</span>
-<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a><span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="w">        </span><span class="nv">popout</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">300</span>
-<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="w">        </span><span class="nv">popout</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">150</span>
-<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a><span class="w">    </span><span class="kr">end</span>
-<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kd">local</span><span class="w"> </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="nv">p</span><span class="p">)</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left"</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"down"</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"up"</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span><span class="nv">popout</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="nv">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">    </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">    </span><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="w">        </span><span class="nv">circling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="w">        </span><span class="nf">resetWindow</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w">    </span><span class="c1">-- glide home, then close</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="w">    </span><span class="kr">end</span><span class="p">)</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="kr">end</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onFrame</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">circling</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">do</span>
+<a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a><span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a><span class="w">        </span><span class="nv">popout</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">300</span>
+<a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a><span class="w">        </span><span class="nv">popout</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">150</span>
+<a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-30-22" name="__codelineno-30-22" href="#__codelineno-30-22"></a><span class="kr">end</span>
 </code></pre></div>
 </details>
 
