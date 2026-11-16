@@ -18,7 +18,7 @@
         <link rel="prev" href="../stage/">
       
       
-        <link rel="next" href="../strums/">
+        <link rel="next" href="../build/">
       
       
         
@@ -2007,6 +2007,8 @@
       
         
       
+        
+      
     
     
     
@@ -2436,6 +2438,36 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    build[n]
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3909,7 +3941,7 @@
 
 <h1 id="mobn">mob[n]<a class="headerlink" href="#mobn" title="Permanent link">&para;</a></h1>
 <p>Sixteen stage mobs: Minecraft's mobs (or a mod's) standing around the fight, only for the people in the song. They
-stand, look, walk, jump, fall over, explode or vanish when your script says so - nothing of them is real: no AI, no
+stand still until your script moves them - then they walk, look, jump, fall over, explode or vanish - nothing of them is real: no AI, no
 sounds of their own, nobody is hurt, the world doesn't change.</p>
 <div class="admonition info">
 <p class="admonition-title">How to use it</p>
@@ -3973,8 +4005,8 @@ Options › Song effects › "Minecraft effects".</p>
 <tr>
 <td><a href="#mob-look">mob[n].look</a></td>
 <td>choice</td>
-<td><code>"camera"</code></td>
-<td>Where it looks: <code>"camera"</code> (at you, through the screen), <code>"player"</code>, <code>"opponent"</code>, or …</td>
+<td><code>"none"</code></td>
+<td>Where it looks: <code>"none"</code> (the default) = it stands still and <code>turn</code> decides; <code>"camera"</code> …</td>
 </tr>
 <tr>
 <td><a href="#mob-turn">mob[n].turn</a></td>
@@ -4024,11 +4056,11 @@ name that isn't a mob is said once in the event log.</p>
 
 <p>Blocks toward the opponent from the middle (negative = toward you).</p>
 <h3 id="mob-look">mob[n].look<a class="headerlink" href="#mob-look" title="Permanent link">&para;</a></h3>
-<p class="mf-sig"><span class="mf-type">choice</span> <code>mob[n].look</code> <span class="mf-eq">= <code>"camera"</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>mob[n].look</code> <span class="mf-eq">= <code>"none"</code></span></p>
 
-<p>Where it looks: <code>"camera"</code> (at you, through the screen), <code>"player"</code>, <code>"opponent"</code>, or <code>"none"</code> - then <code>turn</code>
-decides. While it walks it looks where it goes.</p>
-<p>One of: <code>"camera"</code>, <code>"player"</code>, <code>"opponent"</code>, <code>"none"</code>.</p>
+<p>Where it looks: <code>"none"</code> (the default) = it stands still and <code>turn</code> decides; <code>"camera"</code> (at you, through the
+screen), <code>"player"</code> or <code>"opponent"</code> = it keeps turning to follow them. While it walks it looks where it goes.</p>
+<p>One of: <code>"none"</code>, <code>"camera"</code>, <code>"player"</code>, <code>"opponent"</code>.</p>
 <h3 id="mob-turn">mob[n].turn<a class="headerlink" href="#mob-turn" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>mob[n].turn</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">degrees</span></p>
@@ -4103,13 +4135,13 @@ opponent.</p>
         
         
           
-          <a href="../strums/" class="md-footer__link md-footer__link--next" aria-label="Next: strums">
+          <a href="../build/" class="md-footer__link md-footer__link--next" aria-label="Next: build[n]">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                strums
+                build[n]
               </div>
             </div>
             <div class="md-footer__button md-icon">
