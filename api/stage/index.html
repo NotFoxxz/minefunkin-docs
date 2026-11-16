@@ -3736,7 +3736,7 @@ inside. Practice and replays aren't changed.</p>
 <td><a href="#stage-world">stage.world</a></td>
 <td>choice</td>
 <td><code>"on"</code></td>
-<td>The Minecraft world in a fight: <code>"on"</code> = as it is, <code>"off"</code> = none at all. Off, the fight …</td>
+<td>The Minecraft world in a fight: <code>"on"</code> = as it is, <code>"fighters"</code> = no world, only the two …</td>
 </tr>
 </tbody>
 </table>
@@ -3744,10 +3744,12 @@ inside. Practice and replays aren't changed.</p>
 <h3 id="stage-world">stage.world<a class="headerlink" href="#stage-world" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">choice</span> <code>stage.world</code> <span class="mf-eq">= <code>"on"</code></span></p>
 
-<p>The Minecraft world in a fight: <code>"on"</code> = as it is, <code>"off"</code> = none at all. Off, the fight looks like practice: the
-song's pictures (the <code>"stage"</code> layer is drawn on the screen then), the notes and the HUD over MineFunkin's own
+<p>The Minecraft world in a fight: <code>"on"</code> = as it is, <code>"fighters"</code> = no world, only the two fighters, <code>"off"</code> = none
+at all. With <code>"fighters"</code> the fighters stand over MineFunkin's own background and the <code>"stage"</code> layer (drawn on the
+screen then) - the fight camera, the beat bump and the hit nudge still move them; terrain, sky, mobs and other
+players are gone. Off, the fight looks like practice: the song's pictures, the notes and the HUD over MineFunkin's own
 background - no world, no fighters.</p>
-<p>One of: <code>"on"</code>, <code>"off"</code>.</p>
+<p>One of: <code>"on"</code>, <code>"fighters"</code>, <code>"off"</code>.</p>
 
 
 
