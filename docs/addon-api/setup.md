@@ -17,7 +17,7 @@ MineFunkin's jar into a `libs/` folder in your project and add it as a *compile-
 
     ```groovy
     dependencies {
-        modCompileOnly files("libs/minefunkin-fabric-1.21.11_ALPHA-0.1.0j.jar")
+        modCompileOnly files("libs/minefunkin-fabric-1.21.11_ALPHA-0.1.1a.jar")
     }
     ```
 
@@ -25,7 +25,7 @@ MineFunkin's jar into a `libs/` folder in your project and add it as a *compile-
 
     ```groovy
     dependencies {
-        compileOnly files("libs/minefunkin-neoforge-1.21.1_ALPHA-0.1.0j.jar")
+        compileOnly files("libs/minefunkin-neoforge-1.21.1_ALPHA-0.1.1a.jar")
     }
     ```
 
@@ -138,7 +138,7 @@ One class per side. MineFunkin creates it once while the game starts and hands i
     side = "BOTH"
     ```
 
-    Leave the range open (`"*"`): MineFunkin's versions (like `ALPHA-0.1.0j`) aren't plain numbers a range can
+    Leave the range open (`"*"`): MineFunkin's versions (like `ALPHA-0.1.1a`) aren't plain numbers a range can
     compare. The API version below decides whether your mod is served.
 
     MineFunkin finds the annotated classes in NeoForge's mod scan data (like JEI's `@JeiPlugin`) and only
