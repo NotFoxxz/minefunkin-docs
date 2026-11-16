@@ -56,8 +56,8 @@ default and range. The kinds and how properties combine: [Properties](properties
 | [underlay](underlay.md) | the strum background | 4 |
 | [note[i]](notes.md) | every note on its way, one by one | 15 |
 | [text[n]](text.md) | eight texts | 13 |
-| [image[n]](image.md) | 32 pictures, sprite sheets, Psych sprites, videos | 22 |
-| [Fighters](fighters.md) | `player`, `opponent`, `boyfriend`, `dad`, `puppet[i]` | 32 |
+| [image[n]](image.md) | 64 pictures, sprite sheets, Psych sprites, videos | 23 |
+| [Fighters](fighters.md) | `player`, `opponent`, `boyfriend`, `dad`, `fighter[i]`, `puppet[i]` | 32 |
 | [Body parts](parts.md) | `player.head`, `.leftArm`, ... | 8 |
 | [fx](fx.md) | built-in effects | 17 |
 | [shader[n]](shader.md) | the song's own shaders | 8 |

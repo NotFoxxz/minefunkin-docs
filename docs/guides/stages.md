@@ -259,6 +259,8 @@ to - the fighters stand where the Speaker puts them. If you want them somewhere 
 
 ## Limits
 
-You have room for a lot - 32 pictures at once (`image[0]` ... `image[31]`) and up to 128 different picture files per song: `.png`, at most
-8192 pixels a side and 16 MB as a file, 512 MB of video memory together. A video folder: up to 20,000 `.jpg` /
+You have room for a lot - 64 pictures at once (`image[0]` ... `image[63]`) and up to 128 different picture files loaded at a time: `.png`, at most
+8192 pixels a side and 16 MB as a file, 512 MB of video memory together. A picture that hasn't been shown for a few seconds makes
+room for new ones and loads again when it's needed - so a song can use more than that over its length; `preload` the next big ones a
+few seconds early. A video folder: up to 20,000 `.jpg` /
 `.png` frames, 2048 pixels a side, 8 MB a frame. Everything is freed when the song closes.

@@ -113,11 +113,12 @@ nav:
           - hud: api/hud.md
           - judgments: api/judgments.md
           - screen, flash, vignette: api/screen.md
+          - stage: api/stage.md
           - strums: api/strums.md
           - strum[lane]: api/strum.md
           - underlay: api/underlay.md
           - note[i]: api/notes.md
-          - text[n]: api/text.md
+          - text[n], title: api/text.md
           - image[n]: api/image.md
           - Fighters: api/fighters.md
           - Body parts: api/parts.md
@@ -133,13 +134,19 @@ nav:
   - Songs:
       - songs/index.md
       - Song files: songs/files.md
+  - Figura avatars: figura.md
   - Addon API:
       - addon-api/index.md
       - Getting started:
           - Set up your mod: addon-api/setup.md
           - Recipes: addon-api/recipes.md
+          - Example addon: addon-api/example.md
       - The API:
           - Server side: addon-api/server.md
+          - Rights: addon-api/rights.md
+          - Starting fights: addon-api/starting-fights.md
+          - Controlling fights: addon-api/controlling-fights.md
+          - Boss opponents: addon-api/boss-opponents.md
           - Client side: addon-api/client.md
           - Types: addon-api/types.md
       - More:

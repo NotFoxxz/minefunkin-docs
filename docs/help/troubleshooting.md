@@ -112,7 +112,7 @@ and land in the log with their line:
 
 | Message | Cause |
 |---|---|
-| `there's no fighter 2 - fighters are 0 (you) and 1 (the opponent)` | `puppet[2]`: only 0 and 1 exist. |
+| `there's no fighter 2 - fighters are 0 (you) and 1 (the opponent)` | `fighter[2]` / `puppet[2]`: only 0 and 1 exist. |
 | a lane that doesn't exist | `strum[4]`: lanes are 0-3. |
 | text where a number is needed | e.g. `hud.angle = "big"`. |
 | a choice property set to a word it doesn't take | e.g. `text[0].layer = "middle"`. |

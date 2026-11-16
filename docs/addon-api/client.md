@@ -13,7 +13,7 @@ public final class MyMineFunkinClientAddon implements MineFunkinClientAddon {
 	@Override
 	public void onMineFunkinClientApi(MineFunkinClientApi api) {
 		api.events().onNoteJudged((session, note) -> {
-			if (note.judgment() == Judgment.SICK) {
+			if (note.judgment() == Rating.SICK) {
 				Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_BELL, 2.0f));
 			}
 		});

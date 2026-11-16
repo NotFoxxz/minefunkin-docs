@@ -109,7 +109,7 @@ magic, and it's eight lines.
 | `player`, `opponent` | A fighter (see [Fighters in a pop-out](#fighters-in-a-pop-out)). |
 | `judgments` | The "Sick!" popup, the ms label and the combo. |
 | `score`, `title`, `health` | The score line, the song title, the hearts. `hud` is all three. |
-| `text0` ... `text7`, `image0` ... `image31` | One of the scripts' [texts](../api/text.md) and [pictures](../api/image.md). |
+| `text0` ... `text7`, `image0` ... `image31` | One of the scripts' [texts](../api/text.md) and [pictures](../api/image.md) (the first 32 pictures - the others stay in the game window). |
 
 One pop-out can show several parts - it's then as big as all of them together (`"left right"` spans all four
 lanes). Everything about a part keeps working inside its pop-out: lane offsets, colours and scroll directions, a

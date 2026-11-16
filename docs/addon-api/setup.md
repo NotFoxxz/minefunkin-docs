@@ -17,7 +17,7 @@ MineFunkin's jar into a `libs/` folder in your project and add it as a *compile-
 
     ```groovy
     dependencies {
-        modCompileOnly files("libs/minefunkin-0.3.0.jar")
+        modCompileOnly files("libs/minefunkin-fabric-1.21.11_ALPHA-0.1.0h.jar")
     }
     ```
 
@@ -25,11 +25,11 @@ MineFunkin's jar into a `libs/` folder in your project and add it as a *compile-
 
     ```groovy
     dependencies {
-        compileOnly files("libs/minefunkin-0.3.0.jar")   // the jar of MineFunkin's NeoForge build
+        compileOnly files("libs/minefunkin-neoforge-1.21.1_ALPHA-0.1.0h.jar")
     }
     ```
 
-To try your mod together with MineFunkin, drop the same jar into your development run's `mods` folder
+Use the file name of the jar you downloaded. To try your mod together with MineFunkin, drop the same jar into your development run's `mods` folder
 (`run/mods`).
 
 ## 2. Write the addon class
@@ -100,7 +100,8 @@ One class per side. MineFunkin creates it once while the game starts and hands i
         "minefunkin-client": [ "com.example.mymod.client.MyMineFunkinClientAddon" ]
       },
       "custom": {
-        "minefunkin:api": "1.1"
+        "minefunkin:api": "3.0",
+        "minefunkin:permissions": ["fights.start", "fights.control"]
       },
       "suggests": { "minefunkin": "*" }
     }
@@ -126,31 +127,40 @@ One class per side. MineFunkin creates it once while the game starts and hands i
 
     ```toml
     [modproperties.mymod]
-    "minefunkin:api" = "1.1"
+    "minefunkin:api" = "3.0"
+    "minefunkin:permissions" = ["fights.start", "fights.control"]
 
     [[dependencies.mymod]]
     modId = "minefunkin"
     type = "optional"
-    versionRange = "[0.3.0,)"
+    versionRange = "*"
     ordering = "NONE"
     side = "BOTH"
     ```
+
+    Leave the range open (`"*"`): MineFunkin's versions (like `ALPHA-0.1.0h`) aren't plain numbers a range can
+    compare. The API version below decides whether your mod is served.
 
     MineFunkin finds the annotated classes in NeoForge's mod scan data (like JEI's `@JeiPlugin`) and only
     loads one once it knows the class implements the interface for the running side - so a
     `MineFunkinClientAddon` is never touched on a dedicated server.
 
-`"minefunkin:api": "1.1"` is the API version you wrote against. MineFunkin serves it if the first number
-matches and the second isn't higher than its own (`1.0` and `1.1` both get 1.1). A mod asking for a
+`"minefunkin:api": "3.0"` is the API version you wrote against. MineFunkin serves it if the first number
+matches and the second isn't higher than its own (`3.0` gets 3.0; a mod written for 2.x isn't served -
+fights changed, see [Versions](versions.md)). A mod asking for a
 version MineFunkin doesn't serve gets no handle, and the log says why.
+
+`"minefunkin:permissions"` lists the [rights](rights.md) your mod wants - only for changing things (starting and
+controlling fights, leaderboards, moving players). A mod that only listens and reads leaves it out.
 
 ## 4. See it work
 
 Start the game and look in `logs/latest.log`:
 
 ```
-[Render thread/INFO] (MineFunkin/API) MineFunkin API 1.1 (client): online for [mymod]
-[Render thread/INFO] (MineFunkin/API) MineFunkin API 1.1 (server): online for [mymod]
+[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (client): online for [mymod]
+[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (server): online for [mymod]
+[Render thread/INFO] (MineFunkin/API) MineFunkin API: mymod (My Mod) declares [fights.start, fights.control]
 ```
 
 One line per side; a mod with only a server-side class gets `online` on the `(server)` line only. A
@@ -168,7 +178,8 @@ shows up in the log.
   - the game waits for them. Don't read files or wait for the network inside one; hand slow work to
   your own thread.
 - **A listener that throws** is logged under your mod id and skipped. It never breaks MineFunkin or
-  another mod's listener.
+  another mod's listener. After 10 such errors in one session your mod is switched off until the next start
+  (see [Rights](rights.md#mistakes-stay-with-your-mod)).
 - **Register any time.** Most mods register everything in `onMineFunkinApi`, but you can keep the
   handle and register later.
 - **Check `result.verified()`** before handing out anything valuable on the server - see

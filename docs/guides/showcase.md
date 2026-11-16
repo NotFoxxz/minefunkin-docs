@@ -97,7 +97,7 @@ Looking for an example of something specific? Find it here, then open that file:
 | `shockwave.event` | every impact | a shader (`shaders/shockwave.fsh`) handed its start time; the fighters' `pitch` / `squash` / `z` |
 | `lane_lights.event` | drop | the strum background (`underlay.color` / `.alpha` / `.width`) flaring on the beat |
 | `hop.event` | drops | `max(0, sin())` as a bouncing ball, `isDown` to hop toward the middle |
-| `dance_routine.event` | the dance | `animate = false`, body parts, eight moves as functions, a mirror flag, `puppet[i]` |
+| `dance_routine.event` | the dance | `animate = false`, body parts, eight moves as functions, a mirror flag, `fighter[i]` |
 | `orbit_cam.event` | the dance | `camera.x / .y / .z / .yaw / .pitch` together: circling the fighters |
 | `word_by_word.event` | the dance | six parameters from the parts of one value, `after()` keeping each step, `break` |
 | `fake_death.event` | fake death | `opponent.pose = "death"`, `fx.saturation` draining the colour, the camera looking down |

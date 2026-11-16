@@ -4,16 +4,17 @@ icon: material/image-outline
 
 # image[n]
 
-Thirty-two pictures: logos, stage art, sprite sheets, Psych sprites with their animations, videos, plain coloured boxes.
+Sixty-four pictures: logos, stage art, sprite sheets, Psych sprites with their animations, videos, plain coloured boxes.
 Everything you need to dress up a song.
 
 !!! info "How to use it"
-    `image[0]` to `image[31]` - set `file` and it shows, `""` hides it. Positions and sizes are shares of the screen.
+    `image[0]` to `image[63]` - set `file` and it shows, `""` hides it. Positions and sizes are shares of the screen.
     A picture is loaded the first time it's drawn; [`preload(file)`](shortcuts.md#preload) in `onStart` loads it
     before, so it's there on the right frame.
     
     - **Files:** a `.png` in the song folder or its `events/` folder (up to 8192 pixels a side, 128 pictures and 512 MB
-      per song). `"solid"` = a plain white box to colour with `color`.
+      at a time - a picture that hasn't been shown for a while makes room for a new one and loads again when it's
+      needed). `"solid"` = a plain white box to colour with `color`.
     - **Animated:** a grid sprite sheet (`columns`, `rows`, `fps`), a Psych sprite (`.png` + Sparrow `.xml`, `anim`), or
       a video as a folder of numbered frames (`"videos/intro/"`).
     - **In a fight:** the [`"stage"` layer](choices.md#layers) paints it onto the world behind the fighters, `follow`
@@ -72,6 +73,7 @@ end
 | [image[n].anim](#image-anim) | text | `""` | A Psych sprite (the `.png` with a Sparrow `.xml` of the same name next to it): plays the … |
 | [image[n].blend](#image-blend) | choice | `"normal"` | How it's laid over what's under it: `"normal"`, `"add"` (glows), `"multiply"` (darkens - … |
 | [image[n].smooth](#image-smooth) | switch | `false` | false (default) = drawn with sharp pixels, like the game. true = smoothed - for big, … |
+| [image[n].shader](#image-shader) | text | `""` | A shader on this picture alone: a `.frag` or `.fsh` from the song folder, its `events/` … |
 
 ---
 
@@ -240,3 +242,15 @@ One of: `"normal"`, `"add"`, `"multiply"`, `"screen"`, `"erase"`, `"key"` ([what
 
 false (default) = drawn with sharp pixels, like the game. true = smoothed - for big, detailed art that's drawn
 smaller or turned. Psych's `antialiasing`.
+
+### image[n].shader { #image-shader }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>image[n].shader</code> <span class="mf-eq">= <code>""</code></span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+
+A shader on this picture alone: a `.frag` or `.fsh` from the song folder, its `events/` or `shaders/` folder.
+`""` = none. The shader sees the picture's own file (a Psych sprite: its whole sheet). Its `iTime` runs by
+itself; its other values stay 0. A picture with a shader is drawn with the normal blend, and `color` doesn't
+tint it. The same rules as [`shader[n]`](shader.md) apply - whether it runs is the player's choice.
+
+<p class="mf-like">Psych: <code>setSpriteShader</code></p>

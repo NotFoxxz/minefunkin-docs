@@ -2,7 +2,7 @@
 icon: material/format-text
 ---
 
-# text[n]
+# text[n], title
 
 Eight texts you can put anywhere on the screen: a word on the drop, lyrics, a counter, a title card. Positions are shares
 of the screen, so they sit in the same spot in every window size.
@@ -36,6 +36,10 @@ end
 
 | Property | Kind | Default | |
 |---|---|---|---|
+| [title.text](#title-text) | text | `""` | The big line in the middle of the screen - Minecraft's `/title` look, over everything (up … |
+| [title.subtitle](#title-subtitle) | text | `""` | The smaller line under it. |
+| [title.color](#title-color) | colour | `#FFFFFF` | The colour of both lines. |
+| [title.alpha](#title-alpha) | number | `0` | Their opacity: 0 = gone. `showTitle` fades it in (a quarter second), holds it and fades … |
 | [text[n].value](#text-value) | text | `""` | What it says (up to 200 characters). `""` = hidden. Numbers are turned into text: … |
 | [text[n].x](#text-x) | number | `0.5` | Where its anchor sits from left to right: 0 = the left edge, 1 = the right edge. |
 | [text[n].y](#text-y) | number | `0.5` | Where its anchor sits from top to bottom: 0 = the top, 1 = the bottom. |
@@ -51,6 +55,33 @@ end
 | [text[n].wrap](#text-wrap) | number | `0` | Breaks the text into lines at this share of the screen width. 0 = one line. |
 
 ---
+
+### title.text { #title-text }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>title.text</code> <span class="mf-eq">= <code>""</code></span></p>
+
+The big line in the middle of the screen - Minecraft's `/title` look, over everything (up to 200 characters). A long
+one is made smaller to fit. [showTitle](shortcuts.md#showtitle) sets it and fades it in and out for you.
+
+### title.subtitle { #title-subtitle }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>title.subtitle</code> <span class="mf-eq">= <code>""</code></span></p>
+
+The smaller line under it.
+
+### title.color { #title-color }
+
+<p class="mf-sig"><span class="mf-type">colour</span> <code>title.color</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+
+The colour of both lines.
+
+### title.alpha { #title-alpha }
+
+<p class="mf-sig"><span class="mf-type">number</span> <code>title.alpha</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+
+Their opacity: 0 = gone. `showTitle` fades it in (a quarter second), holds it and fades it out (half a second); set it
+yourself to show a title as long as you like.
 
 ### text[n].value { #text-value }
 

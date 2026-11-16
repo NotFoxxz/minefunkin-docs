@@ -21,7 +21,7 @@ A handful of things work differently on purpose. Once these click, the rest is m
   `player.pose`). The upside: a typo is an error the moment the file loads, with a "did you mean ...?" - instead of
   silently doing nothing while you wonder why.
 - **No tags.** Psych names every sprite, tween and timer with a tag. Here texts and pictures are slots
-  (`text[0]` ... `text[7]`, `image[0]` ... `image[31]`), a tween belongs to the property it moves, and timers
+  (`text[0]` ... `text[7]`, `image[0]` ... `image[63]`), a tween belongs to the property it moves, and timers
   only need a name if you want to [cancel](../api/actions.md#cancel) them.
 - **Durations are milliseconds,** written `beats(2)`, `steps(4)` or `seconds(1)` - they follow the song's
   tempo by themselves.
@@ -124,7 +124,7 @@ A handful of things work differently on purpose. Once these click, the rest is m
 
 | Psych | MineFunkin |
 |---|---|
-| `initLuaShader` + `setSpriteShader(tag, shader)` | `shader[0].file = "my.frag"` - the Psych `.frag` file as it is, on the whole picture, the world, or the world behind the fighters ([your own shaders](shaders.md#shaders-from-psych-engine-frag)) |
+| `initLuaShader` + `setSpriteShader(tag, shader)` | `image[0].shader = "my.frag"` on one sprite, or `shader[0].file = "my.frag"` on the whole picture, the world, or the world behind the fighters - the Psych `.frag` file as it is ([your own shaders](shaders.md#shaders-from-psych-engine-frag)) |
 | `setShaderFloat(tag, name, value)` | [setShaderFloat](../api/shortcuts.md#setshaderfloat)`(slot, name, value)` - `int` / `bool` uniforms too |
 | `setShaderFloatArray` | not available - use single values |
 | ready-made shader effects | the built-in [`fx.*`](effects.md): chromatic, bloom, blur, glitch, wave, ... |

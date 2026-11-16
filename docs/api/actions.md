@@ -12,7 +12,7 @@ ready-made actions for the common cases.
 |---|---|
 | Animate | [tween](#tween) · [approach](#approach) · [stopTween](#stoptween) |
 | Later and again | [after](#after) · [every](#every) · [cancel](#cancel) |
-| Put things back | [reset / resetAll](#reset) · [resetCamera](#resetcamera) · [resetPuppet](#resetpuppet) · [resetFx](#resetfx) · [resetWindow](#resetwindow) |
+| Put things back | [reset / resetAll](#reset) · [resetCamera](#resetcamera) · [resetFighter](#resetfighter) · [resetPuppet](#resetpuppet) · [resetFx](#resetfx) · [resetWindow](#resetwindow) |
 | The song | [scrollTo / scrollBy](#scrollto) · [countdown](#countdown) · [scatterStrums](#scatterstrums) |
 | Sound | [playSound](#playsound) · [loopSound](#loopsound) |
 | Debugging | [log / print](#log) |
@@ -156,7 +156,7 @@ Puts things back to their defaults - at once, or eased over a duration (the [eas
 | `strums` | the whole strumline and every lane |
 | one slot: `strum[2]`, `text[0]`, `image[4]`, `shader[1]` | everything of that slot |
 | `text`, `image`, `shader` | every slot |
-| a fighter: `player`, `opponent`, `boyfriend`, `dad`, `puppet[i]` | like [resetPuppet](#resetpuppet) |
+| a fighter: `player`, `opponent`, `boyfriend`, `dad`, `fighter[i]`, `puppet[i]` | like [resetFighter](#resetfighter) |
 | a body part: `player.head` | that part |
 | `window` | like [resetWindow](#resetwindow) |
 | `popout[n]` | eases it home, then closes it |
@@ -187,12 +187,23 @@ Puts the [fight camera](../guides/camera.md) back: at once, or gliding home over
 resetCamera(beats(2))
 ```
 
+### resetFighter
+
+<p class="mf-sig"><code>resetFighter(who[, duration[, ease]])</code></p>
+
+Puts a [fighter](../guides/fighters.md) back - position, size, turn, tint, body parts: `"player"`, `"opponent"`,
+`"both"`, or 0 / 1. <span class="mf-tag fight">fights</span>
+
+```lua
+resetFighter("both", beats(1))
+```
+
 ### resetPuppet
 
 <p class="mf-sig"><code>resetPuppet(who[, duration[, ease]])</code></p>
 
-Puts a [fighter](../guides/fighters.md) back - position, size, turn, tint, body parts: `"player"`, `"opponent"`,
-`"both"`, or 0 / 1. <span class="mf-tag fight">fights</span>
+The same for the two puppets beside the lanes in practice. In a fight it does nothing (and `resetFighter` does
+nothing in practice) - a script can hold both. `reset(player)` works in both modes.
 
 ```lua
 resetPuppet("both", beats(1))

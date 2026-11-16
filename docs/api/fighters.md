@@ -12,15 +12,20 @@ pin them to the screen like sprites, outline them. All of it only in your own pi
     
     | Name | Who |
     |---|---|
-    | `player` / `puppet[0]` | you |
-    | `opponent` / `puppet[1]` | the other one |
+    | `player` / `fighter[0]` / `puppet[0]` | you |
+    | `opponent` / `fighter[1]` / `puppet[1]` | the other one |
     | `boyfriend` / `dad` | by the **chart's** sides: whoever plays the Boyfriend part / the opponent part - the same as `player` / `opponent` unless you play the opponent side |
     
     **Where:** in a fight, the fighters in the world - seen only by you, the real players don't move. In practice, the two
     puppets beside the lanes follow most of it (position, size, squash, turn, tint, poses, body parts, pinning);
     `clip*`, `outline*`, `depth` and `facing` are fights only.
     
-    Put one back with [`resetPuppet(who[, duration])`](actions.md#resetpuppet) or `reset(player, duration)`. Shortcuts:
+    The numbered names belong to one mode each: `fighter[i]` = the fighters in a fight (its replay, watching it),
+    `puppet[i]` = the puppets beside the lanes in practice. In the other mode they do nothing (no error) - one script
+    can hold both. `player`, `opponent`, `boyfriend` and `dad` work in both.
+    
+    Put one back with [`resetFighter(who[, duration])`](actions.md#resetfighter) (practice:
+    [`resetPuppet`](actions.md#resetpuppet)) or `reset(player, duration)`. Shortcuts:
     [pose](shortcuts.md#pose), [setPose](shortcuts.md#setpose), [setSkin](shortcuts.md#setskin),
     [setModel](shortcuts.md#setmodel), [swapFighters](shortcuts.md#swapfighters), [bind](shortcuts.md#bind),
     [focus](shortcuts.md#focus). Body parts: [Body parts](parts.md). The whole picture: [The fighters](../guides/fighters.md).
@@ -39,7 +44,7 @@ function onEvent(p)
     tween(opponent.screenX, 0.5, beats(2), "cubicInOut")
     after(beats(8), function()
         tween(opponent.screenX, opponent.homeX, beats(2), "cubicInOut")
-        after(beats(2), function() resetPuppet("opponent") end)
+        after(beats(2), function() resetFighter("opponent") end)
     end)
 end
 ```
@@ -63,6 +68,8 @@ end
 | [player.pose](#pose) | choice | `"none"` | Plays one of MineFunkin's own poses: a lane's pose pops and holds like a held note, … |
 | [player.skin](#skin) | text | `""` | Its Minecraft skin: `""` = its own, `"player"` / `"opponent"` = that fighter's own (so … |
 | [player.model](#model) | choice | `"default"` | The arm shape: `"default"` (what the skin says), `"wide"` (Steve, 4 pixels) or `"slim"` … |
+| [player.figure](#figure) | text | `""` | In a fight against the dummy: a Minecraft mob stands in for it - `"creeper"`, … |
+| [player.figura](#figura) | switch | `true` | The fighter's Figura avatar, if the player has one and you have Figura installed. false = … |
 | [player.pinned](#pinned) | switch | `false` | true = stuck to a spot on the screen like a sprite: `screenX` / `screenY` place its feet, … |
 | [player.place](#place) | choice | `""` | Which spot of the fight it stands on: `"bf"` (the spot in front, where the camera stands … |
 | [player.screenX](#screenx) | number | `0.5` | A pinned fighter's feet, from left to right: 0 = the left edge, 1 = the right edge. … |
@@ -85,87 +92,87 @@ end
 
 ### player.x { #x }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.x</code> · <code>opponent.x</code> · <code>boyfriend.x</code> · <code>dad.x</code> · <code>puppet[i].x</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.x</code> · <code>opponent.x</code> · <code>boyfriend.x</code> · <code>dad.x</code> · <code>fighter[i].x</code> · <code>puppet[i].x</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">blocks</span></p>
 
 Moved to the camera's right, in blocks (practice: a block = the puppet's height / 2.1).
 
 ### player.y { #y }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.y</code> · <code>opponent.y</code> · <code>boyfriend.y</code> · <code>dad.y</code> · <code>puppet[i].y</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.y</code> · <code>opponent.y</code> · <code>boyfriend.y</code> · <code>dad.y</code> · <code>fighter[i].y</code> · <code>puppet[i].y</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">blocks</span></p>
 
 Moved up, in blocks.
 
 ### player.z { #z }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.z</code> · <code>opponent.z</code> · <code>boyfriend.z</code> · <code>dad.z</code> · <code>puppet[i].z</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.z</code> · <code>opponent.z</code> · <code>boyfriend.z</code> · <code>dad.z</code> · <code>fighter[i].z</code> · <code>puppet[i].z</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">blocks</span></p>
 
 Moved away from the camera, in blocks.
 
 ### player.scale { #scale }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.scale</code> · <code>opponent.scale</code> · <code>boyfriend.scale</code> · <code>dad.scale</code> · <code>puppet[i].scale</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.scale</code> · <code>opponent.scale</code> · <code>boyfriend.scale</code> · <code>dad.scale</code> · <code>fighter[i].scale</code> · <code>puppet[i].scale</code> <span class="mf-eq">= <code>1</code></span></p>
 
 Its size, from the feet up.
 
 ### player.turn { #turn }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.turn</code> · <code>opponent.turn</code> · <code>boyfriend.turn</code> · <code>dad.turn</code> · <code>puppet[i].turn</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.turn</code> · <code>opponent.turn</code> · <code>boyfriend.turn</code> · <code>dad.turn</code> · <code>fighter[i].turn</code> · <code>puppet[i].turn</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">degrees</span></p>
 
 Turned around its own vertical axis, in degrees: positive = to its right.
 
 ### player.pitch { #pitch }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.pitch</code> · <code>opponent.pitch</code> · <code>boyfriend.pitch</code> · <code>dad.pitch</code> · <code>puppet[i].pitch</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.pitch</code> · <code>opponent.pitch</code> · <code>boyfriend.pitch</code> · <code>dad.pitch</code> · <code>fighter[i].pitch</code> · <code>puppet[i].pitch</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">degrees</span></p>
 
 The whole figure tipped forward (positive) or back, around its feet, in degrees.
 
 ### player.roll { #roll }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.roll</code> · <code>opponent.roll</code> · <code>boyfriend.roll</code> · <code>dad.roll</code> · <code>puppet[i].roll</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.roll</code> · <code>opponent.roll</code> · <code>boyfriend.roll</code> · <code>dad.roll</code> · <code>fighter[i].roll</code> · <code>puppet[i].roll</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">degrees</span></p>
 
 The whole figure tipped to its own right (positive) or left, around its feet, in degrees.
 
 ### player.alpha { #alpha }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.alpha</code> · <code>opponent.alpha</code> · <code>boyfriend.alpha</code> · <code>dad.alpha</code> · <code>puppet[i].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.alpha</code> · <code>opponent.alpha</code> · <code>boyfriend.alpha</code> · <code>dad.alpha</code> · <code>fighter[i].alpha</code> · <code>puppet[i].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
 <p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
 
 Its opacity.
 
 ### player.color { #color }
 
-<p class="mf-sig"><span class="mf-type">colour</span> <code>player.color</code> · <code>opponent.color</code> · <code>boyfriend.color</code> · <code>dad.color</code> · <code>puppet[i].color</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+<p class="mf-sig"><span class="mf-type">colour</span> <code>player.color</code> · <code>opponent.color</code> · <code>boyfriend.color</code> · <code>dad.color</code> · <code>fighter[i].color</code> · <code>puppet[i].color</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
 
 Multiplied onto the skin - and onto its armor, cape and head item.
 
 ### player.visible { #visible }
 
-<p class="mf-sig"><span class="mf-type">switch</span> <code>player.visible</code> · <code>opponent.visible</code> · <code>boyfriend.visible</code> · <code>dad.visible</code> · <code>puppet[i].visible</code> <span class="mf-eq">= <code>true</code></span></p>
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.visible</code> · <code>opponent.visible</code> · <code>boyfriend.visible</code> · <code>dad.visible</code> · <code>fighter[i].visible</code> · <code>puppet[i].visible</code> <span class="mf-eq">= <code>true</code></span></p>
 
 false = gone.
 
 ### player.animate { #animate }
 
-<p class="mf-sig"><span class="mf-type">switch</span> <code>player.animate</code> · <code>opponent.animate</code> · <code>boyfriend.animate</code> · <code>dad.animate</code> · <code>puppet[i].animate</code> <span class="mf-eq">= <code>true</code></span></p>
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.animate</code> · <code>opponent.animate</code> · <code>boyfriend.animate</code> · <code>dad.animate</code> · <code>fighter[i].animate</code> · <code>puppet[i].animate</code> <span class="mf-eq">= <code>true</code></span></p>
 
 false = MineFunkin's own animation stops: it stands in its rest pose and only your values (and the body parts')
 move it. Wins over `pose`.
 
 ### player.squash { #squash }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.squash</code> · <code>opponent.squash</code> · <code>boyfriend.squash</code> · <code>dad.squash</code> · <code>puppet[i].squash</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.squash</code> · <code>opponent.squash</code> · <code>boyfriend.squash</code> · <code>dad.squash</code> · <code>fighter[i].squash</code> · <code>puppet[i].squash</code> <span class="mf-eq">= <code>0</code></span></p>
 
 Squash and stretch, feet on the ground, volume kept: 0.3 = shorter and wider, -0.3 = taller and thinner.
 
 ### player.pose { #pose }
 
-<p class="mf-sig"><span class="mf-type">choice</span> <code>player.pose</code> · <code>opponent.pose</code> · <code>boyfriend.pose</code> · <code>dad.pose</code> · <code>puppet[i].pose</code> <span class="mf-eq">= <code>"none"</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>player.pose</code> · <code>opponent.pose</code> · <code>boyfriend.pose</code> · <code>dad.pose</code> · <code>fighter[i].pose</code> · <code>puppet[i].pose</code> <span class="mf-eq">= <code>"none"</code></span></p>
 
 Plays one of MineFunkin's own poses: a lane's pose pops and holds like a held note, `"death"` sits it down,
 `"none"` lets go (a held pose eases out like a released note). While it's set, the notes don't change it.
@@ -175,29 +182,48 @@ One of: `"none"`, `"left"`, `"down"`, `"up"`, `"right"`, `"death"` ([what they d
 
 ### player.skin { #skin }
 
-<p class="mf-sig"><span class="mf-type">text</span> <code>player.skin</code> · <code>opponent.skin</code> · <code>boyfriend.skin</code> · <code>dad.skin</code> · <code>puppet[i].skin</code> <span class="mf-eq">= <code>""</code></span></p>
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.skin</code> · <code>opponent.skin</code> · <code>boyfriend.skin</code> · <code>dad.skin</code> · <code>fighter[i].skin</code> · <code>puppet[i].skin</code> <span class="mf-eq">= <code>""</code></span></p>
 
 Its Minecraft skin: `""` = its own, `"player"` / `"opponent"` = that fighter's own (so the two can swap), or a
 64x64 skin `.png` from the song folder (or its `events/` / `skins/` folder) - at most 8 files, 1 MB each.
 
 ### player.model { #model }
 
-<p class="mf-sig"><span class="mf-type">choice</span> <code>player.model</code> · <code>opponent.model</code> · <code>boyfriend.model</code> · <code>dad.model</code> · <code>puppet[i].model</code> <span class="mf-eq">= <code>"default"</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>player.model</code> · <code>opponent.model</code> · <code>boyfriend.model</code> · <code>dad.model</code> · <code>fighter[i].model</code> · <code>puppet[i].model</code> <span class="mf-eq">= <code>"default"</code></span></p>
 
 The arm shape: `"default"` (what the skin says), `"wide"` (Steve, 4 pixels) or `"slim"` (Alex, 3 pixels).
 
 One of: `"default"`, `"wide"`, `"slim"`.
 
+### player.figure { #figure }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.figure</code> · <code>opponent.figure</code> · <code>boyfriend.figure</code> · <code>dad.figure</code> · <code>fighter[i].figure</code> · <code>puppet[i].figure</code> <span class="mf-eq">= <code>""</code></span></p>
+
+In a fight against the dummy: a Minecraft mob stands in for it - `"creeper"`, `"minecraft:iron_golem"` or a mod's mob
+(`"mymod:boss"`). When it changes, the one standing there is pushed out to the side and the new one pushed in from
+the other side - both keep facing you. `""` = the dummy itself again. The players around the fight see the same mob. Its
+moves come from animation files ([Boss opponents](../addon-api/boss-opponents.md#animations)); a mob without one
+hops on every note. Only the opponent when it's the dummy - on a player it does nothing. Set it with
+[`setFigure`](shortcuts.md#setfigure).
+
+### player.figura { #figura }
+
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.figura</code> · <code>opponent.figura</code> · <code>boyfriend.figura</code> · <code>dad.figura</code> · <code>fighter[i].figura</code> · <code>puppet[i].figura</code> <span class="mf-eq">= <code>true</code></span></p>
+
+The fighter's Figura avatar, if the player has one and you have Figura installed. false = hidden for this song: the
+fighter shows its plain Minecraft skin, so your song's poses, skins and tints look the way you made them. Only on your
+own screen. Without Figura it does nothing.
+
 ### player.pinned { #pinned }
 
-<p class="mf-sig"><span class="mf-type">switch</span> <code>player.pinned</code> · <code>opponent.pinned</code> · <code>boyfriend.pinned</code> · <code>dad.pinned</code> · <code>puppet[i].pinned</code> <span class="mf-eq">= <code>false</code></span></p>
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.pinned</code> · <code>opponent.pinned</code> · <code>boyfriend.pinned</code> · <code>dad.pinned</code> · <code>fighter[i].pinned</code> · <code>puppet[i].pinned</code> <span class="mf-eq">= <code>false</code></span></p>
 
 true = stuck to a spot on the screen like a sprite: `screenX` / `screenY` place its feet, whatever the camera does.
 false = back where the fight wants it, at once.
 
 ### player.place { #place }
 
-<p class="mf-sig"><span class="mf-type">choice</span> <code>player.place</code> · <code>opponent.place</code> · <code>boyfriend.place</code> · <code>dad.place</code> · <code>puppet[i].place</code> <span class="mf-eq">= <code>""</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>player.place</code> · <code>opponent.place</code> · <code>boyfriend.place</code> · <code>dad.place</code> · <code>fighter[i].place</code> · <code>puppet[i].place</code> <span class="mf-eq">= <code>""</code></span></p>
 
 Which spot of the fight it stands on: `"bf"` (the spot in front, where the camera stands behind), `"dad"` (the far
 spot), `""` = the fight's own (you in front). Set it with [`bind(who, "bf" | "dad")`](shortcuts.md#bind) - that
@@ -207,21 +233,21 @@ One of: `""`, `"bf"`, `"dad"`.
 
 ### player.screenX { #screenx }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenX</code> · <code>opponent.screenX</code> · <code>boyfriend.screenX</code> · <code>dad.screenX</code> · <code>puppet[i].screenX</code> <span class="mf-eq">= <code>0.5</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenX</code> · <code>opponent.screenX</code> · <code>boyfriend.screenX</code> · <code>dad.screenX</code> · <code>fighter[i].screenX</code> · <code>puppet[i].screenX</code> <span class="mf-eq">= <code>0.5</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span></p>
 
 A pinned fighter's feet, from left to right: 0 = the left edge, 1 = the right edge. Beyond = off the screen.
 
 ### player.screenY { #screeny }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenY</code> · <code>opponent.screenY</code> · <code>boyfriend.screenY</code> · <code>dad.screenY</code> · <code>puppet[i].screenY</code> <span class="mf-eq">= <code>0.9</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenY</code> · <code>opponent.screenY</code> · <code>boyfriend.screenY</code> · <code>dad.screenY</code> · <code>fighter[i].screenY</code> · <code>puppet[i].screenY</code> <span class="mf-eq">= <code>0.9</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span></p>
 
 A pinned fighter's feet, from top to bottom: 0.9 = near the bottom. Above 1 = the feet below the bottom edge.
 
 ### player.depth { #depth }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.depth</code> · <code>opponent.depth</code> · <code>boyfriend.depth</code> · <code>dad.depth</code> · <code>puppet[i].depth</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.depth</code> · <code>opponent.depth</code> · <code>boyfriend.depth</code> · <code>dad.depth</code> · <code>fighter[i].depth</code> · <code>puppet[i].depth</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">blocks</span></p>
 
 How far from the camera a pinned fighter stands, in blocks: near = big. 0 = as far as it really is. The camera's
@@ -229,7 +255,7 @@ zoom still makes it bigger or smaller.
 
 ### player.screenHeight { #screenheight }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenHeight</code> · <code>opponent.screenHeight</code> · <code>boyfriend.screenHeight</code> · <code>dad.screenHeight</code> · <code>puppet[i].screenHeight</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.screenHeight</code> · <code>opponent.screenHeight</code> · <code>boyfriend.screenHeight</code> · <code>dad.screenHeight</code> · <code>fighter[i].screenHeight</code> · <code>puppet[i].screenHeight</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span></p>
 
 A pinned fighter's height as a share of the screen (1 = as tall as the screen), whatever the camera's lens.
@@ -237,7 +263,7 @@ A pinned fighter's height as a share of the screen (1 = as tall as the screen), 
 
 ### player.clipLeft { #clipleft }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipLeft</code> · <code>opponent.clipLeft</code> · <code>boyfriend.clipLeft</code> · <code>dad.clipLeft</code> · <code>puppet[i].clipLeft</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipLeft</code> · <code>opponent.clipLeft</code> · <code>boyfriend.clipLeft</code> · <code>dad.clipLeft</code> · <code>fighter[i].clipLeft</code> · <code>puppet[i].clipLeft</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span><span class="mf-tag fight">fights only</span></p>
 
 Cuts the fighter off left of this share of the screen (0 = not cut). With the other three it shows the fighter
@@ -253,28 +279,28 @@ player.clipBottom = 0.8
 
 ### player.clipTop { #cliptop }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipTop</code> · <code>opponent.clipTop</code> · <code>boyfriend.clipTop</code> · <code>dad.clipTop</code> · <code>puppet[i].clipTop</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipTop</code> · <code>opponent.clipTop</code> · <code>boyfriend.clipTop</code> · <code>dad.clipTop</code> · <code>fighter[i].clipTop</code> · <code>puppet[i].clipTop</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span><span class="mf-tag fight">fights only</span></p>
 
 Cuts the fighter off above this share of the screen (0 = not cut).
 
 ### player.clipRight { #clipright }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipRight</code> · <code>opponent.clipRight</code> · <code>boyfriend.clipRight</code> · <code>dad.clipRight</code> · <code>puppet[i].clipRight</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipRight</code> · <code>opponent.clipRight</code> · <code>boyfriend.clipRight</code> · <code>dad.clipRight</code> · <code>fighter[i].clipRight</code> · <code>puppet[i].clipRight</code> <span class="mf-eq">= <code>1</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span><span class="mf-tag fight">fights only</span></p>
 
 Cuts the fighter off right of this share of the screen (1 = not cut).
 
 ### player.clipBottom { #clipbottom }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipBottom</code> · <code>opponent.clipBottom</code> · <code>boyfriend.clipBottom</code> · <code>dad.clipBottom</code> · <code>puppet[i].clipBottom</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.clipBottom</code> · <code>opponent.clipBottom</code> · <code>boyfriend.clipBottom</code> · <code>dad.clipBottom</code> · <code>fighter[i].clipBottom</code> · <code>puppet[i].clipBottom</code> <span class="mf-eq">= <code>1</code></span></p>
 <p class="mf-tags"><span class="mf-tag">share of the screen</span><span class="mf-tag fight">fights only</span></p>
 
 Cuts the fighter off below this share of the screen (1 = not cut).
 
 ### player.facing { #facing }
 
-<p class="mf-sig"><span class="mf-type">choice</span> <code>player.facing</code> · <code>opponent.facing</code> · <code>boyfriend.facing</code> · <code>dad.facing</code> · <code>puppet[i].facing</code> <span class="mf-eq">= <code>"fight"</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>player.facing</code> · <code>opponent.facing</code> · <code>boyfriend.facing</code> · <code>dad.facing</code> · <code>fighter[i].facing</code> · <code>puppet[i].facing</code> <span class="mf-eq">= <code>"fight"</code></span></p>
 <p class="mf-tags"><span class="mf-tag fight">fights only</span></p>
 
 `"fight"` = it faces where the fight turns it, `"camera"` = it looks straight at you (`turn` still turns it on
@@ -284,35 +310,35 @@ One of: `"fight"`, `"camera"`.
 
 ### player.outlineAlpha { #outlinealpha }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.outlineAlpha</code> · <code>opponent.outlineAlpha</code> · <code>boyfriend.outlineAlpha</code> · <code>dad.outlineAlpha</code> · <code>puppet[i].outlineAlpha</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.outlineAlpha</code> · <code>opponent.outlineAlpha</code> · <code>boyfriend.outlineAlpha</code> · <code>dad.outlineAlpha</code> · <code>fighter[i].outlineAlpha</code> · <code>puppet[i].outlineAlpha</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag fight">fights only</span></p>
 
 A line around the fighter's silhouette: 0 = none, 1 = full.
 
 ### player.outlineColor { #outlinecolor }
 
-<p class="mf-sig"><span class="mf-type">colour</span> <code>player.outlineColor</code> · <code>opponent.outlineColor</code> · <code>boyfriend.outlineColor</code> · <code>dad.outlineColor</code> · <code>puppet[i].outlineColor</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+<p class="mf-sig"><span class="mf-type">colour</span> <code>player.outlineColor</code> · <code>opponent.outlineColor</code> · <code>boyfriend.outlineColor</code> · <code>dad.outlineColor</code> · <code>fighter[i].outlineColor</code> · <code>puppet[i].outlineColor</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
 <p class="mf-tags"><span class="mf-tag fight">fights only</span></p>
 
 The outline's colour.
 
 ### player.outlineOnly { #outlineonly }
 
-<p class="mf-sig"><span class="mf-type">switch</span> <code>player.outlineOnly</code> · <code>opponent.outlineOnly</code> · <code>boyfriend.outlineOnly</code> · <code>dad.outlineOnly</code> · <code>puppet[i].outlineOnly</code> <span class="mf-eq">= <code>false</code></span></p>
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.outlineOnly</code> · <code>opponent.outlineOnly</code> · <code>boyfriend.outlineOnly</code> · <code>dad.outlineOnly</code> · <code>fighter[i].outlineOnly</code> · <code>puppet[i].outlineOnly</code> <span class="mf-eq">= <code>false</code></span></p>
 <p class="mf-tags"><span class="mf-tag fight">fights only</span></p>
 
 true = only the outline shows - the fighter itself is gone (a silhouette drawn with a pen).
 
 ### player.outlineWidth { #outlinewidth }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.outlineWidth</code> · <code>opponent.outlineWidth</code> · <code>boyfriend.outlineWidth</code> · <code>dad.outlineWidth</code> · <code>puppet[i].outlineWidth</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.outlineWidth</code> · <code>opponent.outlineWidth</code> · <code>boyfriend.outlineWidth</code> · <code>dad.outlineWidth</code> · <code>fighter[i].outlineWidth</code> · <code>puppet[i].outlineWidth</code> <span class="mf-eq">= <code>0</code></span></p>
 <p class="mf-tags"><span class="mf-tag">0 – 40</span><span class="mf-tag">pixels</span><span class="mf-tag fight">fights only</span></p>
 
 The outline's width in pixels at 1080p (it scales with the window). 0 = automatic, about 3.
 
 ### player.homeX { #homex }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.homeX</code> · <code>opponent.homeX</code> · <code>boyfriend.homeX</code> · <code>dad.homeX</code> · <code>puppet[i].homeX</code> <span class="mf-eq">= <code>0.5</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.homeX</code> · <code>opponent.homeX</code> · <code>boyfriend.homeX</code> · <code>dad.homeX</code> · <code>fighter[i].homeX</code> · <code>puppet[i].homeX</code> <span class="mf-eq">= <code>0.5</code></span></p>
 <p class="mf-tags"><span class="mf-tag ro">read only</span></p>
 
 Where the fight puts its feet on the screen right now, from left to right - start a slide from here and it
@@ -320,7 +346,7 @@ doesn't jump.
 
 ### player.homeY { #homey }
 
-<p class="mf-sig"><span class="mf-type">number</span> <code>player.homeY</code> · <code>opponent.homeY</code> · <code>boyfriend.homeY</code> · <code>dad.homeY</code> · <code>puppet[i].homeY</code> <span class="mf-eq">= <code>0.9</code></span></p>
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.homeY</code> · <code>opponent.homeY</code> · <code>boyfriend.homeY</code> · <code>dad.homeY</code> · <code>fighter[i].homeY</code> · <code>puppet[i].homeY</code> <span class="mf-eq">= <code>0.9</code></span></p>
 <p class="mf-tags"><span class="mf-tag ro">read only</span></p>
 
 Where the fight puts its feet on the screen right now, from top to bottom.

@@ -90,6 +90,24 @@ Click one open, copy it, change the numbers until it feels right. That's really 
 
     With the [shortcuts](../api/shortcuts.md): `fadeOut(#000000, 0)`, then `fadeIn(beats(1))` in the `after`.
 
+??? example "A title card on the chart event (uses onEvent)"
+
+    ```lua
+    function onEvent(p)
+        title.color = #FFD040
+        showTitle("ROUND 2", "fight!", beats(4))
+    end
+    ```
+
+??? example "The world goes dark for a part (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 8 then stage.world = "off" end    -- only your pictures, notes and the HUD
+        if n == 12 then stage.world = "on" end
+    end
+    ```
+
 ??? example "Strum background in the colour of the last judgment"
 
     ```lua
@@ -197,13 +215,29 @@ More in [Modcharts](modcharts.md) and [strum[lane]](../api/strum.md).
 
 ## Fighters (fights only)
 
+??? example "Hearts on every Sick (uses onHit)"
+
+    ```lua
+    function onHit(n)
+        if n.judgment == "sick" then particle("heart", "player", 2, 0.4) end
+    end
+    ```
+
+??? example "Fire around the opponent on every beat (uses onBeat)"
+
+    ```lua
+    function onBeat(b)
+        particle("flame", "opponent", 10, 0.6)
+    end
+    ```
+
 ??? example "Both fighters bounce on every beat"
 
     ```lua
     function onBeat(b)
         for who = 0, 1 do
-            puppet[who].squash = 0.18
-            tween(puppet[who].squash, 0, beats(0.8), "elasticOut")
+            fighter[who].squash = 0.18
+            tween(fighter[who].squash, 0, beats(0.8), "elasticOut")
         end
     end
     ```
@@ -227,9 +261,44 @@ More in [Modcharts](modcharts.md) and [strum[lane]](../api/strum.md).
     end
     ```
 
+??? example "A new mob every 8 beats (against the dummy)"
+
+    ```lua
+    function onBeat(b)
+        if b % 16 == 0 then setFigure("opponent", "zombie") end
+        if b % 16 == 8 then setFigure("opponent", "creeper") end
+    end
+    ```
+
+??? example "The dummy turns into a skeleton for the drop, then comes back"
+
+    ```lua
+    function onSection(n)
+        if n == 16 then setFigure("opponent", "skeleton") end
+        if n == 24 then setFigure("opponent", "") end
+    end
+    ```
+
+??? example "Plain skins for this song (Figura avatars off)"
+
+    ```lua
+    function onStart()
+        player.figura = false
+        opponent.figura = false
+    end
+    ```
+
 More in [The fighters](fighters.md).
 
 ## Sound
+
+??? example "A Minecraft bell on every fourth beat (uses onBeat)"
+
+    ```lua
+    function onBeat(b)
+        if b % 4 == 0 then playGameSound("block.note_block.bell", 0.6, 1.5) end
+    end
+    ```
 
 ??? example "A sound on the drop"
 

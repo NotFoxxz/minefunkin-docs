@@ -27,8 +27,8 @@ reset(camera.zoom)                               -- put it back to its default
 | `underlay.*` - the strum background | [underlay](underlay.md) |
 | `notes.count`, `note[i].*` - every note on its way | [note[i]](notes.md) |
 | `text[n].*` - eight texts | [text[n]](text.md) |
-| `image[n].*` - 32 pictures, sheets, Psych sprites, videos | [image[n]](image.md) |
-| `player.*`, `opponent.*`, `boyfriend.*`, `dad.*`, `puppet[i].*` - the fighters | [Fighters](fighters.md) |
+| `image[n].*` - 64 pictures, sheets, Psych sprites, videos | [image[n]](image.md) |
+| `player.*`, `opponent.*`, `boyfriend.*`, `dad.*`, `fighter[i].*`, `puppet[i].*` - the fighters | [Fighters](fighters.md) |
 | `player.head.*`, `.leftArm.*`, ... - body parts | [Body parts](parts.md) |
 | `fx.*` - built-in effects | [fx](fx.md) |
 | `shader[n].*` - the song's own shaders | [shader[n]](shader.md) |
@@ -37,7 +37,7 @@ reset(camera.zoom)                               -- put it back to its default
 | `song.*`, `player.score`, ... - the game's state (read only) | [song](song.md), [player (your run)](player.md) |
 
 `strum[lane]` exists once per lane (0 left, 1 down, 2 up, 3 right), `text[n]` has 8 slots (0-7),
-`image[n]` 32 (0-31), `shader[n]` 4, `popout[n]` 8, `puppet[i]` 2 (0 = you, 1 = the opponent), `note[i]`
+`image[n]` 64 (0-63), `shader[n]` 4, `popout[n]` 8, `fighter[i]` / `puppet[i]` 2 (0 = you, 1 = the opponent), `note[i]`
 up to 128 (as many as `notes.count` says).
 
 ## Kinds of properties

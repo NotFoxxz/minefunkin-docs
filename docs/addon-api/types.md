@@ -5,9 +5,9 @@ icon: material/shape-outline
 # Types
 
 Everything the events hand you and the queries give back. They are Java records (read a field with
-`result.score()`, `result.hits().sick()`) and enums. Server-side types are in
-`com.notfoxxz.minefunkin.api`, client-side ones in `com.notfoxxz.minefunkin.api.client`; `Rank` and
-`Judgment` are in `com.notfoxxz.minefunkin.game`.
+`result.score()`, `result.hits().sick()`), enums and a few small classes. Server-side and shared types are in
+`com.notfoxxz.minefunkin.api`, client-side ones in `com.notfoxxz.minefunkin.api.client` - the API never hands you
+one of MineFunkin's internal classes.
 
 ## Shared
 
@@ -68,26 +68,30 @@ How a run's notes were judged.
 | `hits()` | every hit (all but misses) |
 | `judged()` | hits + misses |
 
-### Rank
+### RunRank
 
-The end-of-song rank, from the run's accuracy:
+The run's full-combo rank, from its judgments (the game shows it right after the accuracy: "96.4% · GFC"):
 
 | Value | |
 |---|---|
-| `PERFECT_GOLD` | every note a "Sick!" |
-| `PERFECT` | 100 % accuracy |
-| `EXCELLENT` | 90 % and up |
-| `GREAT` | 80 % and up |
-| `GOOD` | 60 % and up |
-| `SHIT` | below 60 % |
+| `SFC` | no miss, every note a "Sick!" |
+| `GFC` | no miss, only "Sick!" and "Good" |
+| `FC` | no miss ("Bad" and "Shit" count as hits) |
+| `SDCB` | 1 to 9 misses |
+| `CLEAR` | 10 misses or more |
 | `FAILED` | the health ran out (client side only - a server result is never `FAILED`) |
 
-Better ranks come first: `rank.ordinal()` is smaller for a better rank. `rank.label` is the name the game
-shows.
+Better ranks come first: `rank.betterThan(other)` compares two. `rank.label()` is the name the game shows,
+`rank.fullCombo()` is `true` for `SFC`, `GFC` and `FC`. A best saved before the full-combo ranks can have no rank
+(`null`): back then the misses weren't kept, only a run with every note a "Sick!" became an `SFC`.
 
-### Judgment
+### Rating
 
-One note's judgment: `SICK`, `GOOD`, `BAD`, `SHIT`, `MISS`.
+One note's judgment: `SICK`, `GOOD`, `BAD`, `SHIT`, `MISS` (`isMiss()`).
+
+### ChartSide
+
+`PLAYER` or `OPPONENT` - the two parts of a chart (`other()` gives the other one).
 
 ## Server side
 
@@ -103,7 +107,7 @@ A song played to its end without failing, as the server knows it.
 | `validation()` | who vouches for the numbers - see [Can I trust a result?](server.md#can-i-trust-a-result) |
 | `verified()` | shorthand: `true` unless `UNVERIFIED` |
 | `score()`, `accuracyPercent()` | |
-| `rank()` | `Rank`, never `FAILED` |
+| `rank()` | `RunRank`, never `FAILED` |
 | `hits()` | `HitStats` (the server's own count for a player fight) |
 | `chart()` | `ChartInfo` |
 | `opponent()` | the other fighter in a player fight, `null` against the dummy |
@@ -116,41 +120,174 @@ A song played to its end without failing, as the server knows it.
 | `REPLAY_VERIFIED` | a dummy fight whose replay confirmed it |
 | `UNVERIFIED` | the player's game's own report, unchecked |
 
-### FightInfo
+### Fight
 
-A fight between two players.
+A running fight as an object - see [Controlling fights](controlling-fights.md). Not a record: its state changes while
+you hold it.
+
+| | |
+|---|---|
+| `id()` | its number |
+| `startedBy()` | the addon's mod id, empty for a Speaker fight |
+| `isMine()` | your addon started it |
+| `fighters()`, `first()`, `second()`, `fighter(uuid)` | [`Fighter`](#fighter)s, a snapshot each time you ask |
+| `song()` | `SongRef` - the chart the first fighter plays |
+| `rules()` | [`FightRules`](#fightrules) |
+| `state()` | [`FightState`](#fightstate) |
+| `songTimeMs()` | the server's song time, `NaN` before the countdown |
+| `pausedBy()` | an addon's name or `""` (the players) while paused, else empty |
+| `result()` | the [`FightResult`](#fightresult) once it's over |
+| `opponentEntity()` | against a mob: the real mob while it's in the world, else empty |
+| `onCountdownOver`, `onNote`, `onHealthChanged`, `onPause`, `onResume`, `onFighterOut`, `onEnd`, `onEntityGone` | listeners on this fight |
+| `pause()`, `resume()`, `stop(outcome)`, `setHealth(id, hp)`, `addHealth(id, amount)` | control - your own fights only |
+
+### FightState
+
+`LOADING` (the games load the song), `COUNTDOWN`, `RUNNING`, `PAUSED`, `SCORING` (over, the server scores the runs),
+`OVER`.
+
+### Fighter
+
+One fighter, as a snapshot.
 
 | Field | |
 |---|---|
-| `fightId()` | its number (for `api.fights().cancel(...)`) |
-| `challenger()`, `challenged()` | `PlayerRef`s - who opened the Speaker and waited, who stepped onto the free pad |
+| `ref()` | [`FighterRef`](#fighterref) (also `id()`, `name()`, `kind()`) |
+| `side()` | `ChartSide` - which part of the chart it plays |
+| `live()` | [`LiveStats`](#livestats) - unverified |
+
+### FighterRef
+
+| Field | |
+|---|---|
+| `id()` | the player's UUID - the dummy and a mob's figure have one made for the fight |
+| `name()` | the player's name, "Dummy" for the dummy, the mob's name |
+| `kind()` | `PLAYER`, `DUMMY` or `ENTITY` (`FighterKind` - more kinds can come, keep a `default` in a `switch`) |
+| `isPlayer()` | `kind() == PLAYER` |
+
+### LiveStats
+
+A fighter's numbers so far, as its game reports them - not checked by the server.
+
+| Field | |
+|---|---|
+| `score()`, `accuracyPercent()`, `combo()` | |
+| `hits()` | `HitStats` so far |
+| `health()` | 0-20 (20 = full, 10 hearts); the dummy stays at 20, a mob's goes down with the player's hits |
+| `out()` | its health ran out |
+
+### NoteHit
+
+One judged note of a fighter (`onNote`).
+
+| Field | |
+|---|---|
+| `fighter()` | `FighterRef` |
+| `lane()` | 0 left, 1 down, 2 up, 3 right |
+| `rating()` | `Rating`; `isMiss()` |
+| `songTimeMs()`, `combo()` | |
+
+### FightResult
+
+How a fight ended - once per fight.
+
+| Field | |
+|---|---|
+| `fight()` | the `Fight` |
+| `reason()` | `EndReason` - see [Fights](server.md#fights) |
+| `winner()` | `FighterRef`, `null` = nobody won |
+| `fighters()`, `first()`, `second()`, `of(uuid)` | each [`FighterResult`](#fighterresult) |
+| `message()` | the reason text the players saw ("" when none) |
+| `countsForBoard()` | the results went on a leaderboard |
+| `isDraw()`, `cancelled()` | played to the end with equal results / ended without a winner otherwise |
+
+### FighterResult
+
+| Field | |
+|---|---|
+| `fighter()` | `FighterRef` |
+| `outcome()` | `WON`, `LOST`, `DRAW`, `FORFEITED` (this fighter gave up), `CANCELLED`; `won()` |
+| `score()`, `accuracyPercent()`, `hits()` | |
+| `rank()` | `RunRank` (`FAILED` when its health ran out, `null` when nothing was judged) |
+| `finished()`, `failed()` | its game reported the end of its run / its health ran out |
+| `verified()` | the server resimulated this run itself (the dummy: played it) |
+
+### FightProposal
+
+A fight about to start (`allowFight`).
+
+| Field | |
+|---|---|
+| `first()` | the player who opened it (a Speaker's host, an addon request's player) |
+| `second()` | the opponent player, `null` against the dummy (`againstDummy()`) or a mob |
+| `entity()` | the opponent mob, `null` otherwise (`againstEntity()`) |
 | `song()` | `SongRef` |
-| `challengerPlaysOpponentSide()` | whether the challenger plays the chart's opponent side |
-| `involves(uuid)` | whether that player is one of the two |
-| `opponentOf(uuid)` | the other one of the two |
+| `startedBy()` | the addon's mod id, `null` at a Speaker |
 
-### FightEnd
+### FightRequest
 
-How a fight ended.
+A fight to start - built with `FightRequest.builder(player, opponent, songId)`, see [the kit](starting-fights.md#the-kit).
+
+### Opponent
+
+`Opponent.dummy()`, `Opponent.entity(mob)` or `Opponent.player(serverPlayer)` - see [Boss opponents](boss-opponents.md).
+
+### BossBar
+
+`BossBar(name, colour)` - a fight's boss bar, made with `.bossBar(name, colour)` on the request (`name` `null` = the
+mob's name). See [Boss bar](boss-opponents.md#boss-bar).
+
+### EntityGone
+
+Why the real mob disappeared (`onEntityGone`): `KILLED`, `REMOVED`, `UNLOADED`, `CHANGED_WORLD` - see
+[When the mob disappears anyway](boss-opponents.md#when-the-mob-disappears-anyway).
+
+### FightPlace
+
+`FightPlace.inPlace()`, `FightPlace.at(firstFeet, secondFeet)`, `FightPlace.speaker(blockPos)` - see
+[Where](starting-fights.md#where).
+
+### FightRules
+
+| Field | Default | |
+|---|---|---|
+| `health()` | `true` | health and losing |
+| `pause()` | `true` | the fighters may pause |
+| `forfeit()` | `true` | the fighters may give up |
+
+`FightRules.DEFAULT.withHealth(false)`, `.withPause(...)`, `.withForfeit(...)` give changed copies.
+
+### Board
+
+`Board.none()`, `Board.song()`, `Board.own("name")` (1-32 characters of a-z, 0-9, `_`, `-`, `.`) - see
+[Leaderboards](starting-fights.md#leaderboards).
+
+### FightStart
+
+The answer to `start`: `state()` (`PENDING`, `STARTED`, `REFUSED`), `fight()`, `refusal()`, `onStarted(...)`,
+`onRefused(...)`, `withdraw()`.
+
+### Refusal
 
 | Field | |
 |---|---|
-| `fight()` | `FightInfo` |
-| `reason()` | `COMPLETED`, `FORFEIT`, `DISCONNECT`, `NOT_STARTED`, `CANCELLED` - see [Fights](server.md#fights) |
-| `winner()` | `PlayerRef`, `null` for a draw (equal scores, both failed) |
-| `isDraw()` | `winner() == null` |
-| `challenger()`, `challenged()` | each side's `FightEnd.Line` |
+| `reason()` | `Refusal.Reason` - see [the answer](starting-fights.md#the-answer-started-or-refused) |
+| `player()` | the player it's about, `null` when it's about the whole fight |
+| `message()` | a short English text for logs |
 
-`FightEnd.Line` is one fighter's last known state - for a fight cut short, the score so far. For a `COMPLETED` fight the
-server has scored both runs itself (it replays their key presses on its own chart), and the lines and the winner come from
-that, not from what the games reported:
+### StopOutcome
 
-| Field | |
-|---|---|
-| `player()` | `PlayerRef` |
-| `score()`, `accuracyPercent()`, `misses()` | |
-| `finished()` | their game reported the end of their run (played to the end, or failed) |
-| `failed()` | their health ran out |
+`StopOutcome.cancelled(reason)` or `StopOutcome.winner(fighterId, reason)` - see [Stop](controlling-fights.md#stop).
+
+### Permission
+
+The [rights](rights.md): `FIGHTS_START` ("fights.start"), `FIGHTS_CONTROL`, `SONGS_REGISTER`, `SCRIPTS_RUN`,
+`CAMERA_TAKE`, `RESULTS_WRITE`, `PLAYERS_TELEPORT`, `WORLD_PARTICLES`, `WORLD_BLOCKS`, `WORLD_ENTITIES`, `CLIENT_HUD`.
+`key()` is the name in the metadata file.
+
+### PermissionDeniedException
+
+Thrown when a right is missing - `getMessage()` says which and why, `modId()` and `permission()` too.
 
 ### LeaderboardEntry
 
@@ -183,7 +320,7 @@ One judged note.
 | Field | |
 |---|---|
 | `lane()` | 0 left, 1 down, 2 up, 3 right |
-| `judgment()` | `Judgment` |
+| `judgment()` | `Rating` |
 | `isMiss()` | `judgment() == MISS` |
 | `songTimeMs()` | when it was judged |
 | `offsetMs()` | how early (negative) or late (positive) the press was; `NaN` without a timed press |
@@ -217,7 +354,7 @@ How a run ended.
 |---|---|
 | `outcome()` | `COMPLETED`, `FAILED` or `ABORTED` - see [How a run ends](client.md#how-a-run-ends) |
 | `score()`, `accuracyPercent()` | |
-| `rank()` | `Rank`: `FAILED` for a failed run, `null` for an aborted one |
+| `rank()` | `RunRank`: `FAILED` for a failed run, `null` for an aborted one |
 | `hits()` | `HitStats` |
 | `audioLengthMs()` | the song file's length, -1 if it never finished loading |
 

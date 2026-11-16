@@ -26,11 +26,12 @@ end
 | Modifiers | [ease](#ease) · [set](#set) · [add](#add) · [setMod](#setmod) · [customMod](#custommod) |
 | Lanes and scroll | [flipScroll](#flipscroll) · [setScroll](#setscroll) · [hideStrums / showStrums](#hidestrums) · [hideLane / showLane](#hidelane) · [moveStrums](#movestrums) · [resetLanes](#resetlanes) |
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
-| Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) |
-| Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [bind / unbind](#bind) |
+| Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
+| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) |
+| Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
 | Health <span class="mf-tag fight">fights</span> | [setHealth / addHealth](#sethealth) |
-| Sound | [stopSound](#stopsound) · [soundVolume](#soundvolume) |
+| Sound | [playGameSound](#playgamesound) · [stopSound](#stopsound) · [soundVolume](#soundvolume) |
 | Events together | [trigger](#trigger) · [call / callIn](#call) · [preload](#preload) |
 | Debugging | [inspect](#inspect) |
 
@@ -301,6 +302,49 @@ shake(0.02, beats(2))
 
 <p class="mf-like">Psych: <code>cameraShake</code> · Changes <code>camera.shake</code></p>
 
+### showTitle
+
+<p class="mf-sig"><code>showTitle(text[, subtitle[, duration]])</code></p>
+
+A big title in the middle of the screen with a smaller line under it - Minecraft's `/title` look, over
+everything. It fades in, stays for the duration (2 seconds unless given) and fades out. A long title is made
+smaller to fit. The colour is [`title.color`](text.md).
+
+```lua
+title.color = #FFD040
+showTitle("ROUND 2", "fight!", beats(4))
+```
+
+<p class="mf-like">Changes <code>title.text</code>, <code>title.subtitle</code>, <code>title.alpha</code></p>
+
+---
+
+## Stage
+
+### particle
+
+<p class="mf-sig"><code>particle(type, where[, count[, spread]])</code></p>
+
+Minecraft's particles at a fighter: `where` is `"player"`, `"opponent"`, `"boyfriend"`, `"dad"` or `"center"`
+(between both). `count` = how many (8 unless given, at most 64), `spread` = how far around in blocks (0.5 unless
+given, at most 4).
+
+They're stage particles: only the people in the song see them - both fighters and whoever watches the fight
+from inside. The players standing around see nothing. Practice and replays have no world, so nothing shows there.
+
+Any particle that needs no extra values works: `flame`, `soul_fire_flame`, `heart`, `note`, `end_rod`, `cloud`,
+`smoke`, `crit`, `enchanted_hit`, `happy_villager`, `angry_villager`, `totem_of_undying`, `firework`,
+`snowflake`, `glow`, `electric_spark`, `cherry_leaves` ... A name that doesn't exist (or needs a colour or a
+block) is said once in the event log. The player's own Particles setting thins them out like any other
+particle, and a song can spawn at most 600 a second.
+
+```lua
+particle("flame", "opponent", 12, 0.6)
+particle("heart", "player", 3)
+```
+
+<p class="mf-like">Changes nothing - the particles only fly</p>
+
 ---
 
 ## Fighters
@@ -402,6 +446,20 @@ The arm shape: `"slim"` (Alex), `"wide"` (Steve) or `"default"` (what the skin s
 setModel("both", "slim")
 ```
 
+
+### setFigure
+
+<p class="mf-sig"><code>setFigure(who, mob)</code> <span class="mf-tag fight">fights</span></p>
+
+A Minecraft mob stands in for the dummy: `"creeper"`, `"minecraft:iron_golem"`, a mod's mob. The one standing there is pushed
+out to the side, the new one pushed in from the other side - both keep facing you. `""` = the dummy itself again. Only for the
+dummy - on a player it does nothing. Sets [`opponent.figure`](fighters.md).
+
+```lua
+function onSection(n)
+    setFigure("opponent", n % 2 == 0 ? "creeper" : "skeleton")
+end
+```
 ### bind
 
 <p class="mf-sig"><code>bind(who, place)</code><br><code>bind(who, x, y[, height])</code><br><code>unbind(who)</code></p>
@@ -483,6 +541,21 @@ end
 
 The sounds themselves start with the actions [playSound](actions.md#playsound) and
 [loopSound](actions.md#loopsound) - see [Sounds and music](../guides/sound.md).
+
+### playGameSound
+
+<p class="mf-sig"><code>playGameSound(name[, volume[, pitch]])</code></p>
+
+One of Minecraft's own sounds by its name - the names `/playsound` takes (`minecraft:` may be left out). No file
+needed. Volume 0-1, pitch 0.5-2 (1 = normal). A resource pack's version counts. It plays at MineFunkin's volume,
+like `playSound` without a name.
+
+```lua
+playGameSound("block.note_block.bell", 0.8, 1.5)
+playGameSound("entity.generic.explode")
+```
+
+<p class="mf-like">Psych: — · Changes nothing</p>
 
 ### stopSound
 
@@ -595,11 +668,13 @@ you mix them with your own code: the last thing that sets a property wins. So `h
 | `hideJudgments`, `showJudgments` | `judgments.alpha` |
 | `flash` | `flash.color`, `flash.alpha` |
 | `fadeOut`, `fadeIn` | `screen.color`, `screen.alpha` |
+| `showTitle` | `title.text`, `title.subtitle`, `title.alpha` |
+| `particle`, `playGameSound` | nothing - they only show / play |
 | `zoom` | `camera.zoom` |
 | `shake` | `camera.shake` |
 | `focus` | `camera.x`, `camera.z`, `camera.yaw` |
 | `swapFighters` | `player.` / `opponent.` `x`, `y`, `z`, `turn` |
-| `pose`, `setSkin`, `setModel` | `player.pose`, `.skin`, `.model` (and the same for `opponent.`) |
+| `pose`, `setSkin`, `setModel`, `setFigure` | `player.pose`, `.skin`, `.model`, `.figure` (and the same for `opponent.`) |
 | `setPose`, `clearPose` | no property - the fighter's pose designs |
 | `bind`, `unbind` | `player.place` / `opponent.place`, or `.pinned`, `.screenX`, `.screenY`, `.screenHeight` |
 | `setShaderFloat` | the shader's own values (not `shader[n].a` ... `d`) |

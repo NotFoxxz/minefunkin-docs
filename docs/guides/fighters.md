@@ -8,8 +8,8 @@ The two fighters are the stars of every song - so of course you can play with th
 them like jelly, paint them red, make one three times taller, swap their places mid-song, or take over their animation
 completely and choreograph your own dance.
 
-`player` is you (the one the camera looks over), `opponent` is the other one. `puppet[0]` and `puppet[1]` are the same
-two by number, which comes in handy in loops and functions.
+`player` is you (the one the camera looks over), `opponent` is the other one. `fighter[0]` and `fighter[1]` are the
+same two by number, which comes in handy in loops and functions.
 
 Here's the important bit: all of this happens **only in your own picture**. The real players don't move an inch, and
 nobody else (your opponent, the people watching) sees it. That's what makes it safe to go wild. The one exception is
@@ -17,7 +17,9 @@ poses a song designs with [setPose](#your-own-poses-setpose) - those, the player
 
 **In practice** (the Retro TV) there's no world, but the two puppets next to the lanes follow most of it: position,
 size, squash, turn, tint, poses, body parts, pinning and skins. Outlines, clipping, `depth` and `facing` only work in
-fights.
+fights. In practice the numbered names are `puppet[0]` and `puppet[1]` - `fighter[i]` only works in fights and
+`puppet[i]` only in practice; the other one simply does nothing, so one script can hold both. `player`, `opponent`,
+`boyfriend` and `dad` work everywhere.
 
 There's also `boyfriend` and `dad`: the same two fighters, but named by the **chart's** sides - see
 [Places](#places-bind) and [fighter names](../api/choices.md#fighter-names).
@@ -27,7 +29,7 @@ There's also `boyfriend` and `dad`: the same two fighters, but named by the **ch
 Both fighters have the same set of properties - position and turn (in blocks and degrees), `scale`, `squash`,
 `color`, `alpha`, `visible`, `animate`, `pose`, `skin`, `model`, the pinning ones, outlines and clipping. Every one of
 them, with defaults and ranges, is on [Fighters](../api/fighters.md). What works for `player.` works the same for
-`opponent.` and `puppet[i].`.
+`opponent.`, `fighter[i].` and `puppet[i].`.
 
 <div class="grid" markdown>
 
@@ -132,9 +134,9 @@ like the creepy intro of a horror mod. Fights only.
 ```lua
 -- Both of them as white outlines, fading in.
 for i = 0, 1 do
-    puppet[i].outlineOnly = true
-    puppet[i].outlineAlpha = 0
-    tween(puppet[i].outlineAlpha, 1, seconds(4))
+    fighter[i].outlineOnly = true
+    fighter[i].outlineAlpha = 0
+    tween(fighter[i].outlineAlpha, 1, seconds(4))
 end
 ```
 
@@ -166,7 +168,7 @@ for i = 0, 3 do
         tween(player.rightArm.roll, i % 2 == 0 ? 120 : 160, beats(0.5), "sineInOut")
     end)
 end
-after(beats(2), function() resetPuppet("player", beats(0.5)) end)
+after(beats(2), function() resetFighter("player", beats(0.5)) end)
 ```
 
 ## On top of the animation, or instead of it
@@ -180,16 +182,16 @@ whole pose. That's how you build your own moves:
 
 ```lua
 local function armsUp(who)
-    puppet[who].animate = false
-    tween(puppet[who].leftArm.roll, 165, beats(0.25), "backOut")
-    tween(puppet[who].rightArm.roll, 165, beats(0.25), "backOut")
-    tween(puppet[who].head.pitch, -15, beats(0.25), "backOut")
+    fighter[who].animate = false
+    tween(fighter[who].leftArm.roll, 165, beats(0.25), "backOut")
+    tween(fighter[who].rightArm.roll, 165, beats(0.25), "backOut")
+    tween(fighter[who].head.pitch, -15, beats(0.25), "backOut")
 end
 
 function onEvent(p)
     armsUp(0)
     armsUp(1)
-    after(beats(2), function() resetPuppet("both", beats(1)) end)
+    after(beats(2), function() resetFighter("both", beats(1)) end)
 end
 ```
 
@@ -314,11 +316,11 @@ left of you. Move each fighter to the other's spot and turn it 180°, so they st
 
 ```lua
 local function hop(who, x, z, turn)
-    tween(puppet[who].x, x, beats(2), "sineInOut")
-    tween(puppet[who].z, z, beats(2), "sineInOut")
-    tween(puppet[who].turn, turn, beats(2), "sineInOut")
-    tween(puppet[who].y, 2.5, beats(1), "quadOut")
-    after(beats(1), function() tween(puppet[who].y, 0, beats(1), "quadIn") end)
+    tween(fighter[who].x, x, beats(2), "sineInOut")
+    tween(fighter[who].z, z, beats(2), "sineInOut")
+    tween(fighter[who].turn, turn, beats(2), "sineInOut")
+    tween(fighter[who].y, 2.5, beats(1), "quadOut")
+    after(beats(1), function() tween(fighter[who].y, 0, beats(1), "quadIn") end)
 end
 
 function onEvent(p)
@@ -358,9 +360,9 @@ tween(opponent.scale, 2.2, beats(1.5), "elasticOut")
 ## Putting them back
 
 ```lua
-resetPuppet("player")             -- at once
-resetPuppet("opponent", beats(1)) -- over a beat
-resetPuppet("both", beats(2))     -- or 0 / 1 for one of them
+resetFighter("player")             -- at once
+resetFighter("opponent", beats(1)) -- over a beat
+resetFighter("both", beats(2))     -- or 0 / 1 for one of them
 ```
 
 When the song ends, both go back on their own.

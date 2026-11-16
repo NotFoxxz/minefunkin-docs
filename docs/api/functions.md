@@ -260,12 +260,12 @@ end
 <p class="mf-sig"><code>atPlace(place)</code></p>
 
 Which fighter stands on a place right now: `atPlace("bf")` / `atPlace("dad")` gives 0 (you) or 1 (the other) - for
-`puppet[atPlace("dad")]`. The places follow [`bind`](shortcuts.md#bind): without one, you stand on `"bf"`.
+`fighter[atPlace("dad")]`. The places follow [`bind`](shortcuts.md#bind): without one, you stand on `"bf"`.
 
 ```lua
 -- Whoever stands in the far spot glows red, whoever it is.
 function onEvent(p)
-    puppet[atPlace("dad")].color = #FF6060
+    fighter[atPlace("dad")].color = #FF6060
 end
 ```
 

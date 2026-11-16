@@ -158,14 +158,14 @@ How an action or shortcut is told which fighter you mean.
 !!! info "How to use it"
     The `who` argument of [`pose`](shortcuts.md#pose), [`setPose` / `clearPose`](shortcuts.md#setpose),
     [`setSkin`](shortcuts.md#setskin), [`setModel`](shortcuts.md#setmodel), [`focus`](shortcuts.md#focus),
-    [`bind` / `unbind`](shortcuts.md#bind), [`resetPuppet`](actions.md#resetpuppet),
+    [`bind` / `unbind`](shortcuts.md#bind), [`resetFighter`](actions.md#resetfighter),
     [`atPlace`](functions.md#atplace). As properties, the same names are the [Fighters](fighters.md):
-    `player.x`, `dad.alpha`, `puppet[1].pose`.
+    `player.x`, `dad.alpha`, `fighter[1].pose`.
 
 ```lua
 pose("dad", "up")              -- whoever plays the opponent part
 setSkin("both", "skins/bf.png")
-resetPuppet(1, beats(1))       -- puppet[1] = the opponent
+resetFighter(1, beats(1))      -- fighter[1] = the opponent
 ```
 
 | Name | Who |
@@ -174,7 +174,7 @@ resetPuppet(1, beats(1))       -- puppet[1] = the opponent
 | `"opponent"` or `1` | The other fighter. |
 | `"boyfriend"` | Whoever plays the chart's Boyfriend part (the player side) - you, unless you play the opponent side. |
 | `"dad"` | Whoever plays the chart's opponent part. |
-| `"both"` | Both at once - for `pose`, `setPose`, `clearPose`, `setSkin`, `setModel`, `resetPuppet`. |
+| `"both"` | Both at once - for `pose`, `setPose`, `clearPose`, `setSkin`, `setModel`, `resetFighter`, `resetPuppet`. |
 | `"center"` | Only for [`focus`](shortcuts.md#focus): the camera's middle between the two. |
 
 Use `boyfriend` / `dad` when an effect belongs to a **part of the chart** (Boyfriend's solo), `player` /
