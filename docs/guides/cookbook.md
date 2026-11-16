@@ -290,6 +290,30 @@ More in [Modcharts](modcharts.md) and [strum[lane]](../api/strum.md).
 
 More in [The fighters](fighters.md).
 
+## Sprite characters
+
+??? example "A dancing GF that cheers every 25 notes (uses onStart)"
+
+    ```lua
+    function onStart()
+        character[2].file = "characters/gf.png"     -- + gf.xml next to it
+        character[2].x = 0.5
+        character[2].y = 0.8
+        character[2].cheerEvery = 25
+        characterPose(2, "danceLeft", "GF Dancing Beat", 0, -9, "30, 0-14")
+        characterPose(2, "danceRight", "GF Dancing Beat", 0, -9, "15-29")
+        characterPose(2, "cheer", "GF Cheer")
+    end
+    ```
+
+??? example "The opponent sprite jumps on the drop (uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 16 then characterPlay(1, "hey", beats(1)) end
+    end
+    ```
+
 ## Sound
 
 ??? example "A Minecraft bell on every fourth beat (uses onBeat)"

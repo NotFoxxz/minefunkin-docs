@@ -120,6 +120,7 @@ nav:
           - note[i]: api/notes.md
           - text[n], title: api/text.md
           - image[n]: api/image.md
+          - character[n]: api/character.md
           - Fighters: api/fighters.md
           - Body parts: api/parts.md
           - fx: api/fx.md

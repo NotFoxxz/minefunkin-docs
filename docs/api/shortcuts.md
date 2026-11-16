@@ -28,6 +28,7 @@ end
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
 | Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
 | Stage <span class="mf-tag fight">fights</span> | [particle](#particle) |
+| Sprite characters | [characterPose](#characterpose) · [characterPlay](#characterplay) |
 | Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
 | Health <span class="mf-tag fight">fights</span> | [setHealth / addHealth](#sethealth) |
@@ -316,6 +317,42 @@ showTitle("ROUND 2", "fight!", beats(4))
 ```
 
 <p class="mf-like">Changes <code>title.text</code>, <code>title.subtitle</code>, <code>title.alpha</code></p>
+
+---
+
+## Sprite characters
+
+### characterPose
+
+<p class="mf-sig"><code>characterPose(n, pose, animation[, x, y[, frames]])</code></p>
+
+Names a pose of [sprite character](character.md) `n`: the frames of its `.xml` called `animation` plus a number
+(`"BF NOTE LEFT0000"` ...). `x` / `y` move this pose, in the sprite's own pixels - a Psych character file's `offsets`
+work as they are. `frames` plays only those frames of the animation, in that order: `"0-14"`, `"30, 0, 1, 2"` - a
+Psych character file's `indices` (a GF's two dances are halves of one animation). The poses MineFunkin plays by itself are listed on [character[n]](character.md); any other name is
+yours for `characterPlay`.
+
+```lua
+characterPose(0, "idle", "BF idle dance")
+characterPose(0, "left", "BF NOTE LEFT", 5, -6)
+characterPose(0, "leftMiss", "BF NOTE LEFT MISS", 7, 19)
+characterPose(2, "danceLeft", "GF Dancing Beat", 0, -9, "30, 0-14")
+characterPose(2, "danceRight", "GF Dancing Beat", 0, -9, "15-29")
+```
+
+<p class="mf-like">Psych: the <code>animations</code> of a character file · Changes nothing - it names a pose</p>
+
+### characterPlay
+
+<p class="mf-sig"><code>characterPlay(n, pose[, duration])</code></p>
+
+Character `n` shows that pose now - for the duration (0.6 s unless given) - then dances again.
+
+```lua
+characterPlay(2, "cheer", beats(1))
+```
+
+<p class="mf-like">Psych: <code>playAnim</code> on a character · Changes nothing</p>
 
 ---
 
@@ -670,6 +707,7 @@ you mix them with your own code: the last thing that sets a property wins. So `h
 | `fadeOut`, `fadeIn` | `screen.color`, `screen.alpha` |
 | `showTitle` | `title.text`, `title.subtitle`, `title.alpha` |
 | `particle`, `playGameSound` | nothing - they only show / play |
+| `characterPose`, `characterPlay` | nothing - the character's poses |
 | `zoom` | `camera.zoom` |
 | `shake` | `camera.shake` |
 | `focus` | `camera.x`, `camera.z`, `camera.yaw` |
