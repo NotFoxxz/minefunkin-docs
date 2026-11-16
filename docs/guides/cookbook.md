@@ -285,6 +285,37 @@ More in [Modcharts](modcharts.md) and [strum[lane]](../api/strum.md).
     end
     ```
 
+??? example "The opponent catches fire for the drop (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 8 then opponent.burning = true end
+        if n == 12 then opponent.burning = false end
+    end
+    ```
+
+??? example "A knight's look for the opponent (fights, uses onStart)"
+
+    ```lua
+    function onStart()
+        opponent.helmet = "iron_helmet"
+        opponent.chestplate = "iron_chestplate"
+        opponent.mainHand = "iron_sword"
+        opponent.offHand = "shield"
+    end
+    ```
+
+??? example "You glow in the dark part (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 6 then
+            stage.dayTime = 18000
+            player.glow = 1
+        end
+    end
+    ```
+
 ??? example "Both fighters bounce on every beat"
 
     ```lua

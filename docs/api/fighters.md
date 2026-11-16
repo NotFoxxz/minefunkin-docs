@@ -70,6 +70,14 @@ end
 | [player.model](#model) | choice | `"default"` | The arm shape: `"default"` (what the skin says), `"wide"` (Steve, 4 pixels) or `"slim"` … |
 | [player.figure](#figure) | text | `""` | In a fight against the dummy: a Minecraft mob stands in for it - `"creeper"`, … |
 | [player.figura](#figura) | switch | `true` | The fighter's Figura avatar, if the player has one and you have Figura installed. false = … |
+| [player.burning](#burning) | switch | `false` | true = Minecraft's fire on it. Only the picture - nothing is hurt. |
+| [player.glow](#glow) | number | `0` | It lights itself up: 0 = the world's light, 1 = full light even at night. |
+| [player.helmet](#helmet) | text | `""` | What it wears on the head, by Minecraft's item name: `"diamond_helmet"`, … |
+| [player.chestplate](#chestplate) | text | `""` | Its chestplate (or `"elytra"`) by the item's name. `""` = its own, `"none"` = nothing. |
+| [player.leggings](#leggings) | text | `""` | Its leggings by the item's name. `""` = its own, `"none"` = nothing. |
+| [player.boots](#boots) | text | `""` | Its boots by the item's name. `""` = its own, `"none"` = nothing. |
+| [player.mainHand](#mainhand) | text | `""` | What it holds in its main hand: `"diamond_sword"`, `"torch"`, `"minecraft:trident"`. `""` … |
+| [player.offHand](#offhand) | text | `""` | What it holds in its other hand: `"shield"`, `"totem_of_undying"`. `""` = its own, … |
 | [player.pinned](#pinned) | switch | `false` | true = stuck to a spot on the screen like a sprite: `screenX` / `screenY` place its feet, … |
 | [player.place](#place) | choice | `""` | Which spot of the fight it stands on: `"bf"` (the spot in front, where the camera stands … |
 | [player.screenX](#screenx) | number | `0.5` | A pinned fighter's feet, from left to right: 0 = the left edge, 1 = the right edge. … |
@@ -213,6 +221,57 @@ hops on every note. Only the opponent when it's the dummy - on a player it does 
 The fighter's Figura avatar, if the player has one and you have Figura installed. false = hidden for this song: the
 fighter shows its plain Minecraft skin, so your song's poses, skins and tints look the way you made them. Only on your
 own screen. Without Figura it does nothing.
+
+### player.burning { #burning }
+
+<p class="mf-sig"><span class="mf-type">switch</span> <code>player.burning</code> · <code>opponent.burning</code> · <code>boyfriend.burning</code> · <code>dad.burning</code> · <code>fighter[i].burning</code> · <code>puppet[i].burning</code> <span class="mf-eq">= <code>false</code></span></p>
+
+true = Minecraft's fire on it. Only the picture - nothing is hurt.
+
+### player.glow { #glow }
+
+<p class="mf-sig"><span class="mf-type">number</span> <code>player.glow</code> · <code>opponent.glow</code> · <code>boyfriend.glow</code> · <code>dad.glow</code> · <code>fighter[i].glow</code> · <code>puppet[i].glow</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+
+It lights itself up: 0 = the world's light, 1 = full light even at night.
+
+### player.helmet { #helmet }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.helmet</code> · <code>opponent.helmet</code> · <code>boyfriend.helmet</code> · <code>dad.helmet</code> · <code>fighter[i].helmet</code> · <code>puppet[i].helmet</code> <span class="mf-eq">= <code>""</code></span></p>
+
+What it wears on the head, by Minecraft's item name: `"diamond_helmet"`, `"carved_pumpkin"`, `"minecraft:dragon_head"`,
+a mod's `"mymod:crown"`. Any item can go on the head. `""` = its own, `"none"` = nothing.
+
+### player.chestplate { #chestplate }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.chestplate</code> · <code>opponent.chestplate</code> · <code>boyfriend.chestplate</code> · <code>dad.chestplate</code> · <code>fighter[i].chestplate</code> · <code>puppet[i].chestplate</code> <span class="mf-eq">= <code>""</code></span></p>
+
+Its chestplate (or `"elytra"`) by the item's name. `""` = its own, `"none"` = nothing.
+
+### player.leggings { #leggings }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.leggings</code> · <code>opponent.leggings</code> · <code>boyfriend.leggings</code> · <code>dad.leggings</code> · <code>fighter[i].leggings</code> · <code>puppet[i].leggings</code> <span class="mf-eq">= <code>""</code></span></p>
+
+Its leggings by the item's name. `""` = its own, `"none"` = nothing.
+
+### player.boots { #boots }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.boots</code> · <code>opponent.boots</code> · <code>boyfriend.boots</code> · <code>dad.boots</code> · <code>fighter[i].boots</code> · <code>puppet[i].boots</code> <span class="mf-eq">= <code>""</code></span></p>
+
+Its boots by the item's name. `""` = its own, `"none"` = nothing.
+
+### player.mainHand { #mainhand }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.mainHand</code> · <code>opponent.mainHand</code> · <code>boyfriend.mainHand</code> · <code>dad.mainHand</code> · <code>fighter[i].mainHand</code> · <code>puppet[i].mainHand</code> <span class="mf-eq">= <code>""</code></span></p>
+
+What it holds in its main hand: `"diamond_sword"`, `"torch"`, `"minecraft:trident"`. `""` = its own (a fighter's
+hands are empty), `"none"` = nothing.
+
+### player.offHand { #offhand }
+
+<p class="mf-sig"><span class="mf-type">text</span> <code>player.offHand</code> · <code>opponent.offHand</code> · <code>boyfriend.offHand</code> · <code>dad.offHand</code> · <code>fighter[i].offHand</code> · <code>puppet[i].offHand</code> <span class="mf-eq">= <code>""</code></span></p>
+
+What it holds in its other hand: `"shield"`, `"totem_of_undying"`. `""` = its own, `"none"` = nothing.
 
 ### player.pinned { #pinned }
 
