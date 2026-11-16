@@ -114,6 +114,7 @@ nav:
           - judgments: api/judgments.md
           - screen, flash, vignette: api/screen.md
           - stage: api/stage.md
+          - mob[n]: api/mob.md
           - strums: api/strums.md
           - strum[lane]: api/strum.md
           - underlay: api/underlay.md

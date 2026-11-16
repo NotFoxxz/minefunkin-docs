@@ -108,6 +108,53 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     end
     ```
 
+??? example "A crowd that jumps on every beat (fights, uses onStart and onBeat)"
+
+    ```lua
+    function onStart()
+        for i = 0, 5 do
+            mob[i].type = "villager"
+            mob[i].x = -7.5 + i * 3
+            mob[i].z = 7
+        end
+    end
+
+    function onBeat(b)
+        for i = 0, 5 do
+            if (b + i) % 2 == 0 then mobAction(i, "jump") end
+        end
+    end
+    ```
+
+??? example "A creeper walks up to the opponent and explodes (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 4 then
+            mob[0].type = "creeper"
+            mob[0].x = 8
+            mob[0].z = 4
+            mobWalk(0, "opponent", beats(8))
+        end
+        if n == 6 then mobAction(0, "explode") end
+    end
+    ```
+
+??? example "A pig walks back and forth (fights, uses onStart and onBeat)"
+
+    ```lua
+    function onStart()
+        mob[0].type = "pig"
+        mob[0].x = -4
+        mob[0].z = 2
+    end
+
+    function onBeat(b)
+        if b % 8 == 0 then mobWalk(0, 4, 2, beats(4)) end
+        if b % 8 == 4 then mobWalk(0, -4, 2, beats(4)) end
+    end
+    ```
+
 ??? example "Fire everyone around can see for the drop (fights, uses onSection)"
 
     ```lua

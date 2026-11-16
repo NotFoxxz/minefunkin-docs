@@ -27,7 +27,7 @@ end
 | Lanes and scroll | [flipScroll](#flipscroll) · [setScroll](#setscroll) · [hideStrums / showStrums](#hidestrums) · [hideLane / showLane](#hidelane) · [moveStrums](#movestrums) · [resetLanes](#resetlanes) |
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
 | Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
-| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [worldParticle](#worldparticle) · [lightning](#lightning) |
+| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [worldParticle](#worldparticle) · [lightning](#lightning) · [mobWalk](#mobwalk) · [mobAction](#mobaction) |
 | Sprite characters | [characterPose](#characterpose) · [characterPlay](#characterplay) |
 | Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
@@ -397,6 +397,45 @@ worldParticle("flame", "center", 40, 3)
 ```
 
 <p class="mf-like">Changes nothing - the particles only fly</p>
+
+### mobWalk
+
+<p class="mf-sig"><code>mobWalk(n, x, z[, duration])</code> · <code>mobWalk(n, where[, duration])</code></p>
+
+[`mob[n]`](mob.md) walks to `x`, `z` (blocks from the middle between the fighters: x = to your right, z = toward
+the opponent), or to a fighter: `where` is `"player"`, `"opponent"`, `"boyfriend"`, `"dad"` or `"center"` - it
+stops just in front of them. It takes `duration` (1000 ms unless given), its legs move and it looks where it goes.
+For a path, start the next walk when one ends (`after`).
+
+```lua
+mobWalk(0, "opponent", beats(4))
+mobWalk(1, -5, 2)
+```
+
+<p class="mf-like">Changes nothing - only the picture</p>
+
+### mobAction
+
+<p class="mf-sig"><code>mobAction(n, action)</code></p>
+
+[`mob[n]`](mob.md) does something, now:
+
+| Action | |
+|---|---|
+| `"jump"` | a hop |
+| `"hurt"` | flashes red like when it's hit |
+| `"swing"` | swings its arm |
+| `"fall"` | falls over and stays down |
+| `"explode"` | explodes - the flash and the bang only, nothing breaks, nobody is hurt - and is gone |
+| `"vanish"` | vanishes in a puff |
+| `"appear"` | is back (after `"fall"`, `"explode"` or `"vanish"`) |
+
+```lua
+mobAction(0, "jump")
+mobAction(2, "explode")
+```
+
+<p class="mf-like">Changes nothing - only the picture</p>
 
 ### lightning
 

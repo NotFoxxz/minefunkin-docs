@@ -11,7 +11,7 @@ see the world as always, and the song's end puts everything back.
     Fights only - both fighters see it (each game runs the song's scripts), and so does whoever watches the fight from
     inside. Practice and replays aren't changed.
     
-    Stage particles come from the [particle](shortcuts.md#particle) shortcut, lightning from
+    Mobs around the fight are [mob[n]](mob.md). Stage particles come from the [particle](shortcuts.md#particle) shortcut, lightning from
     [lightning](shortcuts.md#lightning). A player can switch the sky, the weather and everything else a song does to
     Minecraft off in Options › Song effects › "Minecraft effects".
 
