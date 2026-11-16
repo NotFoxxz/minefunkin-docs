@@ -2307,6 +2307,72 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stage-daytime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.dayTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-weather" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.weather
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-fog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.fog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-fogcolor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.fogColor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-tint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.tint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-tintalpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.tintAlpha
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3674,6 +3740,72 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stage-daytime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.dayTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-weather" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.weather
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-fog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.fog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-fogcolor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.fogColor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-tint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.tint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-tintalpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stage.tintAlpha
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3706,7 +3838,9 @@ see the world as always, and the song's end puts everything back.</p>
 <p class="admonition-title">How to use it</p>
 <p>Fights only - both fighters see it (each game runs the song's scripts), and so does whoever watches the fight from
 inside. Practice and replays aren't changed.</p>
-<p>Stage particles come from the <a href="../shortcuts/#particle">particle</a> shortcut.</p>
+<p>Stage particles come from the <a href="../shortcuts/#particle">particle</a> shortcut, lightning from
+<a href="../shortcuts/#lightning">lightning</a>. A player can switch the sky, the weather and everything else a song does to
+Minecraft off in Options › Song effects › "Minecraft effects".</p>
 </div>
 <h2 id="example-code">Example code<a class="headerlink" href="#example-code" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- The world goes away for the bridge, a picture takes its place.</span>
@@ -3738,6 +3872,42 @@ inside. Practice and replays aren't changed.</p>
 <td><code>"on"</code></td>
 <td>The Minecraft world in a fight: <code>"on"</code> = as it is, <code>"fighters"</code> = no world, only the two …</td>
 </tr>
+<tr>
+<td><a href="#stage-daytime">stage.dayTime</a></td>
+<td>number</td>
+<td><code>-1</code></td>
+<td>The time of day the people in the song see, in Minecraft's numbers: 1000 morning, 6000 …</td>
+</tr>
+<tr>
+<td><a href="#stage-weather">stage.weather</a></td>
+<td>choice</td>
+<td><code>"world"</code></td>
+<td><code>"world"</code> (the world's own), <code>"clear"</code>, <code>"rain"</code>, <code>"snow"</code> or <code>"thunder"</code>. A change fades …</td>
+</tr>
+<tr>
+<td><a href="#stage-fog">stage.fog</a></td>
+<td>number</td>
+<td><code>0</code></td>
+<td>0 = the world's own fog, 1 = so thick that only a few blocks show.</td>
+</tr>
+<tr>
+<td><a href="#stage-fogcolor">stage.fogColor</a></td>
+<td>colour</td>
+<td><code>none</code></td>
+<td>The fog's colour, and the far sky's. Its alpha is how much: <code>#8090A0</code> = all of it, …</td>
+</tr>
+<tr>
+<td><a href="#stage-tint">stage.tint</a></td>
+<td>colour</td>
+<td><code>#FFFFFF</code></td>
+<td>The whole world - the fighters too - washed in this colour, as strong as …</td>
+</tr>
+<tr>
+<td><a href="#stage-tintalpha">stage.tintAlpha</a></td>
+<td>number</td>
+<td><code>0</code></td>
+<td>How strong <code>stage.tint</code> is: 0 = not at all, 1 = only the colour.</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -3750,6 +3920,38 @@ screen then) - the fight camera, the beat bump and the hit nudge still move them
 players are gone. Off, the fight looks like practice: the song's pictures, the notes and the HUD over MineFunkin's own
 background - no world, no fighters.</p>
 <p>One of: <code>"on"</code>, <code>"fighters"</code>, <code>"off"</code>.</p>
+<h3 id="stage-daytime">stage.dayTime<a class="headerlink" href="#stage-daytime" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">number</span> <code>stage.dayTime</code> <span class="mf-eq">= <code>-1</code></span></p>
+<p class="mf-tags"><span class="mf-tag">-1 – 24000</span></p>
+
+<p>The time of day the people in the song see, in Minecraft's numbers: 1000 morning, 6000 noon, 12000 sunset,
+13000 night, 18000 midnight, 23000 sunrise. -1 = the world's own. Tween it for a sunset in a few beats - the
+sky, the sun, the stars and the light all follow.</p>
+<h3 id="stage-weather">stage.weather<a class="headerlink" href="#stage-weather" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>stage.weather</code> <span class="mf-eq">= <code>"world"</code></span></p>
+
+<p><code>"world"</code> (the world's own), <code>"clear"</code>, <code>"rain"</code>, <code>"snow"</code> or <code>"thunder"</code>. A change fades in about a second.
+Rain and snow fall wherever the fight is, even in a desert.</p>
+<p>One of: <code>"world"</code>, <code>"clear"</code>, <code>"rain"</code>, <code>"snow"</code>, <code>"thunder"</code>.</p>
+<h3 id="stage-fog">stage.fog<a class="headerlink" href="#stage-fog" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">number</span> <code>stage.fog</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+
+<p>0 = the world's own fog, 1 = so thick that only a few blocks show.</p>
+<h3 id="stage-fogcolor">stage.fogColor<a class="headerlink" href="#stage-fogcolor" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">colour</span> <code>stage.fogColor</code> <span class="mf-eq">= <code>none</code></span></p>
+
+<p>The fog's colour, and the far sky's. Its alpha is how much: <code>#8090A0</code> = all of it, <code>#808090A0</code> = half. The
+default (alpha 0) keeps the world's.</p>
+<h3 id="stage-tint">stage.tint<a class="headerlink" href="#stage-tint" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">colour</span> <code>stage.tint</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+
+<p>The whole world - the fighters too - washed in this colour, as strong as <code>stage.tintAlpha</code> says.</p>
+<h3 id="stage-tintalpha">stage.tintAlpha<a class="headerlink" href="#stage-tintalpha" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><span class="mf-type">number</span> <code>stage.tintAlpha</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+
+<p>How strong <code>stage.tint</code> is: 0 = not at all, 1 = only the colour.</p>
 
 
 
