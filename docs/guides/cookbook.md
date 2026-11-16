@@ -108,6 +108,51 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     end
     ```
 
+??? example "A storm comes up for the drop (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 8 then
+            stage.weather = "thunder"
+            tween(stage.dayTime, 18000, beats(8))    -- the sky goes dark
+            lightning("center", 6)
+        end
+    end
+    ```
+
+??? example "Snow and fog for a quiet part (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 4 then
+            stage.weather = "snow"
+            stage.fog = 0.6
+            stage.fogColor = #A0B0C0
+        end
+        if n == 6 then
+            stage.weather = "world"
+            stage.fog = 0
+        end
+    end
+    ```
+
+??? example "Lightning on every Sick of the opponent (fights, uses onOpponentHit)"
+
+    ```lua
+    function onOpponentHit(n)
+        if n.judgment == "sick" then lightning("opponent", 3) end
+    end
+    ```
+
+??? example "The world turns red at low health (fights, uses onFrame)"
+
+    ```lua
+    function onFrame(dt)
+        stage.tint = #FF2020
+        stage.tintAlpha = (1 - player.health) * 0.4
+    end
+    ```
+
 ??? example "Only the two fighters for the chorus (fights, uses onSection)"
 
     ```lua

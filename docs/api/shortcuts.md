@@ -27,7 +27,7 @@ end
 | Lanes and scroll | [flipScroll](#flipscroll) · [setScroll](#setscroll) · [hideStrums / showStrums](#hidestrums) · [hideLane / showLane](#hidelane) · [moveStrums](#movestrums) · [resetLanes](#resetlanes) |
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
 | Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
-| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) |
+| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [lightning](#lightning) |
 | Sprite characters | [characterPose](#characterpose) · [characterPlay](#characterplay) |
 | Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
@@ -381,6 +381,24 @@ particle("heart", "player", 3)
 ```
 
 <p class="mf-like">Changes nothing - the particles only fly</p>
+
+### lightning
+
+<p class="mf-sig"><code>lightning(where[, spread])</code></p>
+
+A lightning bolt at a fighter: `where` is `"player"`, `"opponent"`, `"boyfriend"`, `"dad"` or `"center"`
+(between both), `spread` = up to how many blocks off it strikes (0 unless given, at most 16).
+
+Only a picture: the bolt, the sky's flash and its thunder, for the people in the song. Nothing burns, nobody is
+hurt, the players standing around see nothing. With "Reduce flashing" only the thunder is heard. Goes well with
+[`stage.weather = "thunder"`](stage.md).
+
+```lua
+lightning("opponent")
+lightning("center", 8)
+```
+
+<p class="mf-like">Psych: — · Changes nothing - only the picture and the sound</p>
 
 ---
 
