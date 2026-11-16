@@ -2281,6 +2281,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#worldparticle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        worldParticle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lightning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4574,6 +4585,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#worldparticle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        worldParticle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lightning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4950,7 +4972,7 @@ use them - put them inside <code>onEvent</code> (or any other <a href="../callba
 </tr>
 <tr>
 <td>Stage <span class="mf-tag fight">fights</span></td>
-<td><a href="#particle">particle</a> · <a href="#lightning">lightning</a></td>
+<td><a href="#particle">particle</a> · <a href="#worldparticle">worldParticle</a> · <a href="#lightning">lightning</a></td>
 </tr>
 <tr>
 <td>Sprite characters</td>
@@ -5222,6 +5244,18 @@ particle, and a song can spawn at most 600 a second.</p>
 </code></pre></div>
 <p class="mf-like">Changes nothing - the particles only fly</p>
 
+<h3 id="worldparticle">worldParticle<a class="headerlink" href="#worldparticle" title="Permanent link">&para;</a></h3>
+<p class="mf-sig"><code>worldParticle(type, where[, count[, spread]])</code></p>
+
+<p>The same as <a href="#particle">particle</a>, but real world particles: the players standing around the fight see them
+too, even without MineFunkin. One fighter's game asks the server, which checks them (the particle, the place
+near the fight, at most 600 a second) and shows them to everyone near - both fighters included, so nobody sees
+them twice. Whoever watches the fight from inside sees them from the song, in time with what they watch.
+Replays and practice show nothing.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">worldParticle</span><span class="p">(</span><span class="s2">"flame"</span><span class="p">,</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p class="mf-like">Changes nothing - the particles only fly</p>
+
 <h3 id="lightning">lightning<a class="headerlink" href="#lightning" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><code>lightning(where[, spread])</code></p>
 
@@ -5230,8 +5264,8 @@ particle, and a song can spawn at most 600 a second.</p>
 <p>Only a picture: the bolt, the sky's flash and its thunder, for the people in the song. Nothing burns, nobody is
 hurt, the players standing around see nothing. With "Reduce flashing" only the thunder is heard. Goes well with
 <a href="../stage/"><code>stage.weather = "thunder"</code></a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">lightning</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">)</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nf">lightning</span><span class="p">(</span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nf">lightning</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nf">lightning</span><span class="p">(</span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: — · Changes nothing - only the picture and the sound</p>
 
@@ -5246,10 +5280,10 @@ where it makes sense.</p>
 <p class="mf-sig"><code>focus(who[, duration])</code></p>
 
 <p>The <a href="../../guides/camera/">fight camera</a> leans toward <code>"opponent"</code> or <code>"player"</code>, or back to <code>"center"</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">song</span><span class="p">.</span><span class="py">singer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"opponent"</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">focus</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">)</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">song</span><span class="p">.</span><span class="py">singer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"player"</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">focus</span><span class="p">(</span><span class="s2">"player"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">song</span><span class="p">.</span><span class="py">singer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"opponent"</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">focus</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">)</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">song</span><span class="p">.</span><span class="py">singer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"player"</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">focus</span><span class="p">(</span><span class="s2">"player"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>cameraSetTarget</code> · Changes <code>camera.x</code>, <code>camera.z</code>, <code>camera.yaw</code></p>
 
@@ -5257,15 +5291,15 @@ where it makes sense.</p>
 <p class="mf-sig"><code>swapFighters([duration])</code></p>
 
 <p>The fighters jump over each other and trade places. Call it again to swap back.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nf">swapFighters</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">swapFighters</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div>
 <h3 id="pose">pose<a class="headerlink" href="#pose" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><code>pose(who, name)</code></p>
 
 <p>Plays one of the fighters' poses: <code>"left"</code>, <code>"down"</code>, <code>"up"</code>, <code>"right"</code>, <code>"death"</code>, or <code>"none"</code> to let go. A
 pose holds like a held note until <code>"none"</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">pose</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">)</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span><span class="w"> </span><span class="nf">pose</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"none"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nf">pose</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nf">after</span><span class="p">(</span><span class="nf">beats</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">()</span><span class="w"> </span><span class="nf">pose</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"none"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>playAnim</code> / <code>characterPlayAnim</code> · Kade: <code>playActorAnimation</code></p>
 
@@ -5280,13 +5314,13 @@ on a pose starts it from the rest pose.</p>
 and eases back - exactly like MineFunkin's own poses. A song idle stays still with a small dip every second beat.
 <code>clearPose</code> gives MineFunkin's pose back - one, or all five without a name. The song's end clears them too.</p>
 <p>In a fight the players standing around see these poses too: your game sends them along.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1">-- Our own "up": both arms up, head back, a slight lean.</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"leftArm"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">160</span><span class="p">)</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rightArm"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">160</span><span class="p">)</span>
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"head"</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"body"</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">8</span><span class="p">)</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">-- Our own "up": both arms up, head back, a slight lean.</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"leftArm"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">160</span><span class="p">)</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rightArm"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">160</span><span class="p">)</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"head"</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">    </span><span class="nf">setPose</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"up"</span><span class="p">,</span><span class="w"> </span><span class="s2">"body"</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: a character's <code>animations</code> in its JSON, <code>playAnim</code> · Kade: <code>playAnim</code></p>
 
@@ -5295,8 +5329,8 @@ and eases back - exactly like MineFunkin's own poses. A song idle stays still wi
 
 <p>A fighter's Minecraft skin: a 64x64 skin <code>.png</code> from the song folder, <code>"opponent"</code> / <code>"player"</code> (that
 fighter's own skin), or <code>""</code> (back to its own).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nf">setSkin</span><span class="p">(</span><span class="s2">"player"</span><span class="p">,</span><span class="w"> </span><span class="s2">"opponent"</span><span class="p">)</span><span class="w">       </span><span class="c1">-- the fighters wear each other's skin</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nf">setSkin</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"player"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nf">setSkin</span><span class="p">(</span><span class="s2">"player"</span><span class="p">,</span><span class="w"> </span><span class="s2">"opponent"</span><span class="p">)</span><span class="w">       </span><span class="c1">-- the fighters wear each other's skin</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nf">setSkin</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"player"</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: the "Change Character" event · Kade: <code>changeDadCharacter</code></p>
 
@@ -5304,7 +5338,7 @@ fighter's own skin), or <code>""</code> (back to its own).</p>
 <p class="mf-sig"><code>setModel(who, model)</code></p>
 
 <p>The arm shape: <code>"slim"</code> (Alex), <code>"wide"</code> (Steve) or <code>"default"</code> (what the skin says).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nf">setModel</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"slim"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nf">setModel</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="w"> </span><span class="s2">"slim"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="setfigure">setFigure<a class="headerlink" href="#setfigure" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><code>setFigure(who, mob)</code> <span class="mf-tag fight">fights</span></p>
@@ -5312,9 +5346,9 @@ fighter's own skin), or <code>""</code> (back to its own).</p>
 <p>A Minecraft mob stands in for the dummy: <code>"creeper"</code>, <code>"minecraft:iron_golem"</code>, a mod's mob. The one standing there is pushed
 out to the side, the new one pushed in from the other side - both keep facing you. <code>""</code> = the dummy itself again. Only for the
 dummy - on a player it does nothing. Sets <a href="../fighters/"><code>opponent.figure</code></a>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="nf">setFigure</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">?</span><span class="w"> </span><span class="s2">"creeper"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"skeleton"</span><span class="p">)</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">    </span><span class="nf">setFigure</span><span class="p">(</span><span class="s2">"opponent"</span><span class="p">,</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">?</span><span class="w"> </span><span class="s2">"creeper"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"skeleton"</span><span class="p">)</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="kr">end</span>
 </code></pre></div>
 <h3 id="bind">bind<a class="headerlink" href="#bind" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><code>bind(who, place)</code><br><code>bind(who, x, y[, height])</code><br><code>unbind(who)</code></p>
@@ -5326,14 +5360,14 @@ and <a href="#focus"><code>focus</code></a>, <a href="../functions/#atplace"><co
 screen, 0-1), and with <code>height</code> that tall as a share of the screen. The same as setting
 <a href="../fighters/#pinned"><code>pinned</code>, <code>screenX</code>, <code>screenY</code>, <code>screenHeight</code></a>.</p>
 <p><code>unbind(who)</code> lets go of both: back on the fight's own places (you in front), off the screen spot.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1">-- The Boyfriend part always in front, whichever side the one watching plays.</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="nf">bind</span><span class="p">(</span><span class="s2">"boyfriend"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bf"</span><span class="p">)</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">-- The Boyfriend part always in front, whichever side the one watching plays.</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nf">bind</span><span class="p">(</span><span class="s2">"boyfriend"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bf"</span><span class="p">)</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="kr">end</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">-- Like a Psych stage: Boyfriend bottom right, the opponent bottom left, half the screen tall.</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nf">bind</span><span class="p">(</span><span class="s2">"boyfriend"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.98</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nf">bind</span><span class="p">(</span><span class="s2">"dad"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.22</span><span class="p">,</span><span class="w"> </span><span class="mf">0.98</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1">-- Like a Psych stage: Boyfriend bottom right, the opponent bottom left, half the screen tall.</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nf">bind</span><span class="p">(</span><span class="s2">"boyfriend"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.98</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nf">bind</span><span class="p">(</span><span class="s2">"dad"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.22</span><span class="p">,</span><span class="w"> </span><span class="mf">0.98</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: a stage's <code>boyfriend</code> / <code>opponent</code> positions, <code>setCharacterX</code></p>
 
@@ -5345,14 +5379,14 @@ screen, 0-1), and with <code>height</code> that tall as a share of the screen. T
 <p>Sets a <code>uniform float</code> / <code>int</code> / <code>bool</code> of the song's shader in that <a href="../shader/">slot</a> - the way Psych scripts drive
 a <code>.frag</code> file. Up to 16 names per slot; a name the shader doesn't declare does nothing. A value that isn't set is 0,
 except <code>iTime</code>, which runs with the song's seconds.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">    </span><span class="nv">shader</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"chroma.frag"</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">    </span><span class="nf">setShaderFloat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"intensity"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="kr">end</span>
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
-<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="w">    </span><span class="nf">setShaderFloat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"intensity"</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="nv">shader</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"chroma.frag"</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="nf">setShaderFloat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"intensity"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="kr">end</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">    </span><span class="nf">setShaderFloat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"intensity"</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>setShaderFloat(tag, name, value)</code> - with the slot instead of the tag</p>
 
@@ -5364,10 +5398,10 @@ except <code>iTime</code>, which runs with the song's seconds.</p>
 <p>Your health bar: <code>setHealth</code> sets it (1 = full, 0 = empty, which fails you), <code>addHealth</code> changes it by that
 share of the bar - minus drains, plus heals. <span class="mf-tag fight">fights</span> Practice has no health,
 so these do nothing there.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1">-- Health drain: the opponent's notes take a little, but never the last bit.</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onOpponentHit</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">player</span><span class="p">.</span><span class="py">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">addHealth</span><span class="p">(</span><span class="o">-</span><span class="mf">0.01</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1">-- Health drain: the opponent's notes take a little, but never the last bit.</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onOpponentHit</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">player</span><span class="p">.</span><span class="py">health</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">addHealth</span><span class="p">(</span><span class="o">-</span><span class="mf">0.01</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>setHealth</code> / <code>addHealth</code> · Read it as <code>player.health</code></p>
 
@@ -5381,8 +5415,8 @@ so these do nothing there.</p>
 <p>One of Minecraft's own sounds by its name - the names <code>/playsound</code> takes (<code>minecraft:</code> may be left out). No file
 needed. Volume 0-1, pitch 0.5-2 (1 = normal). A resource pack's version counts. It plays at MineFunkin's volume,
 like <code>playSound</code> without a name.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"block.note_block.bell"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"entity.generic.explode"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"block.note_block.bell"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="nf">playGameSound</span><span class="p">(</span><span class="s2">"entity.generic.explode"</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: — · Changes nothing</p>
 
@@ -5390,7 +5424,7 @@ like <code>playSound</code> without a name.</p>
 <p class="mf-sig"><code>stopSound("name")</code></p>
 
 <p>Stops the sound started under that name.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nf">stopSound</span><span class="p">(</span><span class="s2">"rain"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nf">stopSound</span><span class="p">(</span><span class="s2">"rain"</span><span class="p">)</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>stopSound(tag)</code></p>
 
@@ -5398,7 +5432,7 @@ like <code>playSound</code> without a name.</p>
 <p class="mf-sig"><code>soundVolume("name", volume[, duration])</code></p>
 
 <p>Fades a named sound to that volume (0-1). At once without a duration.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nf">soundVolume</span><span class="p">(</span><span class="s2">"rain"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nf">soundVolume</span><span class="p">(</span><span class="s2">"rain"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>soundFadeIn</code> / <code>soundFadeOut</code> / <code>setSoundVolume</code></p>
 
@@ -5410,9 +5444,9 @@ like <code>playSound</code> without a name.</p>
 <p>Runs that event's <code>onEvent</code> right now, as if the chart had it here. The values are text, like a chart's. A
 name the song doesn't have does nothing - the <a href="../../help/troubleshooting/#the-event-log">event log</a> says so once,
 with the name it probably should have been.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">trigger</span><span class="p">(</span><span class="s2">"Hide HUD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span><span class="w">   </span><span class="c1">-- a built-in event, with its chart values</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">trigger</span><span class="p">(</span><span class="s2">"Hide HUD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span><span class="w">   </span><span class="c1">-- a built-in event, with its chart values</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>triggerEvent(name, value1, value2)</code></p>
 
@@ -5422,8 +5456,8 @@ with the name it probably should have been.</p>
 <p><code>call</code> runs your function of that name in every <em>other</em> event of the song that has one, with up to 6 values.
 <code>callIn</code> runs it in <strong>one</strong> event only, picked by its name or alias - an event added later with a function of the same
 name doesn't join in. Calls can go 64 deep.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nf">call</span><span class="p">(</span><span class="s2">"bigHit"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">                  </span><span class="c1">-- every event with a function bigHit(strength) runs it</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="nf">callIn</span><span class="p">(</span><span class="s2">"Impact"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hit"</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span><span class="w">       </span><span class="c1">-- only the Impact event's hit(1.5)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nf">call</span><span class="p">(</span><span class="s2">"bigHit"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">                  </span><span class="c1">-- every event with a function bigHit(strength) runs it</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nf">callIn</span><span class="p">(</span><span class="s2">"Impact"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hit"</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">)</span><span class="w">       </span><span class="c1">-- only the Impact event's hit(1.5)</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>callOnLuas(name, args)</code></p>
 
@@ -5431,9 +5465,9 @@ name doesn't join in. Calls can go 64 deep.</p>
 <p class="mf-sig"><code>preload("picture.png")</code></p>
 
 <p>Starts loading a picture now, so it shows the moment you first use it. Put it in <code>onStart</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span><span class="nf">preload</span><span class="p">(</span><span class="s2">"stage/fire.png"</span><span class="p">)</span>
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="nf">preload</span><span class="p">(</span><span class="s2">"stage/fire.png"</span><span class="p">)</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="kr">end</span>
 </code></pre></div>
 <p class="mf-like">Psych: <code>precacheImage</code></p>
 
@@ -5445,9 +5479,9 @@ name doesn't join in. Calls can go 64 deep.</p>
 <p>Writes to the <a href="../../help/troubleshooting/#the-event-log">event log</a> what a property is right now and <strong>why</strong>: its value
 and default, its range and unit, which event set it, the tween moving it, and what other events wrote under it.
 <code>"strum[2].x"</code> for one slot. The answer to "why is my HUD invisible?".</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">inspect</span><span class="p">(</span><span class="s2">"hud.alpha"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onSection</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nf">inspect</span><span class="p">(</span><span class="s2">"hud.alpha"</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="kr">end</span>
 </code></pre></div>
 <p>The chart editor's <strong>State</strong> panel shows the same for every property at the playhead, without a script.</p>
 <hr />
