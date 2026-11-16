@@ -23,7 +23,7 @@ through long notes, and the miss pose when you miss.
     | `sad` | your combo of 10 or more broke |
     
     Works in fights and in practice, drawn on the screen like the [pictures](image.md). The 3D fighters stay - switch the
-    world off ([`stage.world`](stage.md)) for a sprite-only song.
+    world off ([`stage.world`](stage.md) `"off"`) for a sprite-only song, or keep only the fighters with `"fighters"`.
     
     <p class="mf-like">Psych: <code>characters/*.json</code> (<code>animations</code>, <code>offsets</code>, <code>flip_x</code>, <code>scale</code>) · Kade: —</p>
 

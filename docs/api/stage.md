@@ -33,7 +33,7 @@ end
 
 | Property | Kind | Default | |
 |---|---|---|---|
-| [stage.world](#stage-world) | choice | `"on"` | The Minecraft world in a fight: `"on"` = as it is, `"off"` = none at all. Off, the fight … |
+| [stage.world](#stage-world) | choice | `"on"` | The Minecraft world in a fight: `"on"` = as it is, `"fighters"` = no world, only the two … |
 
 ---
 
@@ -41,8 +41,10 @@ end
 
 <p class="mf-sig"><span class="mf-type">choice</span> <code>stage.world</code> <span class="mf-eq">= <code>"on"</code></span></p>
 
-The Minecraft world in a fight: `"on"` = as it is, `"off"` = none at all. Off, the fight looks like practice: the
-song's pictures (the `"stage"` layer is drawn on the screen then), the notes and the HUD over MineFunkin's own
+The Minecraft world in a fight: `"on"` = as it is, `"fighters"` = no world, only the two fighters, `"off"` = none
+at all. With `"fighters"` the fighters stand over MineFunkin's own background and the `"stage"` layer (drawn on the
+screen then) - the fight camera, the beat bump and the hit nudge still move them; terrain, sky, mobs and other
+players are gone. Off, the fight looks like practice: the song's pictures, the notes and the HUD over MineFunkin's own
 background - no world, no fighters.
 
-One of: `"on"`, `"off"`.
+One of: `"on"`, `"fighters"`, `"off"`.

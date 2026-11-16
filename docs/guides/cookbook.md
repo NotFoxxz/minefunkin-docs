@@ -108,6 +108,15 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     end
     ```
 
+??? example "Only the two fighters for the chorus (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 16 then stage.world = "fighters" end    -- no world, the fighters stay
+        if n == 24 then stage.world = "on" end
+    end
+    ```
+
 ??? example "Strum background in the colour of the last judgment"
 
     ```lua
