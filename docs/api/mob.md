@@ -5,7 +5,7 @@ icon: material/sheep
 # mob[n]
 
 Sixteen stage mobs: Minecraft's mobs (or a mod's) standing around the fight, only for the people in the song. They
-stand, look, walk, jump, fall over, explode or vanish when your script says so - nothing of them is real: no AI, no
+stand still until your script moves them - then they walk, look, jump, fall over, explode or vanish - nothing of them is real: no AI, no
 sounds of their own, nobody is hurt, the world doesn't change.
 
 !!! info "How to use it"
@@ -44,7 +44,7 @@ end
 | [mob[n].x](#mob-x) | number | `0` | Blocks to your right of the middle between the fighters (negative = to your left). |
 | [mob[n].y](#mob-y) | number | `0` | Blocks up from the ground the fighters stand on. |
 | [mob[n].z](#mob-z) | number | `0` | Blocks toward the opponent from the middle (negative = toward you). |
-| [mob[n].look](#mob-look) | choice | `"camera"` | Where it looks: `"camera"` (at you, through the screen), `"player"`, `"opponent"`, or … |
+| [mob[n].look](#mob-look) | choice | `"none"` | Where it looks: `"none"` (the default) = it stands still and `turn` decides; `"camera"` … |
 | [mob[n].turn](#mob-turn) | number | `0` | With `look = "none"`: its direction in degrees - 0 = facing you, 90 = facing to your … |
 | [mob[n].scale](#mob-scale) | number | `1` | Its size: 1 = its own, 2 = twice as big (up to 4). |
 | [mob[n].visible](#mob-visible) | switch | `true` | false = hidden (it stays where it is). |
@@ -82,12 +82,12 @@ Blocks toward the opponent from the middle (negative = toward you).
 
 ### mob[n].look { #mob-look }
 
-<p class="mf-sig"><span class="mf-type">choice</span> <code>mob[n].look</code> <span class="mf-eq">= <code>"camera"</code></span></p>
+<p class="mf-sig"><span class="mf-type">choice</span> <code>mob[n].look</code> <span class="mf-eq">= <code>"none"</code></span></p>
 
-Where it looks: `"camera"` (at you, through the screen), `"player"`, `"opponent"`, or `"none"` - then `turn`
-decides. While it walks it looks where it goes.
+Where it looks: `"none"` (the default) = it stands still and `turn` decides; `"camera"` (at you, through the
+screen), `"player"` or `"opponent"` = it keeps turning to follow them. While it walks it looks where it goes.
 
-One of: `"camera"`, `"player"`, `"opponent"`, `"none"`.
+One of: `"none"`, `"camera"`, `"player"`, `"opponent"`.
 
 ### mob[n].turn { #mob-turn }
 

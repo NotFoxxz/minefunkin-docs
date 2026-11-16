@@ -27,7 +27,7 @@ end
 | Lanes and scroll | [flipScroll](#flipscroll) · [setScroll](#setscroll) · [hideStrums / showStrums](#hidestrums) · [hideLane / showLane](#hidelane) · [moveStrums](#movestrums) · [resetLanes](#resetlanes) |
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
 | Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
-| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [worldParticle](#worldparticle) · [lightning](#lightning) · [mobWalk](#mobwalk) · [mobAction](#mobaction) |
+| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [worldParticle](#worldparticle) · [lightning](#lightning) · [mobWalk](#mobwalk) · [mobAction](#mobaction) · [setBlock](#setblock) · [clearBlocks](#clearblocks) |
 | Sprite characters | [characterPose](#characterpose) · [characterPlay](#characterplay) |
 | Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
@@ -433,6 +433,34 @@ mobWalk(1, -5, 2)
 ```lua
 mobAction(0, "jump")
 mobAction(2, "explode")
+```
+
+<p class="mf-like">Changes nothing - only the picture</p>
+
+### setBlock
+
+<p class="mf-sig"><code>setBlock(n, x, y, z, block)</code></p>
+
+Puts one block into [`build[n]`](build.md), at `x`, `y`, `z` from the build's middle (x = to your right, z =
+toward the opponent, at most 24 out). `block` is Minecraft's name, with its state if you like: `"stone"`,
+`"glowstone"`, `"oak_stairs[facing=east]"`, `"minecraft:red_wool"`. `"air"` takes the block there away. Only a
+picture for the people in the song; at most 20 000 blocks on the stage.
+
+```lua
+setBlock(0, 0, 0, 0, "gold_block")
+setBlock(0, 0, 1, 0, "oak_stairs[facing=east]")
+```
+
+<p class="mf-like">Changes nothing - only the picture</p>
+
+### clearBlocks
+
+<p class="mf-sig"><code>clearBlocks(n)</code></p>
+
+Every block `setBlock` put into [`build[n]`](build.md) goes (its `.nbt` file stays).
+
+```lua
+clearBlocks(0)
 ```
 
 <p class="mf-like">Changes nothing - only the picture</p>

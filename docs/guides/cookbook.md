@@ -108,6 +108,43 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     end
     ```
 
+??? example "A gold path builds up beat by beat (fights, uses onBeat)"
+
+    ```lua
+    function onBeat(b)
+        if b < 16 then setBlock(0, 0, 0, b - 8, "gold_block") end
+    end
+    ```
+
+??? example "Your structure behind the opponent, turning in the drop (fights, uses onStart and onSection)"
+
+    ```lua
+    function onStart()
+        build[0].file = "stage.nbt"
+        build[0].z = 10
+    end
+
+    function onSection(n)
+        if n == 8 then tween(build[0].turn, 360, beats(16)) end
+    end
+    ```
+
+??? example "A wall fades in for the last part (fights, uses onStart and onSection)"
+
+    ```lua
+    function onStart()
+        for x = -6, 6 do
+            for y = 0, 3 do setBlock(1, x, y, 0, "stone_bricks") end
+        end
+        build[1].z = 9
+        build[1].alpha = 0
+    end
+
+    function onSection(n)
+        if n == 12 then tween(build[1].alpha, 1, beats(4)) end
+    end
+    ```
+
 ??? example "A crowd that jumps on every beat (fights, uses onStart and onBeat)"
 
     ```lua
