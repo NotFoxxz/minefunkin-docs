@@ -108,6 +108,14 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     end
     ```
 
+??? example "Fire everyone around can see for the drop (fights, uses onSection)"
+
+    ```lua
+    function onSection(n)
+        if n == 8 then worldParticle("flame", "center", 40, 3) end
+    end
+    ```
+
 ??? example "A storm comes up for the drop (fights, uses onSection)"
 
     ```lua

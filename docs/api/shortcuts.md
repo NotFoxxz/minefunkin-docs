@@ -27,7 +27,7 @@ end
 | Lanes and scroll | [flipScroll](#flipscroll) · [setScroll](#setscroll) · [hideStrums / showStrums](#hidestrums) · [hideLane / showLane](#hidelane) · [moveStrums](#movestrums) · [resetLanes](#resetlanes) |
 | HUD | [hideHud / showHud](#hidehud) · [hideJudgments / showJudgments](#hidejudgments) |
 | Screen | [flash](#flash) · [fadeOut / fadeIn](#fadeout) · [zoom](#zoom) · [shake](#shake) · [showTitle](#showtitle) |
-| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [lightning](#lightning) |
+| Stage <span class="mf-tag fight">fights</span> | [particle](#particle) · [worldParticle](#worldparticle) · [lightning](#lightning) |
 | Sprite characters | [characterPose](#characterpose) · [characterPlay](#characterplay) |
 | Fighters | [focus](#focus) · [swapFighters](#swapfighters) · [pose](#pose) · [setPose / clearPose](#setpose) · [setSkin](#setskin) · [setModel](#setmodel) · [setFigure](#setfigure) · [bind / unbind](#bind) |
 | Effects | [setShaderFloat](#setshaderfloat) |
@@ -378,6 +378,22 @@ particle, and a song can spawn at most 600 a second.
 ```lua
 particle("flame", "opponent", 12, 0.6)
 particle("heart", "player", 3)
+```
+
+<p class="mf-like">Changes nothing - the particles only fly</p>
+
+### worldParticle
+
+<p class="mf-sig"><code>worldParticle(type, where[, count[, spread]])</code></p>
+
+The same as [particle](#particle), but real world particles: the players standing around the fight see them
+too, even without MineFunkin. One fighter's game asks the server, which checks them (the particle, the place
+near the fight, at most 600 a second) and shows them to everyone near - both fighters included, so nobody sees
+them twice. Whoever watches the fight from inside sees them from the song, in time with what they watch.
+Replays and practice show nothing.
+
+```lua
+worldParticle("flame", "center", 40, 3)
 ```
 
 <p class="mf-like">Changes nothing - the particles only fly</p>
