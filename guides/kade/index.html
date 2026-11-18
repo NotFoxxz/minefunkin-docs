@@ -4096,8 +4096,8 @@ modcharts, so you can see a few whole ones side by side.</p>
 <h2 id="the-big-differences">The big differences<a class="headerlink" href="#the-big-differences" title="Permanent link">&para;</a></h2>
 <p>Five things to keep in mind - they'll save you some head-scratching:</p>
 <ul>
-<li><strong>No compiling.</strong> A Kade modchart needs a game built from source. Here the script is just a <code>.event</code> file in the
-  song's folder, and the chart editor's <strong>Reload</strong> picks up your changes while you work. No waiting for a build.</li>
+<li><strong>No compiling.</strong> A Kade modchart needs a game built from source. Here the script is just a <code>.modchart</code> file in the
+  song's folder (the camera and the rest go in a <code>.event</code> file - <a href="../modcharts/#event-and-modchart-files">why</a>), and the chart editor's <strong>Reload</strong> picks up your changes while you work. No waiting for a build.</li>
 <li><strong>Your four lanes, not eight receptors.</strong> Kade numbers the receptors 0-7 (0-3 the opponent's, 4-7 yours).
   MineFunkin's <code>strum[0]</code> ... <code>strum[3]</code> are <strong>your</strong> lanes - Kade's 4-7. In a fight only yours are on screen;
   in practice the opponent's receptors beside them fade with <code>strums.opponentAlpha</code>.</li>
@@ -4510,11 +4510,16 @@ song!). Working the angle out from <code>time</code> spins at the same speed for
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nf">hideHud</span><span class="p">()</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nf">hideJudgments</span><span class="p">()</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nv">strums</span><span class="p">.</span><span class="py">opponentAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">       </span><span class="c1">-- the opponent's receptors (practice)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">-- hud.event</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nf">hideHud</span><span class="p">()</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nf">hideJudgments</span><span class="p">()</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kr">end</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">-- hud.modchart (the lanes are a .modchart's job)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nv">strums</span><span class="p">.</span><span class="py">opponentAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">       </span><span class="c1">-- the opponent's receptors (practice)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kr">end</span>
 </code></pre></div>
 </div>
 </div>
@@ -4523,19 +4528,19 @@ song!). Working the angle out from <code>time</code> spins at the same speed for
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Kade</label><label for="__tabbed_6_2">MineFunkin</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>function update(elapsed)
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    for i = 0, getRenderedNotes() do
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        setRenderedNotePos(getRenderedNoteX(i), getRenderedNoteY(i) + 10 * math.sin(songPos / 100), i)
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    end
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>end
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>function update(elapsed)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    for i = 0, getRenderedNotes() do
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>        setRenderedNotePos(getRenderedNoteX(i), getRenderedNoteY(i) + 10 * math.sin(songPos / 100), i)
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    end
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>end
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onFrame</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">notes</span><span class="p">.</span><span class="py">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">        </span><span class="nv">note</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w">    </span><span class="c1">-- an offset: 0 = where the note would be anyway</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="kr">end</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onFrame</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">notes</span><span class="p">.</span><span class="py">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="nv">note</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w">    </span><span class="c1">-- an offset: 0 = where the note would be anyway</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kr">end</span>
 </code></pre></div>
 </div>
 </div>
@@ -4548,21 +4553,21 @@ over with <a href="../../api/shortcuts/#movestrums">moveStrums</a> if you like.<
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Kade</label><label for="__tabbed_7_2">MineFunkin</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>function beatHit(beat)
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    for i = 0, 7 do
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        setActorY(_G['defaultStrum'..i..'Y'] - 20, i)
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        tweenPosYAngle(i, _G['defaultStrum'..i..'Y'], 0, 0.3)
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    end
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>end
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>function beatHit(beat)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    for i = 0, 7 do
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        setActorY(_G['defaultStrum'..i..'Y'] - 20, i)
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        tweenPosYAngle(i, _G['defaultStrum'..i..'Y'], 0, 0.3)
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    end
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>end
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">lane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">do</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="nv">strum</span><span class="p">[</span><span class="nv">lane</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">20</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="nf">tween</span><span class="p">(</span><span class="nv">strum</span><span class="p">[</span><span class="nv">lane</span><span class="p">].</span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="s2">"quadOut"</span><span class="p">)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="kr">end</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="kr">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onBeat</span><span class="p">(</span><span class="nv">b</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">lane</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">do</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span><span class="nv">strum</span><span class="p">[</span><span class="nv">lane</span><span class="p">].</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">20</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="nf">tween</span><span class="p">(</span><span class="nv">strum</span><span class="p">[</span><span class="nv">lane</span><span class="p">].</span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nf">beats</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="s2">"quadOut"</span><span class="p">)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="kr">end</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="kr">end</span>
 </code></pre></div>
 </div>
 </div>

@@ -3471,6 +3471,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#asking-the-players-first" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3826,6 +3837,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#asking-the-players-first" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3960,6 +3982,11 @@ when it's over your <code>onResult</code> gets the result.</p>
 <td><code>.rules(...)</code></td>
 <td><code>FightRules.DEFAULT</code></td>
 <td>health, pausing, giving up - <a href="#rules">below</a></td>
+</tr>
+<tr>
+<td><code>.modifiers(Modifier.DOUBLE_TIME, ...)</code></td>
+<td>none</td>
+<td>the modifiers both fighters play with - <a href="#modifiers">below</a></td>
 </tr>
 <tr>
 <td><code>.ask(true)</code></td>
@@ -4139,14 +4166,22 @@ must be free; nobody can open it while your fight runs, and players can right-cl
 </tr>
 </tbody>
 </table>
+<h2 id="modifiers">Modifiers<a class="headerlink" href="#modifiers" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">.</span><span class="na">modifiers</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="na">DOUBLE_TIME</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">ONE_SHOT</span><span class="p">)</span>
+</code></pre></div>
+<p>Both fighters play with exactly these. The players' own picks in the song select never apply to your fight - leave
+<code>.modifiers</code> out and it's played without any. <code>EASY</code> beats <code>HARD</code> and <code>ONE_SHOT</code> beats <code>SICK_ONLY</code> when you name both.
+<code>SHUFFLE</code> takes a seed the server makes, the same for both fighters and everyone watching. The points carry the
+modifiers' factor like everywhere (<a href="../types/#modifier"><code>Modifier</code></a>); <code>fight.modifiers()</code> and every result's
+<code>modifiers()</code> say what was played.</p>
 <h2 id="asking-the-players-first">Asking the players first<a class="headerlink" href="#asking-the-players-first" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">.</span><span class="na">ask</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">.</span><span class="na">ask</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 </code></pre></div>
 <p>Every player in the fight gets a question: your mod's name, the opponent, the song - <strong>Fight</strong> or <strong>Not now</strong>, 30
 seconds to answer. The start waits (<code>PENDING</code>) until all said yes. A "Not now" or no answer refuses it (<code>DECLINED</code>,
 <code>NO_ANSWER</code>). The server's admin can make every addon fight ask (<code>addonFightsAlwaysAsk</code>) - whatever your mod says.</p>
 <h2 id="leaderboards">Leaderboards<a class="headerlink" href="#leaderboards" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">.</span><span class="na">board</span><span class="p">(</span><span class="n">Board</span><span class="p">.</span><span class="na">own</span><span class="p">(</span><span class="s">"finale"</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">.</span><span class="na">board</span><span class="p">(</span><span class="n">Board</span><span class="p">.</span><span class="na">own</span><span class="p">(</span><span class="s">"finale"</span><span class="p">))</span>
 </code></pre></div>
 <table>
 <thead>
@@ -4176,7 +4211,7 @@ seconds to answer. The start waits (<code>PENDING</code>) until all said yes. A 
 </table>
 <p>Only runs the server resimulated itself and that were played to the end ever count - a stopped or cancelled fight never
 does.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">LeaderboardEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="na">boards</span><span class="p">().</span><span class="na">top</span><span class="p">(</span><span class="s">"finale"</span><span class="p">,</span><span class="w"> </span><span class="n">fight</span><span class="p">.</span><span class="na">song</span><span class="p">(),</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">LeaderboardEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="na">boards</span><span class="p">().</span><span class="na">top</span><span class="p">(</span><span class="s">"finale"</span><span class="p">,</span><span class="w"> </span><span class="n">fight</span><span class="p">.</span><span class="na">song</span><span class="p">(),</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
 </code></pre></div>
 <table>
 <thead>
@@ -4203,14 +4238,14 @@ does.</p>
 <h2 id="the-result">The result<a class="headerlink" href="#the-result" title="Permanent link">&para;</a></h2>
 <p><code>onResult</code> is called <strong>exactly once</strong> per fight that started - however it ends: played to the end, given up, stopped by
 you, cancelled by an admin, a player left, the server stops. It gets a <a href="../types/#fightresult"><code>FightResult</code></a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.</span><span class="na">onResult</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">FighterResult</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">();</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">.</span><span class="na">outcome</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">WON</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">giveLoot</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">LOST</span><span class="p">,</span><span class="w"> </span><span class="n">FORFEITED</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="na">sendSystemMessage</span><span class="p">(</span><span class="n">Component</span><span class="p">.</span><span class="na">literal</span><span class="p">(</span><span class="s">"The boss laughs."</span><span class="p">));</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">DRAW</span><span class="p">,</span><span class="w"> </span><span class="n">CANCELLED</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">})</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">.</span><span class="na">onResult</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">FighterResult</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">();</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">.</span><span class="na">outcome</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">WON</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">giveLoot</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">LOST</span><span class="p">,</span><span class="w"> </span><span class="n">FORFEITED</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">player</span><span class="p">.</span><span class="na">sendSystemMessage</span><span class="p">(</span><span class="n">Component</span><span class="p">.</span><span class="na">literal</span><span class="p">(</span><span class="s">"The boss laughs."</span><span class="p">));</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">DRAW</span><span class="p">,</span><span class="w"> </span><span class="n">CANCELLED</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="p">})</span>
 </code></pre></div>
 <table>
 <thead>
@@ -4222,7 +4257,7 @@ you, cancelled by an admin, a player left, the server stops. It gets a <a href="
 <tbody>
 <tr>
 <td><code>reason()</code></td>
-<td>why it ended - <code>SONG_END</code>, <code>FORFEIT</code>, <code>PLAYER_OFFLINE</code>, <code>STOPPED_BY_ADDON</code>, <code>PAUSE_TIMEOUT</code>, <code>ADMIN</code>, <code>SERVER_STOPPING</code>, <code>NOT_STARTED</code>, <code>TIMED_OUT</code>, <code>NOT_SCORED</code></td>
+<td>why it ended - <code>SONG_END</code>, <code>FORFEIT</code>, <code>PLAYER_OFFLINE</code>, <code>STOPPED_BY_ADDON</code>, <code>PAUSE_TIMEOUT</code>, <code>ADMIN</code>, <code>RESTARTED</code>, <code>SERVER_STOPPING</code>, <code>NOT_STARTED</code>, <code>TIMED_OUT</code>, <code>NOT_SCORED</code></td>
 </tr>
 <tr>
 <td><code>winner()</code></td>
@@ -4254,9 +4289,9 @@ ends the fight without a winner.</p>
 <h2 id="get-the-song-ready-first">Get the song ready first<a class="headerlink" href="#get-the-song-ready-first" title="Permanent link">&para;</a></h2>
 <p>Showing a cutscene before the fight? Let the players' games fetch the song meanwhile, so the fight starts without a
 loading pause:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">api</span><span class="p">.</span><span class="na">fights</span><span class="p">().</span><span class="na">prepare</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">player</span><span class="p">),</span><span class="w"> </span><span class="s">"finale"</span><span class="p">);</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// ... your cutscene ...</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">api</span><span class="p">.</span><span class="na">fights</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">api</span><span class="p">.</span><span class="na">fights</span><span class="p">().</span><span class="na">prepare</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">player</span><span class="p">),</span><span class="w"> </span><span class="s">"finale"</span><span class="p">);</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// ... your cutscene ...</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">api</span><span class="p">.</span><span class="na">fights</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
 </code></pre></div>
 <p>The files a player's game doesn't have yet come in the background (players without MineFunkin are skipped). Needs
 <code>fights.start</code>.</p>

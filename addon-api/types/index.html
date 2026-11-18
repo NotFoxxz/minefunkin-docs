@@ -3646,6 +3646,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifiers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4273,6 +4295,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modifiers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4861,6 +4905,99 @@ the run was played on.</p>
 <p>One note's judgment: <code>SICK</code>, <code>GOOD</code>, <code>BAD</code>, <code>SHIT</code>, <code>MISS</code> (<code>isMiss()</code>).</p>
 <h3 id="chartside">ChartSide<a class="headerlink" href="#chartside" title="Permanent link">&para;</a></h3>
 <p><code>PLAYER</code> or <code>OPPONENT</code> - the two parts of a chart (<code>other()</code> gives the other one).</p>
+<h3 id="modifier">Modifier<a class="headerlink" href="#modifier" title="Permanent link">&para;</a></h3>
+<p>One modifier a run can be played with (the player picks them in the song select; at a Speaker both fighters agree on
+the host's; an addon names them in its <a href="#fightrequest"><code>FightRequest</code></a>):</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Badge</th>
+<th>Points</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EASY</code></td>
+<td>EZ</td>
+<td>x0.5</td>
+<td>wider hit windows</td>
+</tr>
+<tr>
+<td><code>HARD</code></td>
+<td>HD</td>
+<td>x1.06</td>
+<td>narrower hit windows</td>
+</tr>
+<tr>
+<td><code>FADE</code></td>
+<td>FD</td>
+<td>x1.06</td>
+<td>notes fade out before the receptors</td>
+</tr>
+<tr>
+<td><code>SHUFFLE</code></td>
+<td>SH</td>
+<td>x1</td>
+<td>every note on a random lane (the same for everyone in the run)</td>
+</tr>
+<tr>
+<td><code>DOUBLE_TIME</code></td>
+<td>DT</td>
+<td>x1.12</td>
+<td>the song 1.5x as fast, the music keeps its pitch</td>
+</tr>
+<tr>
+<td><code>NO_MOD</code></td>
+<td>NM</td>
+<td>x0.5 - 1</td>
+<td>the song's <code>.modchart</code> files don't run; less points the more of the song they moved</td>
+</tr>
+<tr>
+<td><code>ONE_SHOT</code></td>
+<td>OS</td>
+<td>x1</td>
+<td>the first miss ends the run</td>
+</tr>
+<tr>
+<td><code>SICK_ONLY</code></td>
+<td>SO</td>
+<td>x1</td>
+<td>anything worse than "Sick!" ends the run</td>
+</tr>
+</tbody>
+</table>
+<p><code>acronym()</code> = the badge's letters, <code>pointFactor()</code> = the factor (<code>NaN</code> for <code>NO_MOD</code> - its value depends on the song).
+<code>EASY</code> and <code>HARD</code> exclude each other, so do <code>ONE_SHOT</code> and <code>SICK_ONLY</code>.</p>
+<h3 id="modifiers">Modifiers<a class="headerlink" href="#modifiers" title="Permanent link">&para;</a></h3>
+<p>The modifiers of one run and what its points were multiplied by.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>on()</code></td>
+<td>the set of <a href="#modifier"><code>Modifier</code></a>s, empty = none</td>
+</tr>
+<tr>
+<td><code>scoreFactor()</code></td>
+<td>the factor in the score (1 = none); with <code>NO_MOD</code> the song's own share when the server worked it out - a leaderboard entry counts <code>NO_MOD</code> as 1</td>
+</tr>
+<tr>
+<td><code>has(modifier)</code>, <code>none()</code>, <code>acronyms()</code></td>
+<td><code>acronyms()</code> = "FD DT"</td>
+</tr>
+<tr>
+<td><code>Modifiers.NONE</code>, <code>Modifiers.of(...)</code></td>
+<td>none; these (for a request)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="server-side">Server side<a class="headerlink" href="#server-side" title="Permanent link">&para;</a></h2>
 <h3 id="songresult">SongResult<a class="headerlink" href="#songresult" title="Permanent link">&para;</a></h3>
 <p>A song played to its end without failing, as the server knows it.</p>
@@ -4911,6 +5048,10 @@ the run was played on.</p>
 <tr>
 <td><code>opponent()</code></td>
 <td>the other fighter in a player fight, <code>null</code> against the dummy</td>
+</tr>
+<tr>
+<td><code>modifiers()</code></td>
+<td><a href="#modifiers"><code>Modifiers</code></a>: what it was played with, the factor in its score</td>
 </tr>
 </tbody>
 </table>
@@ -4967,6 +5108,10 @@ you hold it.</p>
 <tr>
 <td><code>song()</code></td>
 <td><code>SongRef</code> - the chart the first fighter plays</td>
+</tr>
+<tr>
+<td><code>modifiers()</code></td>
+<td><a href="#modifiers"><code>Modifiers</code></a> both fighters play with - fixed for the whole fight</td>
 </tr>
 <tr>
 <td><code>rules()</code></td>
@@ -5185,6 +5330,10 @@ you hold it.</p>
 <td><code>verified()</code></td>
 <td>the server resimulated this run itself (the dummy: played it)</td>
 </tr>
+<tr>
+<td><code>modifiers()</code></td>
+<td>the fight's <a href="#modifiers"><code>Modifiers</code></a> and the factor in this score (the dummy's own score: factor 1)</td>
+</tr>
 </tbody>
 </table>
 <h3 id="fightproposal">FightProposal<a class="headerlink" href="#fightproposal" title="Permanent link">&para;</a></h3>
@@ -5318,6 +5467,10 @@ mob's name). See <a href="../boss-opponents/#boss-bar">Boss bar</a>.</p>
 <tr>
 <td><code>score()</code>, <code>accuracyPercent()</code>, <code>rank()</code></td>
 <td></td>
+</tr>
+<tr>
+<td><code>modifiers()</code></td>
+<td>what the run was played with (<a href="#modifiers"><code>Modifiers</code></a>, <code>NO_MOD</code> counted as 1 in the factor)</td>
 </tr>
 </tbody>
 </table>

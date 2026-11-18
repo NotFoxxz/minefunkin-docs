@@ -4113,6 +4113,10 @@
 <h1 id="notei">note[i]<a class="headerlink" href="#notei" title="Permanent link">&para;</a></h1>
 <p>Every note on its way to you, one by one. Make them ride in on a wave, fade as they come closer, spin, grow - the wildest
 modchart effects live here.</p>
+<div class="admonition note">
+<p class="admonition-title">Written in .modchart files</p>
+<p>These properties move the lanes and notes, so only a <code>.modchart</code> file may set them (any file may read them; <code>strums.input</code>, the keys on / off, may be set anywhere). A <code>.event</code> that sets one doesn't load. The No Mod modifier leaves <code>.modchart</code> files out. <a href="../../guides/modcharts/#event-and-modchart-files">Two kinds of file</a>.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">How to use it</p>
 <p>Every frame the game lists the notes of your lanes that are on the screen (or about to be), in the order they
@@ -4294,32 +4298,32 @@ on. -1 = no note in this slot. <a href="../functions/#noteslot"><code>noteSlot(i
 </code></pre></div>
 <h3 id="note-x">note[i].x<a class="headerlink" href="#note-x" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].x</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Moved to the right in pixels, with its hold.</p>
 <h3 id="note-y">note[i].y<a class="headerlink" href="#note-y" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].y</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Moved down in pixels, with its hold.</p>
 <h3 id="note-alpha">note[i].alpha<a class="headerlink" href="#note-alpha" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Its opacity.</p>
 <h3 id="note-angle">note[i].angle<a class="headerlink" href="#note-angle" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].angle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Turned clockwise, in degrees.</p>
 <h3 id="note-scale">note[i].scale<a class="headerlink" href="#note-scale" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].scale</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Its size.</p>
 <h3 id="note-visible">note[i].visible<a class="headerlink" href="#note-visible" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">switch</span> <code>note[i].visible</code> <span class="mf-eq">= <code>true</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>false = not drawn. It can still be hit.</p>
 

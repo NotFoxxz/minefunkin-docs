@@ -3900,7 +3900,7 @@
 
 <h1 id="cookbook">Cookbook<a class="headerlink" href="#cookbook" title="Permanent link">&para;</a></h1>
 <p>Small recipes to steal. Each one is complete and tested: put it in a file under a <code>format 2.0</code> line and an
-<code>event { name = "..." }</code>, and it works. Recipes that need a chart event use <code>onEvent</code>; the others are
+<code>event { name = "..." }</code>, and it works - a <code>.event</code> file, or a <code>.modchart</code> file for the <a href="#lanes">Lanes</a> ones. Recipes that need a chart event use <code>onEvent</code>; the others are
 <a href="../song-scripts/">song scripts</a> that run for the whole song.</p>
 <p>Click one open, copy it, change the numbers until it feels right. That's really all there is to it.</p>
 <h2 id="camera-and-hud">Camera and HUD<a class="headerlink" href="#camera-and-hud" title="Permanent link">&para;</a></h2>
@@ -4190,6 +4190,7 @@
 </code></pre></div>
 </details>
 <h2 id="lanes">Lanes<a class="headerlink" href="#lanes" title="Permanent link">&para;</a></h2>
+<p>These go in a <code>.modchart</code> file (<a href="../modcharts/#event-and-modchart-files">why</a>).</p>
 <details class="example">
 <summary>Lanes light up when they're pressed</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kr">function</span><span class="w"> </span><span class="nf">onFrame</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>

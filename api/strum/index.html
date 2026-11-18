@@ -4157,6 +4157,10 @@
 <h1 id="strumlane">strum[lane]<a class="headerlink" href="#strumlane" title="Permanent link">&para;</a></h1>
 <p>One of your four lanes: its receptor, its notes and its holds. This is where modcharts happen - move a lane, spin it,
 fade it, change where its notes come from.</p>
+<div class="admonition note">
+<p class="admonition-title">Written in .modchart files</p>
+<p>These properties move the lanes and notes, so only a <code>.modchart</code> file may set them (any file may read them; <code>strums.input</code>, the keys on / off, may be set anywhere). A <code>.event</code> that sets one doesn't load. The No Mod modifier leaves <code>.modchart</code> files out. <a href="../../guides/modcharts/#event-and-modchart-files">Two kinds of file</a>.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">How to use it</p>
 <p><code>strum[0]</code> = left, <code>strum[1]</code> = down, <code>strum[2]</code> = up, <code>strum[3]</code> = right - also in loops: <code>for i = 0, 3 do
@@ -4293,45 +4297,52 @@ strum[i].alpha = 0.5 end</code>. Everything adds to the whole strumline's values
 <hr />
 <h3 id="strum-x">strum[lane].x<a class="headerlink" href="#strum-x" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].x</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane moved to the right, in pixels.</p>
 <h3 id="strum-y">strum[lane].y<a class="headerlink" href="#strum-y" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].y</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane moved down, in pixels.</p>
 <h3 id="strum-wobblex">strum[lane].wobbleX<a class="headerlink" href="#strum-wobblex" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].wobbleX</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>A second offset to the right, added on top of <code>x</code> - for a second effect on the same lane.</p>
 <h3 id="strum-wobbley">strum[lane].wobbleY<a class="headerlink" href="#strum-wobbley" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].wobbleY</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>A second offset down, added on top of <code>y</code>.</p>
 <h3 id="strum-alpha">strum[lane].alpha<a class="headerlink" href="#strum-alpha" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's opacity: receptor, notes, holds.</p>
 <h3 id="strum-notealpha">strum[lane].noteAlpha<a class="headerlink" href="#strum-notealpha" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].noteAlpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 <p>Only the lane's notes and holds - the receptor stays (for hide-near / hide-far modcharts).</p>
 <h3 id="strum-color">strum[lane].color<a class="headerlink" href="#strum-color" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">colour</span> <code>strum[lane].color</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>Multiplied onto the lane's receptor, notes and holds (#FFFFFF = their own colours).</p>
 <h3 id="strum-angle">strum[lane].angle<a class="headerlink" href="#strum-angle" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].angle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's rotation in degrees, clockwise: receptor and note heads.</p>
 <h3 id="strum-scale">strum[lane].scale<a class="headerlink" href="#strum-scale" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].scale</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's size: receptor, notes, hold width.</p>
 <h3 id="strum-scroll">strum[lane].scroll<a class="headerlink" href="#strum-scroll" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">choice</span> <code>strum[lane].scroll</code> <span class="mf-eq">= <code>"auto"</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's own direction: <code>"auto"</code> (follows <a href="../strums/#strums-scroll"><code>strums.scroll</code></a>), <code>"up"</code>, <code>"down"</code>.</p>
 <p>One of: <code>"auto"</code>, <code>"up"</code>, <code>"down"</code> (<a href="../choices/#scroll-directions">what they do</a>).</p>
@@ -4359,19 +4370,19 @@ strumline's own offsets. Kade's <code>receptor.defaultX</code>.</p>
 Kade's <code>receptor.defaultY</code>.</p>
 <h3 id="strum-direction">strum[lane].direction<a class="headerlink" href="#strum-direction" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].direction</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's way in, turned clockwise around the receptor, in degrees: 90 = in from the side, 180 = from the other
 end. The notes stay upright.
 Psych's <code>direction</code> 90 is our 0.</p>
 <h3 id="strum-speed">strum[lane].speed<a class="headerlink" href="#strum-speed" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].speed</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 20</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 20</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's own scroll speed on top of the song's: 2 = its notes come twice as fast, 0.5 = half.</p>
 <h3 id="strum-noteangle">strum[lane].noteAngle<a class="headerlink" href="#strum-noteangle" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].noteAngle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The lane's notes turned, in degrees, on top of <code>angle</code> - the receptor stays.</p>
 

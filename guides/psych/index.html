@@ -4119,6 +4119,9 @@ thing is called in a <code>.event</code> file.</p>
 <ul>
 <li><strong>One file per event.</strong> Psych splits a custom event into <code>Name.lua</code> + <code>Name.txt</code>; here it's one <code>.event</code>
   file with an <code>event { }</code> header, a <code>params { }</code> block for the editor's controls, and the code.</li>
+<li><strong>Lanes in their own file.</strong> Whatever moves the lanes and notes (<code>noteTweenX</code>, <code>setPropertyFromGroup('strumLineNotes', ...)</code>,
+  modcharting tools) goes in a <code>.modchart</code> file next to it - same layout, same callbacks
+  (<a href="../modcharts/#event-and-modchart-files">why</a>).</li>
 <li><strong>No <code>setProperty</code> strings.</strong> Everything you can change has its own name (<code>camera.zoom</code>, <code>strum[2].x</code>,
   <code>player.pose</code>). The upside: a typo is an error the moment the file loads, with a "did you mean ...?" - instead of
   silently doing nothing while you wonder why.</li>

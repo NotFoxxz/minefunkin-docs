@@ -4003,6 +4003,10 @@
 <h1 id="strums">strums<a class="headerlink" href="#strums" title="Permanent link">&para;</a></h1>
 <p>Your whole strumline at once: the four lanes, their scroll direction, the scroll speed - and whether your keys play at all
 (handy for cutscenes).</p>
+<div class="admonition note">
+<p class="admonition-title">Written in .modchart files</p>
+<p>These properties move the lanes and notes, so only a <code>.modchart</code> file may set them (any file may read them; <code>strums.input</code>, the keys on / off, may be set anywhere). A <code>.event</code> that sets one doesn't load. The No Mod modifier leaves <code>.modchart</code> files out. <a href="../../guides/modcharts/#event-and-modchart-files">Two kinds of file</a>.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">How to use it</p>
 <p>Always there. <code>strums.*</code> is the whole strumline, <a href="../strum/"><code>strum[lane]</code></a> one lane - both add up: a lane's <code>x</code>
@@ -4093,31 +4097,34 @@ comes on top of <code>strums.x</code>.</p>
 <hr />
 <h3 id="strums-scroll">strums.scroll<a class="headerlink" href="#strums-scroll" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">choice</span> <code>strums.scroll</code> <span class="mf-eq">= <code>"auto"</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>Every lane's direction: <code>"auto"</code> (the player's own setting), <code>"up"</code>, <code>"down"</code>. A lane's own
 <a href="../strum/#strum-scroll"><code>strum[lane].scroll</code></a> wins over it.</p>
 <p>One of: <code>"auto"</code>, <code>"up"</code>, <code>"down"</code> (<a href="../choices/#scroll-directions">what they do</a>).</p>
 <h3 id="strums-x">strums.x<a class="headerlink" href="#strums-x" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strums.x</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The whole strumline moved to the right, in pixels. The strum background follows.</p>
 <h3 id="strums-y">strums.y<a class="headerlink" href="#strums-y" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strums.y</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 <p>The whole strumline moved down, in pixels.</p>
 <h3 id="strums-alpha">strums.alpha<a class="headerlink" href="#strums-alpha" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strums.alpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The whole strumline's opacity: receptors, notes, holds.</p>
 <h3 id="strums-opponentalpha">strums.opponentAlpha<a class="headerlink" href="#strums-opponentalpha" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strums.opponentAlpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 <p>The opponent's receptors beside yours (practice; a fight shows only yours).</p>
 <h3 id="strums-bump">strums.bump<a class="headerlink" href="#strums-bump" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">number</span> <code>strums.bump</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 <p>How much the beat bump zooms the lanes: 1 = like the rest of the HUD, 0 = the lanes stay still while the rest
 bumps (for modcharts that move the lanes themselves).</p>
@@ -4132,7 +4139,7 @@ that come meanwhile are missed as usual, so leave the chart empty there.</p>
 </div>
 <h3 id="scroll-style">scroll.style<a class="headerlink" href="#scroll-style" title="Permanent link">&para;</a></h3>
 <p class="mf-sig"><span class="mf-type">choice</span> <code>scroll.style</code> <span class="mf-eq">= <code>"classic"</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 <p>How a scroll speed change is drawn: <code>"classic"</code> (the speed is eased live, notes on screen speed up with it) or
 <code>"modern"</code> (notes are placed on the planned speed curve - see <a href="../actions/#scrollto">scrollTo</a>).</p>

@@ -3812,7 +3812,9 @@
 
 <h1 id="the-event-showcase">The Event Showcase<a class="headerlink" href="#the-event-showcase" title="Permanent link">&para;</a></h1>
 <p>Want to see what all of this looks like in one go? The Event Showcase is a complete song - two minutes, 140 BPM,
-intro to outro - where every single effect is an event file in the song's folder. 31 of them, plus 2 shaders.</p>
+intro to outro - where every single effect is an event file in the song's folder. 31 of them, plus 2 shaders. What moves
+the lanes is in <code>.modchart</code> files, the rest in <code>.event</code> files; an effect that does both is a pair with one name.
+Play it with the No Mod modifier and every lane effect stays out while the camera, texts and shaders still run.</p>
 <p>Every big feature gets its own moment: texts and pictures, the callbacks, the HUD and the strum background, a whole
 modchart (lanes that jiggle, fly off the screen, scroll across it, turn upside down and ride a ring), the fight
 camera, the fighters (a dance, a death, a giant, swapping places), built-in effects and the song's own shaders. While
@@ -3937,7 +3939,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td><code>onFrame(dt)</code>, <code>noise()</code>, easing a variable by hand, reading <code>shared hype</code></td>
 </tr>
 <tr>
-<td><code>judge_glow.event</code></td>
+<td><code>judge_glow.event</code> + <code>.modchart</code></td>
 <td>from verse 1 on</td>
 <td><code>onHit</code> / <code>onMiss</code>, <code>note.judgment</code> / <code>note.offset</code>, a function that returns a value</td>
 </tr>
@@ -3947,7 +3949,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td><code>onHit</code> / <code>onOpponentHit</code> easing <code>camera.z</code> / <code>.x</code> / <code>.yaw</code> toward whoever sings (fights)</td>
 </tr>
 <tr>
-<td><code>opponent_echo.event</code></td>
+<td><code>opponent_echo.event</code> + <code>.modchart</code></td>
 <td>verse 1</td>
 <td><code>onOpponentHit</code>, lanes turned into directions, a vignette pulse</td>
 </tr>
@@ -3957,12 +3959,12 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td>a song script: no chart event, only <code>onHit</code> / <code>onMiss</code> and <code>player.combo</code></td>
 </tr>
 <tr>
-<td><code>spotlight.event</code></td>
+<td><code>spotlight.event</code> + <code>.modchart</code></td>
 <td>verse 2</td>
 <td><code>onHit</code> and <code>onOpponentHit</code> sharing one function, <code>strum[lane].alpha</code> per lane</td>
 </tr>
 <tr>
-<td><code>jiggle.event</code></td>
+<td><code>jiggle.modchart</code></td>
 <td>verse 2, the drops</td>
 <td>a modchart's kick: <code>wobbleX</code> / <code>wobbleY</code> jolted on a drum pattern from <code>onStep(n)</code></td>
 </tr>
@@ -3972,12 +3974,12 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td><code>onStep</code> patterns that speed up, a 3-2-1 scheduled in a <code>for</code> loop, writing <code>shared hype</code></td>
 </tr>
 <tr>
-<td><code>kade_sway.event</code></td>
+<td><code>kade_sway.modchart</code></td>
 <td>build</td>
 <td><code>.x</code> / <code>.y</code> from <code>sin()</code> every frame; "wild" takes <code>tan()</code>, so the lanes fly off the screen and come back</td>
 </tr>
 <tr>
-<td><code>spin.event</code></td>
+<td><code>spin.modchart</code></td>
 <td>build, the end</td>
 <td><code>.angle</code> from 360 to 0: once or every bar, counted from where the event sits</td>
 </tr>
@@ -3997,7 +3999,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td>the strum background (<code>underlay.color</code> / <code>.alpha</code> / <code>.width</code>) flaring on the beat</td>
 </tr>
 <tr>
-<td><code>hop.event</code></td>
+<td><code>hop.modchart</code></td>
 <td>drops</td>
 <td><code>max(0, sin())</code> as a bouncing ball, <code>isDown</code> to hop toward the middle</td>
 </tr>
@@ -4022,7 +4024,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td><code>opponent.pose = "death"</code>, <code>fx.saturation</code> draining the colour, the camera looking down</td>
 </tr>
 <tr>
-<td><code>drop_out.event</code></td>
+<td><code>drop_out.event</code> + <code>.modchart</code></td>
 <td>fake death</td>
 <td>a sequence of tweens per lane with <code>after()</code>: fall off, come back with <code>"elasticOut"</code></td>
 </tr>
@@ -4032,7 +4034,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td><code>opponent.scale</code> with <code>"elasticOut"</code>, a white flash, the colour back</td>
 </tr>
 <tr>
-<td><code>scroller.event</code></td>
+<td><code>scroller.event</code> + <code>.modchart</code></td>
 <td>breakdown</td>
 <td>the lanes across <code>screen.width</code>, wrapping round with <code>%</code>; an ease written by hand</td>
 </tr>
@@ -4042,7 +4044,7 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td>the fighters jump and swap places: <code>.x</code> / <code>.z</code> in the fight's frame, <code>.turn</code> 180</td>
 </tr>
 <tr>
-<td><code>scroll_twist.event</code></td>
+<td><code>scroll_twist.event</code> + <code>.modchart</code></td>
 <td>rebuild</td>
 <td>text properties (<code>strum[lane].scroll</code>), <code>player.downscroll</code></td>
 </tr>
@@ -4057,17 +4059,17 @@ opponent sings? That's on purpose - nobody has to play through them. And every e
 <td>the song's <code>logo.png</code> on the <code>"lanes"</code> layer: on the strum background, under the notes</td>
 </tr>
 <tr>
-<td><code>upside_down.event</code></td>
+<td><code>upside_down.event</code> + <code>.modchart</code></td>
 <td>final drop</td>
 <td><code>hud.angle</code> 180 with <code>camera.roll</code> -180 so the world stays upright, the lanes mirrored with <code>strums.spacing</code></td>
 </tr>
 <tr>
-<td><code>halo.event</code></td>
+<td><code>halo.modchart</code></td>
 <td>outro</td>
 <td><code>.x</code> / <code>.y</code> / <code>.scale</code> / <code>.alpha</code> from one angle per lane: a ring with depth</td>
 </tr>
 <tr>
-<td><code>finale.event</code></td>
+<td><code>finale.event</code> + <code>.modchart</code></td>
 <td>outro</td>
 <td>live <code>player.score</code> / <code>player.accuracy</code> on the <code>"top"</code> layer, <code>onEnd</code></td>
 </tr>
