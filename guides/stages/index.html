@@ -3999,7 +3999,7 @@ fighters. A sky behind them, animated fire, dust drifting in front of them, a lo
 only exist in a fight. In practice at the Retro TV, the same pictures are drawn under the two puppets - so your stage
 still shows up there, it just doesn't move with a camera.</p>
 <h2 id="start-with-this">Start with this<a class="headerlink" href="#start-with-this" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">-- The song's stage: a background behind the fighters, fog in front of them.</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>
@@ -4116,7 +4116,7 @@ plays both kinds you'll run into.</p>
 <p>This is what Psych uses: a <code>.png</code> plus a Sparrow <code>.xml</code> of the same name. The frames are packed wherever they fit,
 trimmed, and sometimes turned on their side - you don't have to care about any of that. Put both files in the song's
 folder and name the animation you want:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Dancing Crowd"</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4181,7 +4181,7 @@ nicer smoothed, though: <code>image[n].smooth = true</code> (that's Psych's <cod
 <h2 id="plain-boxes">Plain boxes<a class="headerlink" href="#plain-boxes" title="Permanent link">&para;</a></h2>
 <p>Sometimes you don't need a picture at all, just a coloured box. <code>"solid"</code> is a white box you colour yourself - for
 bars, a curtain, a coloured sky, a floor:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Red Curtain"</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4269,7 +4269,7 @@ sprites. Good news: the Lua part translates almost line by line.</p>
 to - the fighters stand where the Speaker puts them. If you want them somewhere else, or looking like someone else,
 <a href="../fighters/">the fighters</a> page shows you how to move, pin and re-skin them.</p>
 <h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h2>
-<p>You have room for a lot - 64 pictures at once (<code>image[0]</code> ... <code>image[63]</code>) and up to 128 different picture files loaded at a time: <code>.png</code>, at most
+<p>You have room for a lot - 64 pictures at once (<code>image[0]</code> ... <code>image[63]</code>) and up to 512 different picture files loaded at a time: <code>.png</code>, at most
 8192 pixels a side and 16 MB as a file, 512 MB of video memory together. A picture that hasn't been shown for a few seconds makes
 room for new ones and loads again when it's needed - so a song can use more than that over its length; <code>preload</code> the next big ones a
 few seconds early. A video folder: up to 20,000 <code>.jpg</code> /

@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#song-files-format-11" class="md-skip">
+        <a href="#song-files-format-20" class="md-skip">
           Skip to content
         </a>
       
@@ -3796,15 +3796,16 @@
   
 
 
-<h1 id="song-files-format-11">Song files (format 1.1)<a class="headerlink" href="#song-files-format-11" title="Permanent link">&para;</a></h1>
+<h1 id="song-files-format-20">Song files (format 2.0)<a class="headerlink" href="#song-files-format-20" title="Permanent link">&para;</a></h1>
 <p>You'll rarely need to open these - the chart editor writes them for you. But when you do, they're friendly: both
 are plain JSON, kept small on purpose, with one note or event per line. Spotted a wrong note? Fix it in any text
 editor, no tools needed.</p>
-<p>MineFunkin only plays format 1.1. Format 1 was used by MineFunkin's development builds before the first release - a
-song from back then needs one click to convert (see <a href="#format-1-older-songs">below</a>).</p>
+<p>MineFunkin writes format 2.0 and plays 2.0 and 1.1 alike - versions before 2.0 were prototypes, 2.0 is the real
+start. Format 1 was used by MineFunkin's development builds before the first release - a song from back then needs
+one click to convert (see <a href="#format-1-older-songs">below</a>).</p>
 <h2 id="the-song-file-mfknsong">The song file (<code>.mfknsong</code>)<a class="headerlink" href="#the-song-file-mfknsong" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1"</span><span class="p">,</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bopeebo"</span><span class="p">,</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">"artist"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kawai Sprite"</span><span class="p">,</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">"charter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NotFoxxz"</span><span class="p">,</span>
@@ -3833,7 +3834,7 @@ song from back then needs one click to convert (see <a href="#format-1-older-son
 <tr>
 <td><code>format</code></td>
 <td>required</td>
-<td><code>"1.1"</code></td>
+<td><code>"2.0"</code></td>
 </tr>
 <tr>
 <td><code>title</code></td>
@@ -3954,7 +3955,7 @@ a <code>start</code>:</p>
 starts its scores over.</p>
 <h2 id="the-chart-file-mfkn">The chart file (<code>.mfkn</code>)<a class="headerlink" href="#the-chart-file-mfkn" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1"</span><span class="p">,</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"bpm"</span><span class="p">:</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">"player"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">[</span><span class="mf">3428.6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">797</span><span class="p">],</span>
@@ -3982,7 +3983,7 @@ starts its scores over.</p>
 <tbody>
 <tr>
 <td><code>format</code></td>
-<td><code>"1.1"</code></td>
+<td><code>"2.0"</code></td>
 </tr>
 <tr>
 <td><code>bpm</code></td>

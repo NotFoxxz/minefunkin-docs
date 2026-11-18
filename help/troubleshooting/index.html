@@ -3898,7 +3898,9 @@ in the first four:</p>
 <li><strong>Is it a window thing?</strong> <a href="../../guides/windows/">Pop-outs and the game window</a> do nothing when the player
    switched off <em>Let songs use windows</em> in the options, pop-outs can't open on Linux with Wayland, and
    <code>window.transparent</code> works on Windows only.</li>
-<li><strong>Is it switched off?</strong> Players can switch off built-in events under Options › MineFunkin › Song effects.</li>
+<li><strong>Is it turned down?</strong> Every event runs, but <strong>Fewer flashes</strong> and <strong>Less motion</strong> (Options › MineFunkin ›
+   Accessibility) make flashes, shakes and bumps calmer, and <strong>Minecraft effects</strong> (Options › MineFunkin › Song effects)
+   switches off what songs do to the world around a fight.</li>
 <li><strong>Did it fail while running?</strong> A script that runs into an error is switched off for the rest of the
    run. The log says where.</li>
 <li><strong>Does another script overwrite it?</strong> Two scripts setting the same property every frame: only the
@@ -4010,11 +4012,11 @@ ones:</p>
 <td></td>
 </tr>
 <tr>
-<td><code>written for event format 1.0 - MineFunkin only runs 1.1 now; Song Select's update button converts it</code></td>
+<td><code>written for event format 1.0 - MineFunkin only runs 2.0 now; Song Select's update button converts it</code></td>
 <td>An old file. Press <strong>Update old songs</strong> in Song Select - it converts the whole song, the originals go into its <code>backup/</code> folder (<a href="../limits/#old-songs-and-the-update-button">more</a>).</td>
 </tr>
 <tr>
-<td><code>written for event format 2.0, this MineFunkin runs 1.1 - a newer MineFunkin is needed</code></td>
+<td><code>written for event format 2.1, this MineFunkin runs 2.0 and 1.1 - a newer MineFunkin is needed</code></td>
 <td>The file is for a newer MineFunkin.</td>
 </tr>
 </tbody>
@@ -4067,12 +4069,12 @@ and land in the log with their line:</p>
 <td>e.g. <code>text[0].layer = "middle"</code>.</td>
 </tr>
 <tr>
-<td><code>too much work in one go (more than 50000 steps)</code></td>
-<td>More than 50,000 statements in one call - usually a loop that's far too big.</td>
+<td><code>too much work in one go (more than 500000 steps)</code></td>
+<td>More than 500,000 statements in one call - usually a loop that's far too big.</td>
 </tr>
 <tr>
-<td><code>this loop runs more than 10000 times</code></td>
-<td>A <code>for</code> loop with more than 10,000 rounds.</td>
+<td><code>this loop runs more than 100000 times</code></td>
+<td>A <code>for</code> loop with more than 100,000 rounds.</td>
 </tr>
 <tr>
 <td><code>functions call each other more than 64 deep</code></td>

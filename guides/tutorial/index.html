@@ -3877,8 +3877,8 @@ in a real chart, and on the way you'll meet almost everything the bigger ones ar
 <h2 id="1-the-file">1. The file<a class="headerlink" href="#1-the-file" title="Permanent link">&para;</a></h2>
 <p>Make a new text file called <code>beat_flash.event</code> and put it in the song's folder (next to its <code>.mfkn</code> chart), or in an
 <code>events/</code> folder inside it. Every event file starts the same way: a line saying which version of the language it's
-written in (always <code>format 1.1</code>), and an <code>event { }</code> block with its name.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+written in (always <code>format 2.0</code>), and an <code>event { }</code> block with its name.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Beat Flash"</span><span class="p">,</span>
@@ -3894,7 +3894,7 @@ the inspector. If you made a typo, that's also where you'll see it - with the li
 </div>
 <h2 id="2-make-it-do-something">2. Make it do something<a class="headerlink" href="#2-make-it-do-something" title="Permanent link">&para;</a></h2>
 <p>When the song reaches your event in the chart, the game calls <code>onEvent</code>. That's where your code goes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Beat Flash"</span><span class="p">,</span>
@@ -3996,7 +3996,7 @@ of tweening it.</p>
 event as it fires and every script error. <a href="../../help/troubleshooting/">Errors and fixes</a> helps you read it.</p>
 <h2 id="the-whole-file">The whole file<a class="headerlink" href="#the-whole-file" title="Permanent link">&para;</a></h2>
 <p>Here's everything together, plus three header lines that make it look nice in the editor:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">-- Flashes the screen on every beat until it's switched off again.</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>

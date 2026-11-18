@@ -3884,7 +3884,7 @@ players without MineFunkin.</p>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"minefunkin-client"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"com.example.mymod.client.MyMineFunkinClientAddon"</span><span class="w"> </span><span class="p">]</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="p">},</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">"minefunkin:api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">"minefunkin:api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">"minefunkin:permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"fights.start"</span><span class="p">,</span><span class="w"> </span><span class="s2">"fights.control"</span><span class="p">]</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">},</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">"suggests"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"minefunkin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w"> </span><span class="p">}</span>
@@ -3904,7 +3904,7 @@ with a no-argument constructor):</p>
 </code></pre></div>
 <p>and name the API version in your <code>neoforge.mods.toml</code>, with MineFunkin as an optional dependency:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[modproperties.mymod]</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s2">"minefunkin:api"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3.0"</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s2">"minefunkin:api"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2.0"</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s2">"minefunkin:permissions"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"fights.start"</span><span class="p">,</span><span class="w"> </span><span class="s2">"fights.control"</span><span class="p">]</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">[[dependencies.mymod]]</span>
@@ -3922,16 +3922,15 @@ loads one once it knows the class implements the interface for the running side 
 </div>
 </div>
 </div>
-<p><code>"minefunkin:api": "3.0"</code> is the API version you wrote against. MineFunkin serves it if the first number
-matches and the second isn't higher than its own (<code>3.0</code> gets 3.0; a mod written for 2.x isn't served -
-fights changed, see <a href="../versions/">Versions</a>). A mod asking for a
+<p><code>"minefunkin:api": "2.0"</code> is the API version you wrote against. MineFunkin serves it if the first number
+matches and the second isn't higher than its own (<code>2.0</code> gets 2.0, see <a href="../versions/">Versions</a>). A mod asking for a
 version MineFunkin doesn't serve gets no handle, and the log says why.</p>
 <p><code>"minefunkin:permissions"</code> lists the <a href="../rights/">rights</a> your mod wants - only for changing things (starting and
 controlling fights, leaderboards, moving players). A mod that only listens and reads leaves it out.</p>
 <h2 id="4-see-it-work">4. See it work<a class="headerlink" href="#4-see-it-work" title="Permanent link">&para;</a></h2>
 <p>Start the game and look in <code>logs/latest.log</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (client): online for [mymod]
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (server): online for [mymod]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[Render thread/INFO] (MineFunkin/API) MineFunkin API 2.0 (client): online for [mymod]
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>[Render thread/INFO] (MineFunkin/API) MineFunkin API 2.0 (server): online for [mymod]
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>[Render thread/INFO] (MineFunkin/API) MineFunkin API: mymod (My Mod) declares [fights.start, fights.control]
 </code></pre></div>
 <p>One line per side; a mod with only a server-side class gets <code>online</code> on the <code>(server)</code> line only. A
@@ -3993,7 +3992,7 @@ shows up in the log.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Addon API 3.0">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Addon API 2.0">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4003,7 +4002,7 @@ shows up in the log.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Addon API 3.0
+                Addon API 2.0
               </div>
             </div>
           </a>

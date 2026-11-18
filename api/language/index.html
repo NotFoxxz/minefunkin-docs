@@ -3822,7 +3822,7 @@
 <code>if ... then ... end</code>) - but it's MineFunkin's own language: smaller, with a few handy extras (<code>c ? a : b</code>, <code>??</code>,
 <code>#RRGGBB</code> colours), and without the parts a chart never needs. Here's all of it on one page.</p>
 <h2 id="the-file">The file<a class="headerlink" href="#the-file" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">-- What the event does, in a comment.</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>
@@ -3844,7 +3844,7 @@
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="kr">end</span>
 </code></pre></div>
 <ul>
-<li>The first line that isn't blank or a comment is the <strong>format line</strong>: <code>format 1.1</code>, the only version
+<li>The first line that isn't blank or a comment is the <strong>format line</strong>: <code>format 2.0</code>, the only version
   MineFunkin runs (<code>format 1.0</code> files from the development builds before the first release are converted with one click</li>
 <li>see <a href="../../help/limits/#versions">versions</a>).</li>
 <li>The top of a file holds only these: <code>event { }</code> (required), <code>params { }</code>, variables, and functions.
@@ -3854,7 +3854,7 @@
 <li>Text goes in double or single quotes. Inside the quotes, <code>\n</code> is a new line, <code>\t</code> a tab, and <code>\"</code>
   or <code>\'</code> a quote.</li>
 <li>Colours are written <code>#RRGGBB</code>, or <code>#AARRGGBB</code> with alpha.</li>
-<li>One file defines one event and may be at most 64 KB.</li>
+<li>One file defines one event and may be at most 1 MB.</li>
 </ul>
 <h2 id="the-event-header">The event header<a class="headerlink" href="#the-event-header" title="Permanent link">&para;</a></h2>
 <p><code>event { }</code> names the event and says how the editor shows it. Every key but <code>name</code> can be left out.</p>

@@ -3636,39 +3636,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#changes-from-20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 2.0
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changes-from-11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 1.1
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changes-from-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 1.0
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#loaders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3752,39 +3719,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#changes-from-20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 2.0
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changes-from-11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 1.1
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changes-from-10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes from 1.0
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#loaders" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3817,16 +3751,20 @@
 
 <h1 id="versions-and-loaders">Versions and loaders<a class="headerlink" href="#versions-and-loaders" title="Permanent link">&para;</a></h1>
 <h2 id="how-versions-work">How versions work<a class="headerlink" href="#how-versions-work" title="Permanent link">&para;</a></h2>
-<p>The API has a version of two numbers, <code>major.minor</code> - now <strong>3.0</strong>. A new minor version only adds things,
-so an addon written for 3.0 works with a later 3.x. A new major version may change or remove things.</p>
-<p>Your mod names the version it was written against (<code>"minefunkin:api": "3.0"</code>, see
+<p>The API has a version of two numbers, <code>major.minor</code> - now <strong>2.0</strong>. A new minor version only adds things,
+so an addon written for 2.0 works with a later 2.x. A new major version may change or remove things.</p>
+<div class="admonition note">
+<p class="admonition-title">2.0 is the beginning</p>
+<p>Versions before 2.0 were prototypes - 2.0 is the true beginning of the Addon API.</p>
+</div>
+<p>Your mod names the version it was written against (<code>"minefunkin:api": "2.0"</code>, see
 <a href="../setup/#3-ask-for-the-api">Set up your mod</a>). MineFunkin serves it when the major number matches and
 the minor isn't higher than its own. Otherwise your mod gets no handle, and the log says why.</p>
 <h2 id="detecting-the-version">Detecting the version<a class="headerlink" href="#detecting-the-version" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p><strong>Before loading any MineFunkin class:</strong> MineFunkin's own mod metadata carries the same key. It holds
-  the string <code>"3.0"</code> (<code>"2.0"</code> and <code>"1.1"</code> before; it's missing before 1.1).</p>
+  the string <code>"2.0"</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Fabric</label><label for="__tabbed_1_2">NeoForge</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -3843,52 +3781,13 @@ the minor isn't higher than its own. Otherwise your mod gets no handle, and the 
 </div>
 </li>
 <li>
-<p><strong>With the handle:</strong> <code>api.version()</code> returns <code>"3.0"</code> at runtime. Prefer it over the constant
+<p><strong>With the handle:</strong> <code>api.version()</code> returns <code>"2.0"</code> at runtime. Prefer it over the constant
   <code>MineFunkinApi.VERSION</code>, which the Java compiler copies into your class (it would still say what you
   compiled against).</p>
 </li>
-<li><strong>The log</strong> states it on every start: <code>MineFunkin API 3.0 (server): offline - no mod asked for it</code>, or
+<li><strong>The log</strong> states it on every start: <code>MineFunkin API 2.0 (server): offline - no mod asked for it</code>, or
   <code>online for [yourmod]</code> with the mods that asked.</li>
 </ul>
-<h2 id="changes-from-20">Changes from 2.0<a class="headerlink" href="#changes-from-20" title="Permanent link">&para;</a></h2>
-<p>3.0 lets addons <strong>start and control fights</strong> (<a href="../starting-fights/">Starting fights</a>,
-<a href="../controlling-fights/">Controlling fights</a>) with <a href="../rights/">rights</a> - also against a mob as the boss, with its own
-animations (<a href="../boss-opponents/">Boss opponents</a>). On the way, a few things changed - to move to
-3.0:</p>
-<ul>
-<li>ask for <code>"minefunkin:api": "3.0"</code> (and list the rights you need in <code>"minefunkin:permissions"</code>);</li>
-<li><code>api.fights().cancel(id)</code> is gone: an addon stops only its own fights (<code>fight.stop(...)</code>); calling any fight off is
-  for the server's admin (<code>/minefunkin fights cancel &lt;id&gt;</code>);</li>
-<li><code>FightInfo</code> is now <a href="../types/#fight"><code>Fight</code></a> (a live object), <code>FightEnd</code> is now <a href="../types/#fightresult"><code>FightResult</code></a>
-  (reasons: <code>COMPLETED</code> -&gt; <code>SONG_END</code>, <code>DISCONNECT</code> -&gt; <code>PLAYER_OFFLINE</code>, <code>CANCELLED</code> -&gt; the precise one);
-  <code>challenger()</code> / <code>challenged()</code> are <code>first()</code> / <code>second()</code>;</li>
-<li><code>allowFight</code> gets one <a href="../types/#fightproposal"><code>FightProposal</code></a> (also for addons' fights - then <code>second()</code> is
-  <code>null</code> against the dummy); <code>onFightStarted</code> gets the <code>Fight</code>; <code>onFightEnded</code> gets the <code>FightResult</code>;</li>
-<li>the API names none of MineFunkin's internal types any more: <code>Rank</code> is <a href="../types/#runrank"><code>RunRank</code></a>, <code>Judgment</code> is
-  <a href="../types/#rating"><code>Rating</code></a> (same values); <code>HitStats.of(...)</code> and <code>ChartInfo.of(...)</code> are gone;</li>
-<li><code>onFightStarted</code> / <code>onFightEnded</code> also come for every fight an addon starts.</li>
-</ul>
-<h2 id="changes-from-11">Changes from 1.1<a class="headerlink" href="#changes-from-11" title="Permanent link">&para;</a></h2>
-<p>The ranks are the full-combo ranks now (MineFunkin ALPHA-0.1.0f): <code>Rank</code> (now <a href="../types/#runrank"><code>RunRank</code></a>) has <code>SFC</code>,
-<code>GFC</code>, <code>FC</code>, <code>SDCB</code>, <code>CLEAR</code> and <code>FAILED</code> instead of <code>PERFECT_GOLD</code>, <code>PERFECT</code>, <code>EXCELLENT</code>, <code>GREAT</code>, <code>GOOD</code>
-and <code>SHIT</code>. A rank comes from the misses and judgments now, not from the accuracy. To move to 2.0:</p>
-<ul>
-<li>ask for <code>"minefunkin:api": "2.0"</code>;</li>
-<li>compare with the new values (<code>result.rank() == Rank.SFC</code> where you had <code>Rank.PERFECT_GOLD</code>);</li>
-<li>expect <code>null</code> for a best saved before (<code>LeaderboardEntry.rank()</code>, <code>LocalBest.rank()</code>, <code>api.players().bestRank</code>):
-  only a run with every note a "Sick!" became an <code>SFC</code>, the old ranks didn't keep the misses.</li>
-</ul>
-<h2 id="changes-from-10">Changes from 1.0<a class="headerlink" href="#changes-from-10" title="Permanent link">&para;</a></h2>
-<p>1.0 was the static <code>MineFunkinEvents</code> (<code>SONG_COMPLETED</code> / <code>SONG_RANK_ACHIEVED</code> with <code>SongCompletion</code>).
-It is gone: anyone could register on it without asking, which kept the API always on. To move to 1.1 (and then 2.0):</p>
-<ul>
-<li>declare the <code>minefunkin</code> entrypoint (Fabric) or <code>@MineFunkinPlugin</code> (NeoForge);</li>
-<li>register through <code>api.events().onSongCompleted</code> and <code>onRankImproved</code>;</li>
-<li>read <code>SongResult</code>, which carries everything <code>SongCompletion</code> had, plus <code>mode</code>, <code>validation</code>, <code>hits</code>,
-  <code>chart</code> and <code>opponent</code>.</li>
-</ul>
-<p>One behaviour change: a fight that ended early (giving up, a disconnect) no longer reports a completed
-song.</p>
 <h2 id="loaders">Loaders<a class="headerlink" href="#loaders" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

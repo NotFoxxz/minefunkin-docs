@@ -3797,9 +3797,9 @@
 freeze your game - by accident or on purpose. The limits are generous; a normal song never gets near them. If yours
 does, the <a href="#the-event-log">event log</a> tells you which one.</p>
 <ul>
-<li>One call into the scripts (an event, a frame, a hit) may run at most 50,000 statements.</li>
-<li>A <code>for</code> loop may run at most 10,000 rounds. Functions may call each other at most 64 deep.</li>
-<li>At most 512 <code>after</code>s and <code>every</code>s may wait at once. An <code>every</code> runs at most once a frame.</li>
+<li>One call into the scripts (an event, a frame, a hit) may run at most 500,000 statements.</li>
+<li>A <code>for</code> loop may run at most 100,000 rounds. Functions may call each other at most 64 deep.</li>
+<li>At most 8,192 <code>after</code>s and <code>every</code>s may wait at once. An <code>every</code> runs at most once a frame.</li>
 <li><code>trigger</code>: events may trigger each other at most 8 deep.</li>
 <li>A script that fails while running is switched off for the rest of the run, and the failure is
   logged with its line. Examples: a lane that doesn't exist, text where a number is needed, a choice
@@ -3813,7 +3813,7 @@ does, the <a href="#the-event-log">event log</a> tells you which one.</p>
   <code>replace</code> - switches that script off (it isn't cut short).</li>
 <li>Top-level <code>local</code>s get their starting values when the song starts, so they can read the game (<code>local w =
   screen.width</code>). One that fails there switches its script off.</li>
-<li>Pictures: <code>.png</code>, at most 8192 pixels a side and 16 MB as a file, at most 128 different pictures and 512 MB
+<li>Pictures: <code>.png</code>, at most 8192 pixels a side and 16 MB as a file, at most 512 different pictures and 512 MB
   of video memory per song. They are freed when the song closes. A sprite's <code>.xml</code>: at most 2 MB and 4096 frames.
   A video folder: at most 20,000 frames (<code>.jpg</code> / <code>.png</code>), 2048 pixels a side, 8 MB a frame.</li>
 <li>Shaders: <code>.fsh</code> or <code>.frag</code>, at most 32 KB a file, at most four at once. Which run is the player's choice (the
@@ -3821,7 +3821,7 @@ does, the <a href="#the-event-log">event log</a> tells you which one.</p>
 <li>Skins (<code>setSkin</code>, <code>player.skin</code>): 64x64 <code>.png</code>, at most 1 MB each and 8 per song.</li>
 <li>Windows: at most eight pop-outs, each at most 4096 pixels a side. The game window keeps 64 pixels on
   its monitor, at least 0.2 opacity, one full-screen flip a second. All of it only while the song plays,
-  and only if the player allows it (Options › MineFunkin › Window &amp; desktop › "Let songs use windows").</li>
+  and only if the player allows it (Options › MineFunkin › Song effects › "Let songs use windows").</li>
 <li>Sounds: <code>.ogg</code>, at most 5 minutes each (longer ones aren't played - the log says so), at most 32 of a song's own
   sounds playing at once (one more is left out, said once). Each is decoded once per song and let go when it closes.</li>
 <li><a href="../../guides/modifiers/">Modifiers</a>: at most 200,000 planned changes per song (one per field each <code>ease</code> / <code>set</code> /
@@ -3845,8 +3845,8 @@ every time the game starts; the one before is kept as <code>minefunkin-events.pr
 </ul>
 <p>Warnings and errors also go to <code>latest.log</code>. Past 8 MB the file only takes warnings and errors.</p>
 <h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h2>
-<p>The first line of every file says which version of the language it's written in. MineFunkin runs <strong>only
-<code>format 1.1</code></strong> - one version, so you never have to wonder which features you can use:</p>
+<p>The first line of every file says which version of the language it's written in. Write every file as
+<strong><code>format 2.0</code></strong>:</p>
 <table>
 <thead>
 <tr>
@@ -3856,22 +3856,26 @@ every time the game starts; the one before is kept as <code>minefunkin-events.pr
 </thead>
 <tbody>
 <tr>
+<td><code>format 2.0</code></td>
+<td>The one to write - every file starts with it.</td>
+</tr>
+<tr>
 <td><code>format 1.1</code></td>
-<td>The one that runs - write every file like this.</td>
+<td>Runs exactly like 2.0, nothing to change.</td>
 </tr>
 <tr>
 <td><code>format 1.0</code></td>
-<td>The version of MineFunkin's development builds before the first release. It doesn't run anymore: Song Select's update button turns a song's 1.0 files into 1.1 in one go - see <a href="#old-songs-and-the-update-button">old songs</a>.</td>
+<td>MineFunkin's development builds before the first release. It doesn't run anymore: Song Select's update button turns a song's 1.0 files into 2.0 in one go - see <a href="#old-songs-and-the-update-button">old songs</a>.</td>
 </tr>
 <tr>
 <td>anything else</td>
-<td>A version newer than this MineFunkin. Not run; it's listed as a problem: "written for event format 1.2, this MineFunkin runs 1.1 - a newer MineFunkin is needed".</td>
+<td>A version newer than this MineFunkin. Not run; it's listed as a problem: "written for event format 2.1, this MineFunkin runs 2.0 and 1.1 - a newer MineFunkin is needed".</td>
 </tr>
 </tbody>
 </table>
-<p>That's why the first release already starts at 1.1: version 1.0 was only used while MineFunkin was still in
-development. You'll only meet it in songs made with those early builds.</p>
-<p>Some names came to 1.1 after its first files were written: <code>note</code>, <code>notes</code>, <code>every</code>, <code>cancel</code>, <code>stopTween</code>,
+<p>Versions before 2.0 were prototypes - 2.0 is the real start. The same goes for song files and the
+<a href="../../addon-api/versions/">Addon API</a>.</p>
+<p>Some names came to the language after its first files were written: <code>note</code>, <code>notes</code>, <code>every</code>, <code>cancel</code>, <code>stopTween</code>,
 <code>loopSound</code>, <code>trigger</code>, <code>call</code>, <code>callIn</code>, <code>preload</code>, <code>setHealth</code>, <code>addHealth</code>, <code>stopSound</code>, <code>soundVolume</code>, <code>randomInt</code>,
 <code>sub</code>, <code>find</code>, <code>replace</code>, <code>trim</code>, <code>startsWith</code>, <code>endsWith</code>, <code>noteSlot</code>, <code>boyfriend</code>, <code>dad</code>, <code>bind</code>, <code>unbind</code>,
 <code>inspect</code>, <code>atPlace</code>. They stay yours if a file already uses them for its own
@@ -3880,19 +3884,19 @@ function of the file's own (<code>local function preload(...)</code>) is called 
 <h3 id="old-songs-and-the-update-button">Old songs and the update button<a class="headerlink" href="#old-songs-and-the-update-button" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">Just so you know</p>
-<p>You most likely won't need this. Every released MineFunkin uses format 1.1, and only songs made with the
+<p>You most likely won't need this. Every released MineFunkin uses format 2.0, and only songs made with the
 development builds before the first release are in an older format. This section is here so you know how it
-works if a later MineFunkin ever moves on from 1.1 - old songs will then be updated the same way.</p>
+works if a later MineFunkin ever moves on from 2.0 - old songs will then be updated the same way.</p>
 </div>
 <p>A song with any file in an old format - an event file in <code>format 1.0</code>, or a chart or song file in the old song
 format 1 - shows up in Song Select with a yellow ⚠, and can't be played yet. Don't worry, fixing it is one click:
 select it and press <strong>Update all old songs</strong> (or ⋯ › Update old songs), and every such song is converted at once:</p>
 <ul>
-<li>Charts and song files are written in format 1.1. The notes, events, BPM changes and audio links stay exactly
+<li>Charts and song files are written in format 2.0. The notes, events, BPM changes and audio links stay exactly
   as they were.</li>
-<li>Event files get <code>format 1.1</code> as their first line, and nothing else changes - with one exception: a name the
-  file used for its own things that 1.1 uses itself (a variable called <code>volume</code>, a function called <code>zoom</code>, a
-  helper called <code>onPause</code>, which 1.1 would start calling by itself) is renamed to <code>myVolume</code>, <code>myZoom</code>,
+<li>Event files get <code>format 2.0</code> as their first line, and nothing else changes - with one exception: a name the
+  file used for its own things that 2.0 uses itself (a variable called <code>volume</code>, a function called <code>zoom</code>, a
+  helper called <code>onPause</code>, which 2.0 would start calling by itself) is renamed to <code>myVolume</code>, <code>myZoom</code>,
   <code>myOnPause</code>, and a comment under the format line lists what was renamed.</li>
 <li>Every original is copied into the song's <code>backup/</code> folder first, just in case.</li>
 </ul>

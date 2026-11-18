@@ -3874,7 +3874,7 @@ that just listens to the whole song.</p>
 <p>If you know Psych Engine, those are its song scripts. MineFunkin doesn't need a separate kind of file for them, because
 of one simple rule: <strong>every callback of every loaded event runs for the whole song</strong> - whether the chart ever places
 that event or not. So a file with only <code>onBeat</code>, <code>onHit</code> or <code>onFrame</code> and no <code>onEvent</code> <em>is</em> a song script.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1">-- A song script: the camera pops on every hit, harder on a "sick".</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span>
@@ -3988,7 +3988,7 @@ the starting value, and like everything else it goes back to that when the song 
 <h2 id="starting-another-event-trigger-and-call">Starting another event: <code>trigger</code> and <code>call</code><a class="headerlink" href="#starting-another-event-trigger-and-call" title="Permanent link">&para;</a></h2>
 <p>Sometimes one event should set off another. A script can fire an event as if the chart had placed it right there, or
 run a function another file defines:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">1.1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">format</span><span class="w"> </span><span class="mf">2.0</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">event</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Drop Combo"</span><span class="w"> </span><span class="p">}</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
@@ -4044,8 +4044,8 @@ where they'd be.</p>
   <a href="../../api/callbacks/#onresume">onResume</a> run then. Tweens follow the song's time, so they wait too.</li>
 <li>A song script that crashes while running is switched off for the rest of that run. What went wrong is in the
   <a href="../../help/troubleshooting/">event log</a>.</li>
-<li>Players can switch off <em>built-in</em> events in their options (Options › MineFunkin › Song effects) - but never your
-  song's own files.</li>
+<li>Every event runs - players can't switch single events off. Players with <strong>Fewer flashes</strong> or <strong>Less motion</strong>
+  (Options › MineFunkin › Accessibility) see flashes, shakes and bumps calmer.</li>
 <li>An empty song script to start from is in <a href="../templates/#song-script">Templates</a>.</li>
 </ul>
 
