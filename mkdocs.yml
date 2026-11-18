@@ -90,54 +90,55 @@ nav:
       - Examples:
           - Cookbook: guides/cookbook.md
           - The Event Showcase: guides/showcase.md
+      - Event API:
+          - api/index.md
+          - Basics:
+              - Frequently used: api/frequently-used.md
+              - Files and code: api/language.md
+              - Parameters: api/parameters.md
+              - Choices: api/choices.md
+          - Calls:
+              - Callbacks: api/callbacks.md
+              - Actions and timers: api/actions.md
+              - Shortcuts: api/shortcuts.md
+              - Functions and values: api/functions.md
+          - Properties:
+              - How properties work: api/properties.md
+              - camera: api/camera.md
+              - hud: api/hud.md
+              - judgments: api/judgments.md
+              - screen, flash, vignette: api/screen.md
+              - stage: api/stage.md
+              - mob[n]: api/mob.md
+              - build[n]: api/build.md
+              - strums: api/strums.md
+              - strum[lane]: api/strum.md
+              - underlay: api/underlay.md
+              - note[i]: api/notes.md
+              - text[n], title: api/text.md
+              - image[n]: api/image.md
+              - character[n]: api/character.md
+              - Fighters: api/fighters.md
+              - Body parts: api/parts.md
+              - fx: api/fx.md
+              - shader[n]: api/shader.md
+              - volume: api/volume.md
+              - window: api/window.md
+              - popout[n]: api/popout.md
+              - monitor: api/monitor.md
+              - song: api/song.md
+              - player (your run): api/player.md
+          - Modifiers: api/modifiers.md
       - Help:
           - FAQ: help/faq.md
           - Errors and fixes: help/troubleshooting.md
           - Built-in events: help/builtins.md
           - Limits, log, versions: help/limits.md
-  - Event API:
-      - api/index.md
-      - Basics:
-          - Frequently used: api/frequently-used.md
-          - Files and code: api/language.md
-          - Parameters: api/parameters.md
-          - Choices: api/choices.md
-      - Calls:
-          - Callbacks: api/callbacks.md
-          - Actions and timers: api/actions.md
-          - Shortcuts: api/shortcuts.md
-          - Functions and values: api/functions.md
-      - Properties:
-          - How properties work: api/properties.md
-          - camera: api/camera.md
-          - hud: api/hud.md
-          - judgments: api/judgments.md
-          - screen, flash, vignette: api/screen.md
-          - stage: api/stage.md
-          - mob[n]: api/mob.md
-          - build[n]: api/build.md
-          - strums: api/strums.md
-          - strum[lane]: api/strum.md
-          - underlay: api/underlay.md
-          - note[i]: api/notes.md
-          - text[n], title: api/text.md
-          - image[n]: api/image.md
-          - character[n]: api/character.md
-          - Fighters: api/fighters.md
-          - Body parts: api/parts.md
-          - fx: api/fx.md
-          - shader[n]: api/shader.md
-          - volume: api/volume.md
-          - window: api/window.md
-          - popout[n]: api/popout.md
-          - monitor: api/monitor.md
-          - song: api/song.md
-          - player (your run): api/player.md
-      - Modifiers: api/modifiers.md
   - Songs:
       - songs/index.md
       - Song files: songs/files.md
-  - Figura avatars: figura.md
+  - Figura avatars:
+      - figura/index.md
   - Addon API:
       - addon-api/index.md
       - Getting started:

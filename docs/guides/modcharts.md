@@ -128,7 +128,7 @@ function onFrame(dt)
 end
 ```
 
-![Sway](../assets/shots/od-sway.jpg)
+![Sway](../assets/shots/od-sway.webp)
 
 ### Flip sides: left becomes right
 
@@ -143,7 +143,7 @@ end
 Lane 0 moves three lanes to the right, lane 3 three to the left, and the middle two swap. Your keys stay the same -
 so the left arrow is suddenly on the right. Mean, but fun. Tween them back to 0 to undo it.
 
-![Mirror Lanes](../assets/shots/od-mirror.jpg)
+![Mirror Lanes](../assets/shots/od-mirror.webp)
 
 ### Split scroll: two up, two down
 
@@ -221,7 +221,7 @@ function onFrame(dt)
 end
 ```
 
-![Lane Orbit](../assets/shots/od-lane-orbit.jpg)
+![Lane Orbit](../assets/shots/od-lane-orbit.webp)
 
 ### Spread apart on every eighth (Accordion)
 
@@ -235,7 +235,7 @@ function onStep(n)
 end
 ```
 
-![Accordion](../assets/shots/od-accordion.jpg)
+![Accordion](../assets/shots/od-accordion.webp)
 
 ### Ghost lanes: the next lane fades every beat
 
@@ -272,7 +272,7 @@ function onEvent(p)
 end
 ```
 
-![Side doors](../assets/shots/mod-side-doors.jpg)
+![Side doors](../assets/shots/mod-side-doors.webp)
 
 `direction` turns the lane's way in clockwise around its receptor. The notes themselves stay upright, so the arrows
 still point the way you press - only where they come from changes.
@@ -292,7 +292,7 @@ function onFrame(dt)
 end
 ```
 
-![Tilted and slow](../assets/shots/mod-tilted.jpg)
+![Tilted and slow](../assets/shots/mod-tilted.webp)
 
 ### One lane faster
 
@@ -328,7 +328,7 @@ function onFrame(dt)
 end
 ```
 
-![Sway notes](../assets/shots/mod-sway.jpg)
+![Sway notes](../assets/shots/mod-sway.webp)
 
 !!! tip "Landing exactly on the receptor"
     At `distance` 0 the wave above is still somewhere between -30 and 30 pixels. To make every note land
@@ -437,7 +437,7 @@ end
 they come back in from the other side. Looks amazing, plays terribly - so keep it to bars where the player has no
 notes.
 
-![Two lanes gone](../assets/shots/od-wild-sway.jpg)
+![Two lanes gone](../assets/shots/od-wild-sway.webp)
 
 ### Across the screen, wrapping round
 
@@ -458,7 +458,7 @@ end
 `home` is where the lane normally sits (the strumline is centred), and `x` is where it should be now: a quarter of
 the screen apart, sliding right. The `%` wraps it back round when it reaches the edge.
 
-![The scroller](../assets/shots/od-scroller.jpg)
+![The scroller](../assets/shots/od-scroller.webp)
 
 ### Upside down, the world upright
 
@@ -479,7 +479,7 @@ Just turning the HUD over would put the lanes in reverse order with every arrow 
 turning the arrows back makes it play like plain old downscroll - it only *looks* crazy. In a fight the camera rolls
 along with `hud.angle`, and `camera.roll` turns it back, so the world stays the right way up.
 
-![Upside down](../assets/shots/od-upside-down.jpg)
+![Upside down](../assets/shots/od-upside-down.webp)
 
 ### A ring (Halo)
 
@@ -502,7 +502,7 @@ end
 `- (lane - 1.5) * s` cancels the lane's own place, so all four ride the same ring around the middle. The ones at the
 back are smaller and fainter, which sells the 3D.
 
-![The halo](../assets/shots/od-halo.jpg)
+![The halo](../assets/shots/od-halo.webp)
 
 Kade Engine's own example modcharts (spinning receptors, the spinning HUD, jumping arrows, ...) are translated one
 by one on [Coming from Kade Engine](kade.md#kades-examples-translated).

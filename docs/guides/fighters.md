@@ -33,9 +33,9 @@ them, with defaults and ranges, is on [Fighters](../api/fighters.md). What works
 
 <div class="grid" markdown>
 
-![Squash and stretch](../assets/shots/fighters-squash.jpg)
+![Squash and stretch](../assets/shots/fighters-squash.webp)
 
-![Colour, alpha, scale and turn](../assets/shots/fighters-tint.jpg)
+![Colour, alpha, scale and turn](../assets/shots/fighters-tint.webp)
 
 </div>
 
@@ -90,7 +90,7 @@ opponent.screenHeight = 1.3
 opponent.facing = "camera"
 ```
 
-![The opponent pinned big in the middle](../assets/shots/fighters-pinned.jpg)
+![The opponent pinned big in the middle](../assets/shots/fighters-pinned.webp)
 
 ## Places: `bind`
 
@@ -140,7 +140,7 @@ for i = 0, 1 do
 end
 ```
 
-![Both fighters as outlines](../assets/shots/fighters-outline.jpg)
+![Both fighters as outlines](../assets/shots/fighters-outline.webp)
 
 A fighter who glows in the world (a potion, another mod) doesn't glow on your own fight screen - it would get in the
 way of the song's look. Everybody watching from outside still sees the glow, and it's back once the fight is over.
@@ -155,7 +155,7 @@ what each one does is on [Body parts](../api/parts.md).
 right. The opponent faces you, so its right is on your left. Don't worry, it's simpler than it sounds: both arms at
 `roll = 90` is a T-pose for either of them, and an arm straight up is `roll` around 165.
 
-![Body parts](../assets/shots/fighters-parts.jpg)
+![Body parts](../assets/shots/fighters-parts.webp)
 
 *`player.rightArm.roll = 90`, `player.leftArm.pitch = 90`, `player.head.pitch = 25`;
 `opponent.rightArm.roll = 160`, `opponent.leftLeg.pitch = 45`, `opponent.head.roll = 25`.*
@@ -198,7 +198,7 @@ end
 String eight moves like that together (clap, spread, reach, point, squat, kick, jump, spin), one per beat, have the
 opponent dance them mirrored, and you've got a whole routine:
 
-![The dance routine](../assets/shots/od-dance.jpg)
+![The dance routine](../assets/shots/od-dance.webp)
 
 ## `pose`: MineFunkin's own poses
 
@@ -215,9 +215,9 @@ alone.
 
 <div class="grid" markdown>
 
-![A death pose](../assets/shots/fighters-death.jpg)
+![A death pose](../assets/shots/fighters-death.webp)
 
-![Note poses set by a script](../assets/shots/fighters-pose.jpg)
+![Note poses set by a script](../assets/shots/fighters-pose.webp)
 
 </div>
 
@@ -253,7 +253,7 @@ The first call on a pose starts it from the rest pose, and every further call ad
 gives back MineFunkin's own (`clearPose("both")` = all five). In a fight, the players standing around see your song's
 poses too. All the details: [setPose](../api/shortcuts.md#setpose).
 
-![Your own "up" pose](../assets/shots/fighters-setpose.jpg)
+![Your own "up" pose](../assets/shots/fighters-setpose.webp)
 
 ## Skins: `skin` and `model`
 
@@ -331,9 +331,9 @@ end
 
 <div class="grid" markdown>
 
-![Mid-jump](../assets/shots/od-switcheroo-jump.jpg)
+![Mid-jump](../assets/shots/od-switcheroo-jump.webp)
 
-![Swapped](../assets/shots/od-swapped.jpg)
+![Swapped](../assets/shots/od-swapped.webp)
 
 </div>
 
@@ -355,7 +355,7 @@ opponent.scale = 1
 tween(opponent.scale, 2.2, beats(1.5), "elasticOut")
 ```
 
-![Rise](../assets/shots/od-rise.jpg)
+![Rise](../assets/shots/od-rise.webp)
 
 ## Putting them back
 

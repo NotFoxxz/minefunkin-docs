@@ -13,7 +13,7 @@ hide:
 MineFunkin is a Friday Night Funkin' engine for Minecraft. At a **Speaker** you fight another player or the Dummy,
 right in the world, with everybody around watching. At the **Retro TV** you practise songs and make your own charts.
 
-![A fight at a Speaker, against the dummy](assets/shots/fight-home.jpg)
+![A fight at a Speaker, against the dummy](assets/shots/fight-home.webp)
 
 This wiki is about everything *around* the notes: the camera swinging round on the drop, the lanes going upside down,
 your opponent turning into a giant, the whole game window shaking on a miss. You can build all of that yourself with

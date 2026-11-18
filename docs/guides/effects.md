@@ -18,9 +18,9 @@ you use them.
 
 <div class="grid" markdown>
 
-![Grayscale and scanlines](../assets/shots/fx-grayscale.jpg)
+![Grayscale and scanlines](../assets/shots/fx-grayscale.webp)
 
-![Pixelate and hue](../assets/shots/fx-pixelate-hue.jpg)
+![Pixelate and hue](../assets/shots/fx-pixelate-hue.webp)
 
 </div>
 
@@ -38,9 +38,9 @@ This is the clever part: you decide *what* gets the effect.
 
 <div class="grid" markdown>
 
-![fx.target = "world"](../assets/shots/fx-target-world.jpg)
+![fx.target = "world"](../assets/shots/fx-target-world.webp)
 
-![fx.target = "screen"](../assets/shots/fx-target-screen.jpg)
+![fx.target = "screen"](../assets/shots/fx-target-screen.webp)
 
 </div>
 
@@ -124,7 +124,7 @@ tween(fx.saturation, 1, beats(1))
 tween(fx.contrast, 1, beats(1))
 ```
 
-![Fake Death](../assets/shots/od-fake-death.jpg)
+![Fake Death](../assets/shots/od-fake-death.webp)
 
 **Colours walking round the wheel**, slowly, forever:
 

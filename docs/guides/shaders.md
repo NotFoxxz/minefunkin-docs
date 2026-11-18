@@ -17,7 +17,7 @@ A slot has a `file`, an `amount` (how much of it shows), four numbers `a` ... `d
 Never written a shader? No shame - they look scarier than they are. The examples below work as they are, so start by
 changing their numbers and see what happens.
 
-![A ripple shader with fx.chromatic and fx.wave](../assets/shots/fx-chromatic-ripple.jpg)
+![A ripple shader with fx.chromatic and fx.wave](../assets/shots/fx-chromatic-ripple.webp)
 
 ## The file
 
@@ -105,13 +105,13 @@ vec4 effect(vec2 uv) {
 
 <div class="grid" markdown>
 
-![shockwave.fsh](../assets/shots/shader-shockwave.jpg)
+![shockwave.fsh](../assets/shots/shader-shockwave.webp)
 
-![warp.fsh](../assets/shots/shader-warp.jpg)
+![warp.fsh](../assets/shots/shader-warp.webp)
 
-![kaleido.fsh on the whole screen](../assets/shots/shader-kaleido.jpg)
+![kaleido.fsh on the whole screen](../assets/shots/shader-kaleido.webp)
 
-![crt.fsh](../assets/shots/shader-crt.jpg)
+![crt.fsh](../assets/shots/shader-crt.webp)
 
 </div>
 

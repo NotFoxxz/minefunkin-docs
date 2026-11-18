@@ -11,7 +11,7 @@ nicely. Your scripts get to move it on top of that picture: lean over, push in, 
 Practice at the Retro TV has no world, so there the camera properties simply do nothing. Nothing breaks - they're
 just ignored.
 
-![The fight camera at home](../assets/shots/fight-home.jpg)
+![The fight camera at home](../assets/shots/fight-home.webp)
 
 Eight properties move it: [`camera.x`, `.y`, `.z`](../api/camera.md#camera-x) (in blocks),
 [`.yaw`, `.pitch`, `.roll`](../api/camera.md#camera-yaw) (in degrees), [`.fov`](../api/camera.md#camera-fov) (the
@@ -77,7 +77,7 @@ tween(camera.yaw, -6, beats(1), "sineInOut")
 tween(camera.fov, -8, beats(1), "sineInOut")
 ```
 
-![Looking over at the opponent](../assets/shots/camera-look-over.jpg)
+![Looking over at the opponent](../assets/shots/camera-look-over.webp)
 
 **From down low.** Drop the camera, tilt it up, widen the lens - everybody looks taller and more dramatic:
 
@@ -87,7 +87,7 @@ camera.pitch = 12
 camera.fov = 10
 ```
 
-![The camera down low](../assets/shots/camera-low.jpg)
+![The camera down low](../assets/shots/camera-low.webp)
 
 **A slow push in**, for a tense moment:
 
@@ -133,7 +133,7 @@ end
 Swing it round the point between the fighters - pulling back and rising a little as it goes - and both of them stay
 in view:
 
-![Swung round during a dance](../assets/shots/od-dance.jpg)
+![Swung round during a dance](../assets/shots/od-dance.webp)
 
 !!! tip "Which way to swing"
     Your fighter stands close to the camera. Swing towards the side where the opponent ends up *behind* your fighter

@@ -148,14 +148,11 @@ The order of the lines doesn't matter - notes and events are sorted when the cha
 
 ## Format 1 (older songs)
 
-Format 1 is the song format of MineFunkin's development builds before the first release. It wrote every note as an
-object (`{"time": 3428.6, "lane": 0, "hold": 797.0, "forcedMiss":
-false}`), the BPM as `bpmChanges` and the audio once per difficulty with `voices` + `playerVocalIds` /
-`opponentVocalIds`. MineFunkin doesn't play it anymore, but converting is one click: Song Select lists such a song with
-a yellow ⚠, and its **Update all old songs** button converts every old song at once - its charts, its song file and its
-event files (see [old songs](../help/limits.md#old-songs-and-the-update-button)). Nothing is lost: the
-notes, events, BPM changes and audio stay as they were, and the originals are copied into the song's
-`backup/` folder first. On a server, the admin runs `/minefunkin convert` for `server_songs/`.
+The format of MineFunkin's development builds: notes as objects (`{"time", "lane", "hold", "forcedMiss"}`), the BPM
+as `bpmChanges`, the audio per difficulty. It doesn't play anymore - Song Select marks such songs with a yellow ⚠, and
+**Update all old songs** converts them in one go: charts, song file and event files
+([more](../help/limits.md#old-songs-and-the-update-button)). Nothing is lost - the originals go into the song's
+`backup/` folder. On a server: `/minefunkin convert`.
 
-A file with a newer format than this MineFunkin knows (1.2, 2.0, ...) isn't read at all - the song is
-left out of the list and the log says which version it needs.
+A file newer than this MineFunkin (2.1, 3.0, ...) isn't read - the song is left out and the log names the version it
+needs.

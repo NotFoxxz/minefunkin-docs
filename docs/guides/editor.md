@@ -13,7 +13,7 @@ file - the name, the colour, the category, the description, and the controls for
 The first time you open the editor, a short help pops up with the basics. You can get it back any time with
 **? Help** in the tool bar.
 
-![The editor with an event selected](../assets/shots/editor-event.jpg)
+![The editor with an event selected](../assets/shots/editor-event.webp)
 
 ## Finding your way around
 
@@ -75,7 +75,7 @@ file you deleted) shows up grey with just its raw values. Don't worry - it's kep
 again: change a file in your text editor, save, press Reload. Everything here also goes into
 `logs/minefunkin-events.log`.
 
-![Problems in the editor](../assets/shots/editor-problems.jpg)
+![Problems in the editor](../assets/shots/editor-problems.webp)
 
 ## State: what your scripts did up to here
 
@@ -87,7 +87,7 @@ Click a row to see which event set it, the tween that's moving it, and what othe
 field narrows the list down. Pause somewhere else and it works it all out again. Things it can't show (sounds, health,
 the window) are listed at the end.
 
-![The State panel](../assets/shots/editor-state.jpg)
+![The State panel](../assets/shots/editor-state.webp)
 
 It's the same answer [`inspect`](../api/shortcuts.md#inspect) writes to the log during a song.
 

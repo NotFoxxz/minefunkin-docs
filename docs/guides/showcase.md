@@ -23,35 +23,35 @@ at the Retro TV everything else still runs.
 
 <div class="grid" markdown>
 
-![Power On: the title on the old TV](../assets/shots/sc-power-on.jpg)
+![Power On: the title on the old TV](../assets/shots/sc-power-on.webp)
 
-![Opponent Echo: the strumline leans, the camera follows the singer](../assets/shots/sc-opponent-echo.jpg)
+![Opponent Echo: the strumline leans, the camera follows the singer](../assets/shots/sc-opponent-echo.webp)
 
-![Build Up: the 3-2-1, the lanes spinning](../assets/shots/sc-build-up.jpg)
+![Build Up: the 3-2-1, the lanes spinning](../assets/shots/sc-build-up.webp)
 
-![The Drop with a shockwave: the fighters knocked back](../assets/shots/sc-drop.jpg)
+![The Drop with a shockwave: the fighters knocked back](../assets/shots/sc-drop.webp)
 
-![Lane Lights: the strum background lit up](../assets/shots/sc-lane-lights.jpg)
+![Lane Lights: the strum background lit up](../assets/shots/sc-lane-lights.webp)
 
-![The dance: both fighters, the camera swung round, the words](../assets/shots/sc-dance.jpg)
+![The dance: both fighters, the camera swung round, the words](../assets/shots/sc-dance.webp)
 
-![Fake Death: the colour drained](../assets/shots/sc-fake-death.jpg)
+![Fake Death: the colour drained](../assets/shots/sc-fake-death.webp)
 
-![Rise: a giant, a shockwave, the lanes coming back](../assets/shots/sc-rise.jpg)
+![Rise: a giant, a shockwave, the lanes coming back](../assets/shots/sc-rise.webp)
 
-![Scroller: the lanes across the screen](../assets/shots/sc-scroller.jpg)
+![Scroller: the lanes across the screen](../assets/shots/sc-scroller.webp)
 
-![Switcheroo: swapped places](../assets/shots/sc-switcheroo.jpg)
+![Switcheroo: swapped places](../assets/shots/sc-switcheroo.webp)
 
-![Kick Hit and Logo Bump](../assets/shots/sc-kick-hit.jpg)
+![Kick Hit and Logo Bump](../assets/shots/sc-kick-hit.webp)
 
-![Upside Down: the playfield turning, the world upright](../assets/shots/sc-upside-turn.jpg)
+![Upside Down: the playfield turning, the world upright](../assets/shots/sc-upside-turn.webp)
 
-![Upside Down: turned over](../assets/shots/sc-upside-down.jpg)
+![Upside Down: turned over](../assets/shots/sc-upside-down.webp)
 
-![Halo: a ring with depth](../assets/shots/sc-halo.jpg)
+![Halo: a ring with depth](../assets/shots/sc-halo.webp)
 
-![Power Off: the score on the old TV, just before it closes](../assets/shots/sc-power-off.jpg)
+![Power Off: the score on the old TV, just before it closes](../assets/shots/sc-power-off.webp)
 
 </div>
 
