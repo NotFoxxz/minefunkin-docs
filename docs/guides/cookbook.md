@@ -4,7 +4,7 @@ icon: material/chef-hat
 
 # Cookbook
 
-Small recipes to steal. Each one is complete and tested: put it in a file under a `format 1.1` line and an
+Small recipes to steal. Each one is complete and tested: put it in a file under a `format 2.0` line and an
 `event { name = "..." }`, and it works. Recipes that need a chart event use `onEvent`; the others are
 [song scripts](song-scripts.md) that run for the whole song.
 

@@ -17,10 +17,10 @@ You'll need a song to try it on. Any folder in `.minecraft/MineFunkin/client/son
 
 Make a new text file called `beat_flash.event` and put it in the song's folder (next to its `.mfkn` chart), or in an
 `events/` folder inside it. Every event file starts the same way: a line saying which version of the language it's
-written in (always `format 1.1`), and an `event { }` block with its name.
+written in (always `format 2.0`), and an `event { }` block with its name.
 
 ```lua
-format 1.1
+format 2.0
 
 event {
     name = "Beat Flash",
@@ -40,7 +40,7 @@ the song in the editor (Retro TV → Editor), click the event type in the inspec
 When the song reaches your event in the chart, the game calls `onEvent`. That's where your code goes:
 
 ```lua
-format 1.1
+format 2.0
 
 event {
     name = "Beat Flash",
@@ -166,7 +166,7 @@ event as it fires and every script error. [Errors and fixes](../help/troubleshoo
 Here's everything together, plus three header lines that make it look nice in the editor:
 
 ```lua
-format 1.1
+format 2.0
 -- Flashes the screen on every beat until it's switched off again.
 
 event {

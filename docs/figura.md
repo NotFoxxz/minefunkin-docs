@@ -22,6 +22,7 @@ this game sees it. It only reads - a script can't change the fight. Outside a fi
 
 | Call | Answers |
 |---|---|
+| `minefunkin:getVersion()` | this interface's version: `"2.0"` |
 | `minefunkin:isFighting()` | `true` while the player is in a fight |
 | `minefunkin:getPose()` | the pose MineFunkin shows right now: `"idle"`, `"left"`, `"down"`, `"up"`, `"right"` or `"death"` |
 | `minefunkin:getPoseTime()` | milliseconds since that pose started (`nil` in the idle) |

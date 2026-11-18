@@ -24,7 +24,7 @@ behind your fighter itself. Where it stands, where it looks, how wide its lens i
 ## Example code
 
 ```lua
-format 1.1
+format 2.0
 -- Bump on every beat, and look over at the opponent for two beats.
 event { name = "Look Over" }
 

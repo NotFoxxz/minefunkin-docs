@@ -10,7 +10,7 @@ see-through, always on top.
 !!! info "How to use it"
     `popout[0]` to `popout[7]` - set `show` to a list of [parts](choices.md#popout-parts) and the window opens,
     `""` closes it. A part shown in a pop-out leaves the game window (unless `keep`). Pop-outs need a system that lets
-    programs place windows (not Wayland) and the player's OK (Options › MineFunkin › Window & desktop).
+    programs place windows (not Wayland) and the player's OK (Options › MineFunkin › Song effects › Let songs use windows).
     
     The whole picture: [Game window and pop-outs](../guides/windows.md).
 

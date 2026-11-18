@@ -18,7 +18,7 @@ every miss) without a single chart event, the way a Psych Engine song script doe
 Here's how small one can be:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Big Drop" }
 

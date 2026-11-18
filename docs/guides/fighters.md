@@ -65,7 +65,7 @@ instead: it stays on its spot on the screen, whatever the camera does.
   first if it should move there.
 
 ```lua
-format 1.1
+format 2.0
 -- The opponent slides in from the right into the middle, then back where it belongs.
 event { name = "Center Stage" }
 

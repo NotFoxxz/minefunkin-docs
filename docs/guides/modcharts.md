@@ -25,7 +25,7 @@ property used here is explained in full on [strum[lane]](../api/strum.md), [stru
 Here's an empty modchart, ready to fill in. Save it as `modchart.event` in the song's folder:
 
 ```lua
-format 1.1
+format 2.0
 -- The song's modchart: everything that moves the lanes, in one place.
 
 event {

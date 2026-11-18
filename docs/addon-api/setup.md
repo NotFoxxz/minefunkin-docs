@@ -100,7 +100,7 @@ One class per side. MineFunkin creates it once while the game starts and hands i
         "minefunkin-client": [ "com.example.mymod.client.MyMineFunkinClientAddon" ]
       },
       "custom": {
-        "minefunkin:api": "3.0",
+        "minefunkin:api": "2.0",
         "minefunkin:permissions": ["fights.start", "fights.control"]
       },
       "suggests": { "minefunkin": "*" }
@@ -127,7 +127,7 @@ One class per side. MineFunkin creates it once while the game starts and hands i
 
     ```toml
     [modproperties.mymod]
-    "minefunkin:api" = "3.0"
+    "minefunkin:api" = "2.0"
     "minefunkin:permissions" = ["fights.start", "fights.control"]
 
     [[dependencies.mymod]]
@@ -145,9 +145,8 @@ One class per side. MineFunkin creates it once while the game starts and hands i
     loads one once it knows the class implements the interface for the running side - so a
     `MineFunkinClientAddon` is never touched on a dedicated server.
 
-`"minefunkin:api": "3.0"` is the API version you wrote against. MineFunkin serves it if the first number
-matches and the second isn't higher than its own (`3.0` gets 3.0; a mod written for 2.x isn't served -
-fights changed, see [Versions](versions.md)). A mod asking for a
+`"minefunkin:api": "2.0"` is the API version you wrote against. MineFunkin serves it if the first number
+matches and the second isn't higher than its own (`2.0` gets 2.0, see [Versions](versions.md)). A mod asking for a
 version MineFunkin doesn't serve gets no handle, and the log says why.
 
 `"minefunkin:permissions"` lists the [rights](rights.md) your mod wants - only for changing things (starting and
@@ -158,8 +157,8 @@ controlling fights, leaderboards, moving players). A mod that only listens and r
 Start the game and look in `logs/latest.log`:
 
 ```
-[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (client): online for [mymod]
-[Render thread/INFO] (MineFunkin/API) MineFunkin API 3.0 (server): online for [mymod]
+[Render thread/INFO] (MineFunkin/API) MineFunkin API 2.0 (client): online for [mymod]
+[Render thread/INFO] (MineFunkin/API) MineFunkin API 2.0 (server): online for [mymod]
 [Render thread/INFO] (MineFunkin/API) MineFunkin API: mymod (My Mod) declares [fights.start, fights.control]
 ```
 

@@ -217,7 +217,7 @@ Here's a Psych event that flashes the screen and zooms in, with the colour in va
 === "MineFunkin (flash_zoom.event)"
 
     ```lua
-    format 1.1
+    format 2.0
 
     event {
         name = "Flash Zoom",

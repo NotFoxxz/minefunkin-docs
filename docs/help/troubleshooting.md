@@ -24,7 +24,9 @@ in the first four:
 5. **Is it a window thing?** [Pop-outs and the game window](../guides/windows.md) do nothing when the player
    switched off *Let songs use windows* in the options, pop-outs can't open on Linux with Wayland, and
    `window.transparent` works on Windows only.
-6. **Is it switched off?** Players can switch off built-in events under Options › MineFunkin › Song effects.
+6. **Is it turned down?** Every event runs, but **Fewer flashes** and **Less motion** (Options › MineFunkin ›
+   Accessibility) make flashes, shakes and bumps calmer, and **Minecraft effects** (Options › MineFunkin › Song effects)
+   switches off what songs do to the world around a fight.
 7. **Did it fail while running?** A script that runs into an error is switched off for the rest of the
    run. The log says where.
 8. **Does another script overwrite it?** Two scripts setting the same property every frame: only the
@@ -79,8 +81,8 @@ ones:
 | `every is called like this: every(time, function() ... end[, times][, "name"])` | Too many values, or the count after the name. |
 | `unknown easing "bounce"` | See the [list of easings](../api/actions.md#easing-curves). |
 | `'break' only works inside a for loop` | |
-| `written for event format 1.0 - MineFunkin only runs 1.1 now; Song Select's update button converts it` | An old file. Press **Update old songs** in Song Select - it converts the whole song, the originals go into its `backup/` folder ([more](limits.md#old-songs-and-the-update-button)). |
-| `written for event format 2.0, this MineFunkin runs 1.1 - a newer MineFunkin is needed` | The file is for a newer MineFunkin. |
+| `written for event format 1.0 - MineFunkin only runs 2.0 now; Song Select's update button converts it` | An old file. Press **Update old songs** in Song Select - it converts the whole song, the originals go into its `backup/` folder ([more](limits.md#old-songs-and-the-update-button)). |
+| `written for event format 2.1, this MineFunkin runs 2.0 and 1.1 - a newer MineFunkin is needed` | The file is for a newer MineFunkin. |
 
 ### Taken names
 
@@ -116,8 +118,8 @@ and land in the log with their line:
 | a lane that doesn't exist | `strum[4]`: lanes are 0-3. |
 | text where a number is needed | e.g. `hud.angle = "big"`. |
 | a choice property set to a word it doesn't take | e.g. `text[0].layer = "middle"`. |
-| `too much work in one go (more than 50000 steps)` | More than 50,000 statements in one call - usually a loop that's far too big. |
-| `this loop runs more than 10000 times` | A `for` loop with more than 10,000 rounds. |
+| `too much work in one go (more than 500000 steps)` | More than 500,000 statements in one call - usually a loop that's far too big. |
+| `this loop runs more than 100000 times` | A `for` loop with more than 100,000 rounds. |
 | `functions call each other more than 64 deep` | A function that calls itself without stopping. |
 | `too many 'after's waiting (more than 512)` | Usually an `after` (or `every`) scheduled every frame. |
 | `there's no note 130` | `note[i]` past what's listed: loop up to `notes.count - 1`. |

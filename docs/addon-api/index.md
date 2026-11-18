@@ -2,7 +2,7 @@
 icon: material/puzzle-outline
 ---
 
-# Addon API 3.0
+# Addon API 2.0
 
 ![Addon API](../assets/api-logo.png){ .mf-page-logo }
 

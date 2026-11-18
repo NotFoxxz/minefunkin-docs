@@ -56,7 +56,7 @@ Pick where you want to go:
     For other mods (Java): song results, fights, practice and every note of the local player's runs. Opt-in, on
     the server and the client.
 
-    [:octicons-arrow-right-24: Addon API 1.1](addon-api/index.md) · [Set up your mod](addon-api/setup.md)
+    [:octicons-arrow-right-24: Addon API 2.0](addon-api/index.md) · [Set up your mod](addon-api/setup.md)
 
 </div>
 
@@ -84,7 +84,7 @@ Here's a whole event. Drop it into a song's folder as `pop_flash.event`, and the
 **Pop Flash** - with a slider and a colour picker, built from the two lines under `params`:
 
 ```lua
-format 1.1
+format 2.0
 
 event {
     name = "Pop Flash",

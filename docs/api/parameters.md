@@ -33,8 +33,8 @@ a flag. Flags with the same `group` are one pick in the editor - at most one of 
 
 ```lua
 params {
-    classic = flag { word = "classic", group = "Style" },
-    modern  = flag { word = "modern",  group = "Style" },
+    classic = flag { from = "value2", word = "classic", group = "Style" },
+    modern  = flag { from = "value2", word = "modern",  group = "Style" },
 }
 ```
 

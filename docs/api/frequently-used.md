@@ -10,7 +10,7 @@ its full entry.
 ## The skeleton of an event
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "My Event" }
 

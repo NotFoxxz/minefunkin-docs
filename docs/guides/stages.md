@@ -18,7 +18,7 @@ still shows up there, it just doesn't move with a camera.
 ## Start with this
 
 ```lua
-format 1.1
+format 2.0
 -- The song's stage: a background behind the fighters, fog in front of them.
 
 event {
@@ -125,7 +125,7 @@ trimmed, and sometimes turned on their side - you don't have to care about any o
 folder and name the animation you want:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Dancing Crowd" }
 
@@ -205,7 +205,7 @@ Sometimes you don't need a picture at all, just a coloured box. `"solid"` is a w
 bars, a curtain, a coloured sky, a floor:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Red Curtain" }
 
@@ -259,7 +259,7 @@ to - the fighters stand where the Speaker puts them. If you want them somewhere 
 
 ## Limits
 
-You have room for a lot - 64 pictures at once (`image[0]` ... `image[63]`) and up to 128 different picture files loaded at a time: `.png`, at most
+You have room for a lot - 64 pictures at once (`image[0]` ... `image[63]`) and up to 512 different picture files loaded at a time: `.png`, at most
 8192 pixels a side and 16 MB as a file, 512 MB of video memory together. A picture that hasn't been shown for a few seconds makes
 room for new ones and loads again when it's needed - so a song can use more than that over its length; `preload` the next big ones a
 few seconds early. A video folder: up to 20,000 `.jpg` /

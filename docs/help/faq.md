@@ -20,11 +20,11 @@ The questions people actually ask. If yours isn't here, [errors and fixes](troub
     files you can just copy.
 
 ??? question "I have older songs or event files (format 1.0) - what now?"
-    Format 1.0 is from MineFunkin's development builds before the first release. MineFunkin only plays format 1.1,
+    Format 1.0 is from MineFunkin's development builds before the first release. MineFunkin only plays format 2.0,
     but updating is one click. Old songs have a yellow ⚠ in the song list: select
     one and press **Update all old songs** (or ⋯ › Update old songs), and every one of them is converted at once.
     Nothing gets lost - the originals go into each song's `backup/` folder. New files always start with
-    `format 1.1`. More on [old songs](limits.md#old-songs-and-the-update-button).
+    `format 2.0`. More on [old songs](limits.md#old-songs-and-the-update-button).
 
 ??? question "How do I test an event quickly?"
     Open the song in the chart editor (Retro TV → Editor), place the event, press Space. When you change the file,
@@ -36,7 +36,7 @@ The questions people actually ask. If yours isn't here, [errors and fixes](troub
 
 ??? question "My event isn't in the editor's list."
     Look at the editor's footer: **⚠ N** opens the list of files that **can't be used**, each with its line and why.
-    Nine times out of ten it's a typo (the message says "did you mean ...?"), a missing `format 1.1` line, or code
+    Nine times out of ten it's a typo (the message says "did you mean ...?"), a missing `format 2.0` line, or code
     outside a function. Fix it, press **Reload**, done. [Errors and fixes](troubleshooting.md) explains every
     message.
 
@@ -118,5 +118,6 @@ The questions people actually ask. If yours isn't here, [errors and fixes](troub
     plays for them, just a bit calmer. So don't build a moment that *only* works with a full-screen flash.
 
 ??? question "Can I switch events off?"
-    The built-in ones, yes: Options › MineFunkin › Song effects › Built-in events. A song's own files belong to the
-    song, though, so those always run.
+    No - events are part of the song, so they always run. What you can do: **Fewer flashes** and **Less motion**
+    (Options › MineFunkin › Accessibility) make flashes, shakes and bumps calmer, **Song shaders** and **Minecraft
+    effects** (Options › MineFunkin › Song effects) switch those off.

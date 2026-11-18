@@ -40,7 +40,7 @@ end
 | [title.subtitle](#title-subtitle) | text | `""` | The smaller line under it. |
 | [title.color](#title-color) | colour | `#FFFFFF` | The colour of both lines. |
 | [title.alpha](#title-alpha) | number | `0` | Their opacity: 0 = gone. `showTitle` fades it in (a quarter second), holds it and fades … |
-| [text[n].value](#text-value) | text | `""` | What it says (up to 200 characters). `""` = hidden. Numbers are turned into text: … |
+| [text[n].value](#text-value) | text | `""` | What it says (up to 1,000 characters). `""` = hidden. Numbers are turned into text: … |
 | [text[n].x](#text-x) | number | `0.5` | Where its anchor sits from left to right: 0 = the left edge, 1 = the right edge. |
 | [text[n].y](#text-y) | number | `0.5` | Where its anchor sits from top to bottom: 0 = the top, 1 = the bottom. |
 | [text[n].size](#text-size) | number | `1` | Its size: 1 = twice the GUI font. |
@@ -60,7 +60,7 @@ end
 
 <p class="mf-sig"><span class="mf-type">text</span> <code>title.text</code> <span class="mf-eq">= <code>""</code></span></p>
 
-The big line in the middle of the screen - Minecraft's `/title` look, over everything (up to 200 characters). A long
+The big line in the middle of the screen - Minecraft's `/title` look, over everything (up to 1,000 characters). A long
 one is made smaller to fit. [showTitle](shortcuts.md#showtitle) sets it and fades it in and out for you.
 
 ### title.subtitle { #title-subtitle }
@@ -87,7 +87,7 @@ yourself to show a title as long as you like.
 
 <p class="mf-sig"><span class="mf-type">text</span> <code>text[n].value</code> <span class="mf-eq">= <code>""</code></span></p>
 
-What it says (up to 200 characters). `""` = hidden. Numbers are turned into text: `text[4].value = player.combo`.
+What it says (up to 1,000 characters). `""` = hidden. Numbers are turned into text: `text[4].value = player.combo`.
 
 ### text[n].x { #text-x }
 

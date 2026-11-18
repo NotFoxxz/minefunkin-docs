@@ -10,9 +10,9 @@ Why limits at all? Because you'll download songs from people you don't know, and
 freeze your game - by accident or on purpose. The limits are generous; a normal song never gets near them. If yours
 does, the [event log](#the-event-log) tells you which one.
 
-- One call into the scripts (an event, a frame, a hit) may run at most 50,000 statements.
-- A `for` loop may run at most 10,000 rounds. Functions may call each other at most 64 deep.
-- At most 512 `after`s and `every`s may wait at once. An `every` runs at most once a frame.
+- One call into the scripts (an event, a frame, a hit) may run at most 500,000 statements.
+- A `for` loop may run at most 100,000 rounds. Functions may call each other at most 64 deep.
+- At most 8,192 `after`s and `every`s may wait at once. An `every` runs at most once a frame.
 - `trigger`: events may trigger each other at most 8 deep.
 - A script that fails while running is switched off for the rest of the run, and the failure is
   logged with its line. Examples: a lane that doesn't exist, text where a number is needed, a choice
@@ -26,7 +26,7 @@ does, the [event log](#the-event-log) tells you which one.
   `replace` - switches that script off (it isn't cut short).
 - Top-level `local`s get their starting values when the song starts, so they can read the game (`local w =
   screen.width`). One that fails there switches its script off.
-- Pictures: `.png`, at most 8192 pixels a side and 16 MB as a file, at most 128 different pictures and 512 MB
+- Pictures: `.png`, at most 8192 pixels a side and 16 MB as a file, at most 512 different pictures and 512 MB
   of video memory per song. They are freed when the song closes. A sprite's `.xml`: at most 2 MB and 4096 frames.
   A video folder: at most 20,000 frames (`.jpg` / `.png`), 2048 pixels a side, 8 MB a frame.
 - Shaders: `.fsh` or `.frag`, at most 32 KB a file, at most four at once. Which run is the player's choice (the
@@ -34,7 +34,7 @@ does, the [event log](#the-event-log) tells you which one.
 - Skins (`setSkin`, `player.skin`): 64x64 `.png`, at most 1 MB each and 8 per song.
 - Windows: at most eight pop-outs, each at most 4096 pixels a side. The game window keeps 64 pixels on
   its monitor, at least 0.2 opacity, one full-screen flip a second. All of it only while the song plays,
-  and only if the player allows it (Options › MineFunkin › Window & desktop › "Let songs use windows").
+  and only if the player allows it (Options › MineFunkin › Song effects › "Let songs use windows").
 - Sounds: `.ogg`, at most 5 minutes each (longer ones aren't played - the log says so), at most 32 of a song's own
   sounds playing at once (one more is left out, said once). Each is decoded once per song and let go when it closes.
 - [Modifiers](../guides/modifiers.md): at most 200,000 planned changes per song (one per field each `ease` / `set` /
@@ -62,19 +62,20 @@ Warnings and errors also go to `latest.log`. Past 8 MB the file only takes warni
 
 ## Versions
 
-The first line of every file says which version of the language it's written in. MineFunkin runs **only
-`format 1.1`** - one version, so you never have to wonder which features you can use:
+The first line of every file says which version of the language it's written in. Write every file as
+**`format 2.0`**:
 
 | Version | |
 |---|---|
-| `format 1.1` | The one that runs - write every file like this. |
-| `format 1.0` | The version of MineFunkin's development builds before the first release. It doesn't run anymore: Song Select's update button turns a song's 1.0 files into 1.1 in one go - see [old songs](#old-songs-and-the-update-button). |
-| anything else | A version newer than this MineFunkin. Not run; it's listed as a problem: "written for event format 1.2, this MineFunkin runs 1.1 - a newer MineFunkin is needed". |
+| `format 2.0` | The one to write - every file starts with it. |
+| `format 1.1` | Runs exactly like 2.0, nothing to change. |
+| `format 1.0` | MineFunkin's development builds before the first release. It doesn't run anymore: Song Select's update button turns a song's 1.0 files into 2.0 in one go - see [old songs](#old-songs-and-the-update-button). |
+| anything else | A version newer than this MineFunkin. Not run; it's listed as a problem: "written for event format 2.1, this MineFunkin runs 2.0 and 1.1 - a newer MineFunkin is needed". |
 
-That's why the first release already starts at 1.1: version 1.0 was only used while MineFunkin was still in
-development. You'll only meet it in songs made with those early builds.
+Versions before 2.0 were prototypes - 2.0 is the real start. The same goes for song files and the
+[Addon API](../addon-api/versions.md).
 
-Some names came to 1.1 after its first files were written: `note`, `notes`, `every`, `cancel`, `stopTween`,
+Some names came to the language after its first files were written: `note`, `notes`, `every`, `cancel`, `stopTween`,
 `loopSound`, `trigger`, `call`, `callIn`, `preload`, `setHealth`, `addHealth`, `stopSound`, `soundVolume`, `randomInt`,
 `sub`, `find`, `replace`, `trim`, `startsWith`, `endsWith`, `noteSlot`, `boyfriend`, `dad`, `bind`, `unbind`,
 `inspect`, `atPlace`. They stay yours if a file already uses them for its own
@@ -84,19 +85,19 @@ function of the file's own (`local function preload(...)`) is called instead of 
 ### Old songs and the update button
 
 !!! info "Just so you know"
-    You most likely won't need this. Every released MineFunkin uses format 1.1, and only songs made with the
+    You most likely won't need this. Every released MineFunkin uses format 2.0, and only songs made with the
     development builds before the first release are in an older format. This section is here so you know how it
-    works if a later MineFunkin ever moves on from 1.1 - old songs will then be updated the same way.
+    works if a later MineFunkin ever moves on from 2.0 - old songs will then be updated the same way.
 
 A song with any file in an old format - an event file in `format 1.0`, or a chart or song file in the old song
 format 1 - shows up in Song Select with a yellow ⚠, and can't be played yet. Don't worry, fixing it is one click:
 select it and press **Update all old songs** (or ⋯ › Update old songs), and every such song is converted at once:
 
-- Charts and song files are written in format 1.1. The notes, events, BPM changes and audio links stay exactly
+- Charts and song files are written in format 2.0. The notes, events, BPM changes and audio links stay exactly
   as they were.
-- Event files get `format 1.1` as their first line, and nothing else changes - with one exception: a name the
-  file used for its own things that 1.1 uses itself (a variable called `volume`, a function called `zoom`, a
-  helper called `onPause`, which 1.1 would start calling by itself) is renamed to `myVolume`, `myZoom`,
+- Event files get `format 2.0` as their first line, and nothing else changes - with one exception: a name the
+  file used for its own things that 2.0 uses itself (a variable called `volume`, a function called `zoom`, a
+  helper called `onPause`, which 2.0 would start calling by itself) is renamed to `myVolume`, `myZoom`,
   `myOnPause`, and a comment under the format line lists what was renamed.
 - Every original is copied into the song's `backup/` folder first, just in case.
 

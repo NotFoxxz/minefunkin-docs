@@ -9,7 +9,7 @@ zoom, hide the HUD, flip the scroll, swap the fighters. You don't need to know a
 use them - put them inside `onEvent` (or any other [callback](callbacks.md)) and they just work.
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Chorus Hit" }
 

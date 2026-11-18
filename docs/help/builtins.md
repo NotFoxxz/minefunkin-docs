@@ -40,7 +40,7 @@ The built-in files are good starting points for your own. They are in the mod JA
 change it there. For example, HUD Bounce:
 
 ```lua
-format 1.1
+format 2.0
 
 event {
     name = "HUD Bounce",

@@ -127,7 +127,7 @@ java {
     "minefunkin": ["com.example.bossdemo.BossDemoAddon"]
   },
   "custom": {
-    "minefunkin:api": "3.0",
+    "minefunkin:api": "2.0",
     "minefunkin:permissions": ["fights.start", "fights.control"]
   },
   "depends": {

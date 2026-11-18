@@ -11,7 +11,7 @@ An event file is plain text. If you've seen Lua, it'll look familiar (`function 
 ## The file
 
 ```lua
-format 1.1
+format 2.0
 -- What the event does, in a comment.
 
 event {
@@ -33,7 +33,7 @@ function onEvent(p)                   -- functions: the callbacks and your own h
 end
 ```
 
-- The first line that isn't blank or a comment is the **format line**: `format 1.1`, the only version
+- The first line that isn't blank or a comment is the **format line**: `format 2.0`, the only version
   MineFunkin runs (`format 1.0` files from the development builds before the first release are converted with one click
   - see [versions](../help/limits.md#versions)).
 - The top of a file holds only these: `event { }` (required), `params { }`, variables, and functions.
@@ -43,7 +43,7 @@ end
 - Text goes in double or single quotes. Inside the quotes, `\n` is a new line, `\t` a tab, and `\"`
   or `\'` a quote.
 - Colours are written `#RRGGBB`, or `#AARRGGBB` with alpha.
-- One file defines one event and may be at most 64 KB.
+- One file defines one event and may be at most 1 MB.
 
 ## The event header
 

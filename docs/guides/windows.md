@@ -18,7 +18,7 @@ player keeps playing like always.*
 !!! info "Only on the player's own screen, only while the song plays"
     Nobody else sees any of it. On pause, at the end of the song and when it's closed, everything goes back to where
     it was - nobody's desktop is left in a mess. And a player who doesn't want any of this can switch it off under
-    **Options › MineFunkin › Window & desktop › Let songs use windows**: then nothing on this page does anything,
+    **Options › MineFunkin › Song effects › Let songs use windows**: then nothing on this page does anything,
     and everything stays in the game window. That page also tells you what works on your system.
 
 ## Three things to know first
@@ -37,7 +37,7 @@ There are three different things going on, and it helps to keep them apart:
 ## The song on the desktop
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Desktop Mode" }
 
@@ -78,7 +78,7 @@ A few things worth knowing:
 ## Your first pop-out
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Lanes Out" }
 

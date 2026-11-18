@@ -199,12 +199,10 @@ A little honesty here: a shader runs on the player's graphics card, and once it 
 stop it. A loop that never ends freezes the whole game. That's why the player decides which song shaders run
 (Options › MineFunkin › Song effects):
 
-| Setting | |
+| Song shaders | |
 |---|---|
+| On (default) | The player's own songs run freely; songs from a server must pass the check. |
 | Off | No song shader runs. |
-| All checked | Every song's shaders must pass MineFunkin's check. |
-| Own songs unchecked (default) | The player's own songs run freely; songs from a server must pass the check. |
-| All unchecked | Everything runs. |
 
 **The check** makes sure a shader always finishes. A checked file may only loop with `for` over number bounds - a literal, a `#define N 12` or a
 `const int N = 12;` - with the counter declared in the loop's head and not changed inside it. At most 8192 loop rounds

@@ -2,20 +2,21 @@
 icon: material/file-document-outline
 ---
 
-# Song files (format 1.1)
+# Song files (format 2.0)
 
 You'll rarely need to open these - the chart editor writes them for you. But when you do, they're friendly: both
 are plain JSON, kept small on purpose, with one note or event per line. Spotted a wrong note? Fix it in any text
 editor, no tools needed.
 
-MineFunkin only plays format 1.1. Format 1 was used by MineFunkin's development builds before the first release - a
-song from back then needs one click to convert (see [below](#format-1-older-songs)).
+MineFunkin writes format 2.0 and plays 2.0 and 1.1 alike - versions before 2.0 were prototypes, 2.0 is the real
+start. Format 1 was used by MineFunkin's development builds before the first release - a song from back then needs
+one click to convert (see [below](#format-1-older-songs)).
 
 ## The song file (`.mfknsong`)
 
 ```json
 {
-  "format": "1.1",
+  "format": "2.0",
   "title": "Bopeebo",
   "artist": "Kawai Sprite",
   "charter": "NotFoxxz",
@@ -35,7 +36,7 @@ song from back then needs one click to convert (see [below](#format-1-older-song
 
 | Key | | |
 |---|---|---|
-| `format` | required | `"1.1"` |
+| `format` | required | `"2.0"` |
 | `title` | | The name in the song list. Default: the file's name. |
 | `artist`, `charter` | optional | Who made the music, who made the chart. |
 | `speed` | optional | The chart's scroll speed (1 = the player's own). Default 1. |
@@ -101,7 +102,7 @@ starts its scores over.
 
 ```json
 {
-  "format": "1.1",
+  "format": "2.0",
   "bpm": 140,
   "player": [
     [3428.6, 0, 797],
@@ -123,7 +124,7 @@ All times are milliseconds from the start of the song.
 
 | Key | |
 |---|---|
-| `format` | `"1.1"` |
+| `format` | `"2.0"` |
 | `bpm` | The tempo: one number, or a list of changes `[[0, 140], [32000, 170]]` (time, BPM). |
 | `player` | Your notes. |
 | `opponent` | The opponent's notes. |

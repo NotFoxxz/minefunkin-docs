@@ -15,7 +15,7 @@ List them in your `fabric.mod.json`, next to the API version:
 ```json
 {
   "custom": {
-    "minefunkin:api": "3.0",
+    "minefunkin:api": "2.0",
     "minefunkin:permissions": ["fights.start", "fights.control", "results.write"]
   }
 }
@@ -25,7 +25,7 @@ On NeoForge the list goes into your `neoforge.mods.toml`:
 
 ```toml
 [modproperties.mymod]
-"minefunkin:api" = "3.0"
+"minefunkin:api" = "2.0"
 "minefunkin:permissions" = ["fights.start", "fights.control", "results.write"]
 ```
 

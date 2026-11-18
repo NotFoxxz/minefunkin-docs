@@ -164,7 +164,7 @@ underlay.color = mix(#FF3040, #30FF80, player.health)
 `..` joins text: `"Combo " .. player.combo`. `+` joins too when one side is text.
 
 ```lua
-format 1.1
+format 2.0
 
 event {
     name = "Shout",

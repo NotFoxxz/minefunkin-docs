@@ -39,7 +39,7 @@ A sound is an `.ogg` file in the song's folder or its `events/` folder. Five cal
 | [stopSound](../api/shortcuts.md#stopsound)`("rain")` | Stops it. |
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Storm" }
 
@@ -89,7 +89,7 @@ end
 Tired of the standard 3-2-1? Record your own:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Countdown Voice", category = "Song script" }
 
@@ -114,7 +114,7 @@ end
 The rain gets quieter as the song gets louder - with a little help from a `shared` variable:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Rain", category = "Song script" }
 

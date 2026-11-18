@@ -22,7 +22,7 @@ you press at the same moment.
 Save this as `modchart.event` in the song's folder and play the song:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Modchart", category = "Song script" }
 

@@ -22,7 +22,7 @@ one runs as it is - you can place it and press play before you've touched a line
 The simplest kind: you place it in the chart, something happens right there.
 
 ```lua
-format 1.1
+format 2.0
 -- What this event does, in one line.
 
 event {
@@ -48,7 +48,7 @@ For effects that last a while. Place it once with *On* ticked where the effect s
 unticked where it stops - the code in `onBeat` runs in between.
 
 ```lua
-format 1.1
+format 2.0
 -- An effect that runs from one chart event to the next.
 
 event {
@@ -83,7 +83,7 @@ No chart event needed at all. Every callback of every event file in the song run
 simply listens - to every hit, every miss, whatever you put in.
 
 ```lua
-format 1.1
+format 2.0
 -- Runs for the whole song.
 
 event {
@@ -111,7 +111,7 @@ All the lane movement of a song in one file, so you don't have to hunt for it la
 between steps 64 and 128, then puts them back.
 
 ```lua
-format 1.1
+format 2.0
 -- The song's modchart: everything that moves the lanes, in one place.
 
 event {
@@ -141,7 +141,7 @@ Lots more ideas in the [Modcharts](modcharts.md) guide.
 A background behind the fighters. Swap the file name for your own picture.
 
 ```lua
-format 1.1
+format 2.0
 -- The song's stage pictures.
 
 event {
@@ -168,7 +168,7 @@ Animated sprites, layers and more in [Stages and sprites](stages.md).
 Every callback the game has, all empty. Handy when you want to see what's there - delete the ones you don't need.
 
 ```lua
-format 1.1
+format 2.0
 -- Every callback the game has.
 
 event {

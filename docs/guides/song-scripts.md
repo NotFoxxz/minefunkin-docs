@@ -13,7 +13,7 @@ of one simple rule: **every callback of every loaded event runs for the whole so
 that event or not. So a file with only `onBeat`, `onHit` or `onFrame` and no `onEvent` *is* a song script.
 
 ```lua
-format 1.1
+format 2.0
 -- A song script: the camera pops on every hit, harder on a "sick".
 
 event {
@@ -103,7 +103,7 @@ Sometimes one event should set off another. A script can fire an event as if the
 run a function another file defines:
 
 ```lua
-format 1.1
+format 2.0
 
 event { name = "Drop Combo" }
 
@@ -176,6 +176,6 @@ where they'd be.
   [onResume](../api/callbacks.md#onresume) run then. Tweens follow the song's time, so they wait too.
 - A song script that crashes while running is switched off for the rest of that run. What went wrong is in the
   [event log](../help/troubleshooting.md).
-- Players can switch off *built-in* events in their options (Options › MineFunkin › Song effects) - but never your
-  song's own files.
+- Every event runs - players can't switch single events off. Players with **Fewer flashes** or **Less motion**
+  (Options › MineFunkin › Accessibility) see flashes, shakes and bumps calmer.
 - An empty song script to start from is in [Templates](templates.md#song-script).
