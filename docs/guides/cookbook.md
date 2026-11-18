@@ -5,7 +5,7 @@ icon: material/chef-hat
 # Cookbook
 
 Small recipes to steal. Each one is complete and tested: put it in a file under a `format 2.0` line and an
-`event { name = "..." }`, and it works. Recipes that need a chart event use `onEvent`; the others are
+`event { name = "..." }`, and it works - a `.event` file, or a `.modchart` file for the [Lanes](#lanes) ones. Recipes that need a chart event use `onEvent`; the others are
 [song scripts](song-scripts.md) that run for the whole song.
 
 Click one open, copy it, change the numbers until it feels right. That's really all there is to it.
@@ -328,6 +328,8 @@ Click one open, copy it, change the numbers until it feels right. That's really 
     ```
 
 ## Lanes
+
+These go in a `.modchart` file ([why](modcharts.md#event-and-modchart-files)).
 
 ??? example "Lanes light up when they're pressed"
 

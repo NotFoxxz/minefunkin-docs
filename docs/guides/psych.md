@@ -17,6 +17,9 @@ A handful of things work differently on purpose. Once these click, the rest is m
 
 - **One file per event.** Psych splits a custom event into `Name.lua` + `Name.txt`; here it's one `.event`
   file with an `event { }` header, a `params { }` block for the editor's controls, and the code.
+- **Lanes in their own file.** Whatever moves the lanes and notes (`noteTweenX`, `setPropertyFromGroup('strumLineNotes', ...)`,
+  modcharting tools) goes in a `.modchart` file next to it - same layout, same callbacks
+  ([why](modcharts.md#event-and-modchart-files)).
 - **No `setProperty` strings.** Everything you can change has its own name (`camera.zoom`, `strum[2].x`,
   `player.pose`). The upside: a typo is an error the moment the file loads, with a "did you mean ...?" - instead of
   silently doing nothing while you wonder why.

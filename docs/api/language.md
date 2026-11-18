@@ -44,6 +44,8 @@ end
   or `\'` a quote.
 - Colours are written `#RRGGBB`, or `#AARRGGBB` with alpha.
 - One file defines one event and may be at most 1 MB.
+- Two kinds of file, written the same way: `.event` for everything, `.modchart` for what moves the lanes and notes -
+  see [`.event` and `.modchart` files](../guides/modcharts.md#event-and-modchart-files).
 
 ## The event header
 

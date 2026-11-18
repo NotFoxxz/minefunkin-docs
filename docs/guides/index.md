@@ -8,8 +8,8 @@ icon: material/script-text-outline
 
 A flash on the drop. Lanes spinning. Notes riding in on a wave. The camera swinging round, your opponent growing
 three times taller, a whole stage appearing behind the fighters, the game window shaking when you miss. In
-MineFunkin, every one of those is an **event script**: a small text file ending in `.event`, sitting right next to
-the song.
+MineFunkin, every one of those is an **event script**: a small text file sitting right next to the song - ending in
+`.event`, or in `.modchart` when it moves the lanes and notes.
 
 Even the built-in events - Screen Shake, HUD Bounce, Scroll Speed and the rest - are just such files. So a song can
 bring its own events, swap a built-in one for its own version, or listen to the whole song (every beat, every hit,
@@ -25,12 +25,25 @@ event { name = "Big Drop" }
 function onEvent(p)
     flash()                -- a white flash
     zoom(1.15)             -- zoom in and stay there
+end
+```
+
+Save it as `big_drop.event` in a song's folder, place **Big Drop** in the chart editor, done. Want the lanes to join
+in? Everything that moves the lanes and notes goes in a second file with the same name, `big_drop.modchart` - the one
+chart event runs both:
+
+```lua
+format 2.0
+
+event { name = "Big Drop" }
+
+function onEvent(p)
     flipScroll()           -- downscroll becomes upscroll
 end
 ```
 
-Save it as `big_drop.event` in a song's folder, place **Big Drop** in the chart editor, done. Those three calls are
-[shortcuts](../api/shortcuts.md) - one line for the stuff charts do all the time. Once you want more than that, you
+Keeping them apart lets players switch the moving lanes off with the No Mod modifier, while the flash and the zoom stay.
+Those calls are [shortcuts](../api/shortcuts.md) - one line for the stuff charts do all the time. Once you want more than that, you
 build it from [properties](../api/properties.md), [tween](../api/actions.md#tween) and
 [callbacks](../api/callbacks.md), and the pages below show you how.
 

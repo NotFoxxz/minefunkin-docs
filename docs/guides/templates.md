@@ -5,7 +5,8 @@ icon: material/file-document-multiple-outline
 # Templates
 
 Nobody likes starting from a blank file. So here are some that already work: copy one into a text editor, save it
-with `.event` at the end in the song's folder (or its `events/` folder), and change it into whatever you need. Each
+with `.event` at the end in the song's folder (or its `events/` folder) - the [Modchart](#modchart) one with
+`.modchart` - and change it into whatever you need. Each
 one runs as it is - you can place it and press play before you've touched a line.
 
 | I want ... | Template |
@@ -107,7 +108,7 @@ end
 
 ## Modchart
 
-All the lane movement of a song in one file, so you don't have to hunt for it later. This one makes the lanes wobble
+All the lane movement of a song in one file, so you don't have to hunt for it later. Save it as `song.modchart`. This one makes the lanes wobble
 between steps 64 and 128, then puts them back.
 
 ```lua

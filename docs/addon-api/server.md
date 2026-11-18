@@ -126,6 +126,7 @@ resimulation.
 | `STOPPED_BY_ADDON` | The addon that started it stopped it ([Controlling fights](controlling-fights.md#stop)). |
 | `PAUSE_TIMEOUT` | An addon's pause lasted 5 minutes without a resume. No winner. |
 | `ADMIN` | A server admin called it off (`/minefunkin fights cancel <id>`). No winner. |
+| `RESTARTED` | The fighter started the same song again right away (Quick Retry in a Speaker's dummy fight). No winner - a new fight follows. |
 | `SERVER_STOPPING` | The server stopped. No winner. |
 | `NOT_STARTED` | The song never started: a player's game wasn't ready in time. No winner. |
 | `TIMED_OUT`, `NOT_SCORED` | It ran far past the song's end, or the server couldn't score it. No winner. |

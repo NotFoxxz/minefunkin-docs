@@ -93,6 +93,36 @@ One note's judgment: `SICK`, `GOOD`, `BAD`, `SHIT`, `MISS` (`isMiss()`).
 
 `PLAYER` or `OPPONENT` - the two parts of a chart (`other()` gives the other one).
 
+### Modifier
+
+One modifier a run can be played with (the player picks them in the song select; at a Speaker both fighters agree on
+the host's; an addon names them in its [`FightRequest`](#fightrequest)):
+
+| Value | Badge | Points | |
+|---|---|---|---|
+| `EASY` | EZ | x0.5 | wider hit windows |
+| `HARD` | HD | x1.06 | narrower hit windows |
+| `FADE` | FD | x1.06 | notes fade out before the receptors |
+| `SHUFFLE` | SH | x1 | every note on a random lane (the same for everyone in the run) |
+| `DOUBLE_TIME` | DT | x1.12 | the song 1.5x as fast, the music keeps its pitch |
+| `NO_MOD` | NM | x0.5 - 1 | the song's `.modchart` files don't run; less points the more of the song they moved |
+| `ONE_SHOT` | OS | x1 | the first miss ends the run |
+| `SICK_ONLY` | SO | x1 | anything worse than "Sick!" ends the run |
+
+`acronym()` = the badge's letters, `pointFactor()` = the factor (`NaN` for `NO_MOD` - its value depends on the song).
+`EASY` and `HARD` exclude each other, so do `ONE_SHOT` and `SICK_ONLY`.
+
+### Modifiers
+
+The modifiers of one run and what its points were multiplied by.
+
+| | |
+|---|---|
+| `on()` | the set of [`Modifier`](#modifier)s, empty = none |
+| `scoreFactor()` | the factor in the score (1 = none); with `NO_MOD` the song's own share when the server worked it out - a leaderboard entry counts `NO_MOD` as 1 |
+| `has(modifier)`, `none()`, `acronyms()` | `acronyms()` = "FD DT" |
+| `Modifiers.NONE`, `Modifiers.of(...)` | none; these (for a request) |
+
 ## Server side
 
 ### SongResult
@@ -111,6 +141,7 @@ A song played to its end without failing, as the server knows it.
 | `hits()` | `HitStats` (the server's own count for a player fight) |
 | `chart()` | `ChartInfo` |
 | `opponent()` | the other fighter in a player fight, `null` against the dummy |
+| `modifiers()` | [`Modifiers`](#modifiers): what it was played with, the factor in its score |
 
 ### Validation
 
@@ -132,6 +163,7 @@ you hold it.
 | `isMine()` | your addon started it |
 | `fighters()`, `first()`, `second()`, `fighter(uuid)` | [`Fighter`](#fighter)s, a snapshot each time you ask |
 | `song()` | `SongRef` - the chart the first fighter plays |
+| `modifiers()` | [`Modifiers`](#modifiers) both fighters play with - fixed for the whole fight |
 | `rules()` | [`FightRules`](#fightrules) |
 | `state()` | [`FightState`](#fightstate) |
 | `songTimeMs()` | the server's song time, `NaN` before the countdown |
@@ -211,6 +243,7 @@ How a fight ended - once per fight.
 | `rank()` | `RunRank` (`FAILED` when its health ran out, `null` when nothing was judged) |
 | `finished()`, `failed()` | its game reported the end of its run / its health ran out |
 | `verified()` | the server resimulated this run itself (the dummy: played it) |
+| `modifiers()` | the fight's [`Modifiers`](#modifiers) and the factor in this score (the dummy's own score: factor 1) |
 
 ### FightProposal
 
@@ -298,6 +331,7 @@ One place on a chart's leaderboard.
 | `position()` | 1 = best |
 | `player()` | `PlayerRef` |
 | `score()`, `accuracyPercent()`, `rank()` | |
+| `modifiers()` | what the run was played with ([`Modifiers`](#modifiers), `NO_MOD` counted as 1 in the factor) |
 
 ## Client side
 

@@ -39,6 +39,7 @@ Then, all optional:
 | `.side(ChartSide.OPPONENT)` | `ChartSide.PLAYER` | which part of the chart the first player plays (the opponent plays the other) |
 | `.place(...)` | `FightPlace.inPlace()` | where the fight takes place - [below](#where) |
 | `.rules(...)` | `FightRules.DEFAULT` | health, pausing, giving up - [below](#rules) |
+| `.modifiers(Modifier.DOUBLE_TIME, ...)` | none | the modifiers both fighters play with - [below](#modifiers) |
 | `.ask(true)` | `false` | ask the players first - [below](#asking-the-players-first) |
 | `.board(...)` | `Board.none()` | which leaderboard the results go on - [below](#leaderboards) |
 | `.returnTo(posA, posB)` | back where they stood | where the players go after the fight (needs `players.teleport`) |
@@ -135,6 +136,18 @@ After the fight both players get their place and their look back - unless you gi
 | `pause` | on | the fighters may pause (against a player: one asks, the other accepts) |
 | `forfeit` | on | the fighters may give up once the song runs |
 
+## Modifiers
+
+```java
+.modifiers(Modifier.DOUBLE_TIME, Modifier.ONE_SHOT)
+```
+
+Both fighters play with exactly these. The players' own picks in the song select never apply to your fight - leave
+`.modifiers` out and it's played without any. `EASY` beats `HARD` and `ONE_SHOT` beats `SICK_ONLY` when you name both.
+`SHUFFLE` takes a seed the server makes, the same for both fighters and everyone watching. The points carry the
+modifiers' factor like everywhere ([`Modifier`](types.md#modifier)); `fight.modifiers()` and every result's
+`modifiers()` say what was played.
+
 ## Asking the players first
 
 ```java
@@ -188,7 +201,7 @@ you, cancelled by an admin, a player left, the server stops. It gets a [`FightRe
 
 | `FightResult` | |
 |---|---|
-| `reason()` | why it ended - `SONG_END`, `FORFEIT`, `PLAYER_OFFLINE`, `STOPPED_BY_ADDON`, `PAUSE_TIMEOUT`, `ADMIN`, `SERVER_STOPPING`, `NOT_STARTED`, `TIMED_OUT`, `NOT_SCORED` |
+| `reason()` | why it ended - `SONG_END`, `FORFEIT`, `PLAYER_OFFLINE`, `STOPPED_BY_ADDON`, `PAUSE_TIMEOUT`, `ADMIN`, `RESTARTED`, `SERVER_STOPPING`, `NOT_STARTED`, `TIMED_OUT`, `NOT_SCORED` |
 | `winner()` | the winner's `FighterRef`, `null` for a draw or when nobody won |
 | `first()`, `second()` | each fighter's [`FighterResult`](types.md#fighterresult): outcome, score, accuracy, hits, rank, `verified` |
 | `cancelled()`, `isDraw()` | ended without a winner and not as a draw / played to the end with equal results |

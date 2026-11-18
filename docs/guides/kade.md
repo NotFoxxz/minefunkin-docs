@@ -16,8 +16,8 @@ modcharts, so you can see a few whole ones side by side.
 
 Five things to keep in mind - they'll save you some head-scratching:
 
-- **No compiling.** A Kade modchart needs a game built from source. Here the script is just a `.event` file in the
-  song's folder, and the chart editor's **Reload** picks up your changes while you work. No waiting for a build.
+- **No compiling.** A Kade modchart needs a game built from source. Here the script is just a `.modchart` file in the
+  song's folder (the camera and the rest go in a `.event` file - [why](modcharts.md#event-and-modchart-files)), and the chart editor's **Reload** picks up your changes while you work. No waiting for a build.
 - **Your four lanes, not eight receptors.** Kade numbers the receptors 0-7 (0-3 the opponent's, 4-7 yours).
   MineFunkin's `strum[0]` ... `strum[3]` are **your** lanes - Kade's 4-7. In a fight only yours are on screen;
   in practice the opponent's receptors beside them fade with `strums.opponentAlpha`.
@@ -234,9 +234,16 @@ song!). Working the angle out from `time` spins at the same speed for everyone.
 === "MineFunkin"
 
     ```lua
+    -- hud.event
     function onStart()
         hideHud()
         hideJudgments()
+    end
+    ```
+
+    ```lua
+    -- hud.modchart (the lanes are a .modchart's job)
+    function onStart()
         strums.opponentAlpha = 0       -- the opponent's receptors (practice)
     end
     ```

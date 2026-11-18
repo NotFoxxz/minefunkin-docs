@@ -7,6 +7,9 @@ icon: material/arrow-down-bold-outline
 One of your four lanes: its receptor, its notes and its holds. This is where modcharts happen - move a lane, spin it,
 fade it, change where its notes come from.
 
+!!! note "Written in .modchart files"
+    These properties move the lanes and notes, so only a `.modchart` file may set them (any file may read them; `strums.input`, the keys on / off, may be set anywhere). A `.event` that sets one doesn't load. The No Mod modifier leaves `.modchart` files out. [Two kinds of file](../guides/modcharts.md#event-and-modchart-files).
+
 !!! info "How to use it"
     `strum[0]` = left, `strum[1]` = down, `strum[2]` = up, `strum[3]` = right - also in loops: `for i = 0, 3 do
     strum[i].alpha = 0.5 end`. Everything adds to the whole strumline's values ([strums](strums.md)).
@@ -57,63 +60,70 @@ end
 ### strum[lane].x { #strum-x }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].x</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 The lane moved to the right, in pixels.
 
 ### strum[lane].y { #strum-y }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].y</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 The lane moved down, in pixels.
 
 ### strum[lane].wobbleX { #strum-wobblex }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].wobbleX</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 A second offset to the right, added on top of `x` - for a second effect on the same lane.
 
 ### strum[lane].wobbleY { #strum-wobbley }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].wobbleY</code> <span class="mf-eq">= <code>0</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 A second offset down, added on top of `y`.
 
 ### strum[lane].alpha { #strum-alpha }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 The lane's opacity: receptor, notes, holds.
 
 ### strum[lane].noteAlpha { #strum-notealpha }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].noteAlpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">.modchart only</span></p>
 
 Only the lane's notes and holds - the receptor stays (for hide-near / hide-far modcharts).
 
 ### strum[lane].color { #strum-color }
 
 <p class="mf-sig"><span class="mf-type">colour</span> <code>strum[lane].color</code> <span class="mf-eq">= <code>#FFFFFF</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 Multiplied onto the lane's receptor, notes and holds (#FFFFFF = their own colours).
 
 ### strum[lane].angle { #strum-angle }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].angle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 The lane's rotation in degrees, clockwise: receptor and note heads.
 
 ### strum[lane].scale { #strum-scale }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].scale</code> <span class="mf-eq">= <code>1</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 The lane's size: receptor, notes, hold width.
 
 ### strum[lane].scroll { #strum-scroll }
 
 <p class="mf-sig"><span class="mf-type">choice</span> <code>strum[lane].scroll</code> <span class="mf-eq">= <code>"auto"</code></span></p>
+<p class="mf-tags"><span class="mf-tag">.modchart only</span></p>
 
 The lane's own direction: `"auto"` (follows [`strums.scroll`](strums.md#strums-scroll)), `"up"`, `"down"`.
 
@@ -152,7 +162,7 @@ Kade's `receptor.defaultY`.
 ### strum[lane].direction { #strum-direction }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].direction</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 The lane's way in, turned clockwise around the receptor, in degrees: 90 = in from the side, 180 = from the other
 end. The notes stay upright.
@@ -161,13 +171,13 @@ Psych's `direction` 90 is our 0.
 ### strum[lane].speed { #strum-speed }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].speed</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 20</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 20</span><span class="mf-tag">.modchart only</span></p>
 
 The lane's own scroll speed on top of the song's: 2 = its notes come twice as fast, 0.5 = half.
 
 ### strum[lane].noteAngle { #strum-noteangle }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>strum[lane].noteAngle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">.modchart only</span></p>
 
 The lane's notes turned, in degrees, on top of `angle` - the receptor stays.

@@ -127,13 +127,22 @@ end
 
 A modifier of **your own**: a number on the same timeline - eased with `ease`, read with [`mod()`](functions.md#mod) -
 that draws nothing by itself. Use it for values you turn into something else in `onFrame`, or to let two planned
-values add up. Declare it in `onStart` of **every file** that uses it (declaring it twice is fine).
+values add up. Declare it in `onStart` of **every file** that uses it (declaring it twice is fine) - `customMod` and
+`mod()` work in both kinds of file, `ease` only in a `.modchart`.
 
 ```lua
+-- glitch.modchart: plans the value
 function onStart()
     customMod("glitch")
     ease(64, 4, "sineOut", 1, "glitch")
     ease(72, 1, "sineIn", 0, "glitch")
+end
+```
+
+```lua
+-- glitch.event: turns it into a screen effect
+function onStart()
+    customMod("glitch")
 end
 
 function onFrame(dt)
@@ -141,12 +150,15 @@ function onFrame(dt)
 end
 ```
 
+With the No Mod modifier the `.modchart` doesn't run, so `mod("glitch")` stays 0.
+
 
 ---
 
 ## Lanes and scroll
 
-Lanes are numbered 0 (left), 1 (down), 2 (up), 3 (right).
+Lanes are numbered 0 (left), 1 (down), 2 (up), 3 (right). These shortcuts move the lanes, so they go in a
+[`.modchart` file](../guides/modcharts.md#event-and-modchart-files) - like the [modifiers](#modifiers) above.
 
 ### flipScroll
 
@@ -729,11 +741,14 @@ soundVolume("rain", 0, beats(4))
 
 Runs that event's `onEvent` right now, as if the chart had it here. The values are text, like a chart's. A
 name the song doesn't have does nothing - the [event log](../help/troubleshooting.md#the-event-log) says so once,
-with the name it probably should have been.
+with the name it probably should have been. Works in both kinds of file: a `.event` can start a `.modchart` this way
+(and a `.event` / `.modchart` pair of that name runs both halves). With the No Mod modifier a `.modchart` it names
+simply doesn't run.
 
 ```lua
 function onSection(n)
     if n == 16 then trigger("Hide HUD", "0", "1") end   -- a built-in event, with its chart values
+    if n == 24 then trigger("Spin") end                 -- your spin.modchart, from a .event
 end
 ```
 

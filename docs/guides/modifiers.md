@@ -19,7 +19,8 @@ you press at the same moment.
 
 ## Your first one
 
-Save this as `modchart.event` in the song's folder and play the song:
+Save this as `song.modchart` in the song's folder and play the song (modifiers belong in a
+[`.modchart` file](modcharts.md#event-and-modchart-files)):
 
 ```lua
 format 2.0
@@ -144,10 +145,18 @@ draws nothing, and in `onFrame` you turn it into whatever you like. That's how t
 planned curve drives a screen effect:
 
 ```lua
+-- glitch.modchart: plans it
 function onStart()
     customMod("glitch")
     ease(128, 0.5, "cubicOut", 1, "glitch")
     ease(128.5, 2, "cubicIn", 0, "glitch")
+end
+```
+
+```lua
+-- glitch.event: the screen effect (fx is a .event's job)
+function onStart()
+    customMod("glitch")
 end
 
 function onFrame(dt)
@@ -155,7 +164,8 @@ function onFrame(dt)
 end
 ```
 
-Declare your own ones in `onStart` of every file that uses them (twice is fine). A name the game doesn't know - and you
+Declare your own ones in `onStart` of every file that uses them (twice is fine) - `customMod` and `mod()` work in a
+`.event` too. With the No Mod modifier the `.modchart` doesn't run and `mod("glitch")` stays 0. A name the game doesn't know - and you
 didn't declare - is an error when the file loads, with a "did you mean ...?".
 
 ## Coming from Psych or Kade

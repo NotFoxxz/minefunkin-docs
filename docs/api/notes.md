@@ -7,6 +7,9 @@ icon: material/music-note-outline
 Every note on its way to you, one by one. Make them ride in on a wave, fade as they come closer, spin, grow - the wildest
 modchart effects live here.
 
+!!! note "Written in .modchart files"
+    These properties move the lanes and notes, so only a `.modchart` file may set them (any file may read them; `strums.input`, the keys on / off, may be set anywhere). A `.event` that sets one doesn't load. The No Mod modifier leaves `.modchart` files out. [Two kinds of file](../guides/modcharts.md#event-and-modchart-files).
+
 !!! info "How to use it"
     Every frame the game lists the notes of your lanes that are on the screen (or about to be), in the order they
     come: `note[0]` is the next, up to `note[notes.count - 1]` (at most 128). Read `lane`, `time`, `distance`, ...;
@@ -132,41 +135,41 @@ end
 ### note[i].x { #note-x }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].x</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 Moved to the right in pixels, with its hold.
 
 ### note[i].y { #note-y }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].y</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 Moved down in pixels, with its hold.
 
 ### note[i].alpha { #note-alpha }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].alpha</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">0 – 1</span><span class="mf-tag">share of the screen</span><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 Its opacity.
 
 ### note[i].angle { #note-angle }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].angle</code> <span class="mf-eq">= <code>0</code></span></p>
-<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">degrees</span><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 Turned clockwise, in degrees.
 
 ### note[i].scale { #note-scale }
 
 <p class="mf-sig"><span class="mf-type">number</span> <code>note[i].scale</code> <span class="mf-eq">= <code>1</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 Its size.
 
 ### note[i].visible { #note-visible }
 
 <p class="mf-sig"><span class="mf-type">switch</span> <code>note[i].visible</code> <span class="mf-eq">= <code>true</code></span></p>
-<p class="mf-tags"><span class="mf-tag">kept at the song's end</span></p>
+<p class="mf-tags"><span class="mf-tag">kept at the song's end</span><span class="mf-tag">.modchart only</span></p>
 
 false = not drawn. It can still be hit.

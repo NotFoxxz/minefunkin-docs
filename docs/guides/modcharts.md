@@ -7,9 +7,9 @@ icon: material/vector-curve
 Lanes that sway like they've had one too many. Arrows spinning on their way in. Notes riding in on a wave, or
 sneaking in from the side. That's a **modchart** - and it's probably the most fun you can have with event scripts.
 
-In MineFunkin a modchart is nothing special: just event files. Usually one [song script](song-scripts.md) runs the
-whole thing, or you place events in the chart to switch effects on and off. Everything on this page works everywhere -
-in practice at the Retro TV and in fights.
+In MineFunkin a modchart lives in its own kind of file: a **`.modchart`** file. Usually one
+[song script](song-scripts.md) runs the whole thing, or you place events in the chart to switch effects on and off.
+Everything on this page works everywhere - in practice at the Retro TV and in fights.
 
 There are two ways to write one, and you can mix them. This page moves the lanes with **properties**
 (`strum[0].x = ...`, worked out in `onFrame`) - the Psych and Kade way. The other is **[modifiers](modifiers.md)**, where
@@ -20,9 +20,23 @@ Grab what you like, change the numbers, see what happens. That's honestly how mo
 property used here is explained in full on [strum[lane]](../api/strum.md), [strums](../api/strums.md) and
 [note[i]](../api/notes.md).
 
+## `.event` and `.modchart` files { #event-and-modchart-files }
+
+Everything that moves the **lanes and notes** goes in a `.modchart` file; everything else - camera, HUD, flashes,
+pictures, the fighters, sounds - in a `.event` file. Inside, both are written exactly the same way.
+
+- A `.modchart` sets `strum[lane]`, `strums`, `note[i]`, `notes` and `scroll`, the [modifiers](modifiers.md) and the
+  lane [shortcuts](../api/shortcuts.md#lanes-and-scroll) (`flipScroll()`, `hideStrums()`, ...).
+- A `.event` sets everything else. Reading works everywhere: a `.event` may look at `strum[0].x`.
+- Mixing them up is an error when the file loads, and the error says which file the line belongs in.
+- **One effect, two files:** a `.event` and a `.modchart` with the same `name` are one event - the chart event runs
+  both, the `.event` first. A `.event` can also start a modchart with [`trigger("Name")`](../api/shortcuts.md#trigger).
+- **No Mod:** players can switch modcharts off with the No Mod modifier. Then no `.modchart` file runs - the lanes stay
+  plain - while every `.event` still does its thing. That's why the split exists.
+
 ## Start with this
 
-Here's an empty modchart, ready to fill in. Save it as `modchart.event` in the song's folder:
+Here's an empty modchart, ready to fill in. Save it as `song.modchart` in the song's folder:
 
 ```lua
 format 2.0
@@ -462,12 +476,21 @@ the screen apart, sliding right. The `%` wraps it back round when it reaches the
 
 ### Upside down, the world upright
 
+Two files with the same name: the HUD and the camera turn in `upside_down.event`, the lanes in
+`upside_down.modchart` - one chart event runs both.
+
 ```lua
+-- upside_down.event
 function onEvent(p)
     hud.extras = false
     tween(hud.angle, 180, beats(4), "cubicInOut")
     tween(camera.roll, -180, beats(4), "cubicInOut")
+end
+```
 
+```lua
+-- upside_down.modchart
+function onEvent(p)
     for lane = 0, 3 do
         tween(strum[lane].x, (3 - 2 * lane) * strums.spacing, beats(4), "cubicInOut")
         tween(strum[lane].angle, -180, beats(4), "cubicInOut")

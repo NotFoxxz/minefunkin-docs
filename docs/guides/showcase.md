@@ -5,7 +5,9 @@ icon: material/music-note-eighth
 # The Event Showcase
 
 Want to see what all of this looks like in one go? The Event Showcase is a complete song - two minutes, 140 BPM,
-intro to outro - where every single effect is an event file in the song's folder. 31 of them, plus 2 shaders.
+intro to outro - where every single effect is an event file in the song's folder. 31 of them, plus 2 shaders. What moves
+the lanes is in `.modchart` files, the rest in `.event` files; an effect that does both is a pair with one name.
+Play it with the No Mod modifier and every lane effect stays out while the camera, texts and shaders still run.
 
 Every big feature gets its own moment: texts and pictures, the callbacks, the HUD and the strum background, a whole
 modchart (lanes that jiggle, fly off the screen, scroll across it, turn upside down and ride a ring), the fight
@@ -84,33 +86,33 @@ Looking for an example of something specific? Find it here, then open that file:
 | `power_on.event` | intro | a song shader (`shaders/crt.fsh`) driven by its four numbers: a dot, a line, the picture; the title on the `"top"` layer |
 | `caption.event` | every part | a counter kept for the whole song, a newer caption cancelling an older one's slide-out |
 | `cam_sway.event` | from the intro on | `onFrame(dt)`, `noise()`, easing a variable by hand, reading `shared hype` |
-| `judge_glow.event` | from verse 1 on | `onHit` / `onMiss`, `note.judgment` / `note.offset`, a function that returns a value |
+| `judge_glow.event` + `.modchart` | from verse 1 on | `onHit` / `onMiss`, `note.judgment` / `note.offset`, a function that returns a value |
 | `cam_follow.event` | verse 1 on | `onHit` / `onOpponentHit` easing `camera.z` / `.x` / `.yaw` toward whoever sings (fights) |
-| `opponent_echo.event` | verse 1 | `onOpponentHit`, lanes turned into directions, a vignette pulse |
+| `opponent_echo.event` + `.modchart` | verse 1 | `onOpponentHit`, lanes turned into directions, a vignette pulse |
 | `combo_meter.event` | the whole song | a song script: no chart event, only `onHit` / `onMiss` and `player.combo` |
-| `spotlight.event` | verse 2 | `onHit` and `onOpponentHit` sharing one function, `strum[lane].alpha` per lane |
-| `jiggle.event` | verse 2, the drops | a modchart's kick: `wobbleX` / `wobbleY` jolted on a drum pattern from `onStep(n)` |
+| `spotlight.event` + `.modchart` | verse 2 | `onHit` and `onOpponentHit` sharing one function, `strum[lane].alpha` per lane |
+| `jiggle.modchart` | verse 2, the drops | a modchart's kick: `wobbleX` / `wobbleY` jolted on a drum pattern from `onStep(n)` |
 | `build_up.event` | build | `onStep` patterns that speed up, a 3-2-1 scheduled in a `for` loop, writing `shared hype` |
-| `kade_sway.event` | build | `.x` / `.y` from `sin()` every frame; "wild" takes `tan()`, so the lanes fly off the screen and come back |
-| `spin.event` | build, the end | `.angle` from 360 to 0: once or every bar, counted from where the event sits |
+| `kade_sway.modchart` | build | `.x` / `.y` from `sin()` every frame; "wild" takes `tan()`, so the lanes fly off the screen and come back |
+| `spin.modchart` | build, the end | `.angle` from 360 to 0: once or every bar, counted from where the event sits |
 | `the_drop.event` | both drops | an impact, kick / snare patterns in `onBeat`, `hsv()` colours, `hud.angle` |
 | `shockwave.event` | every impact | a shader (`shaders/shockwave.fsh`) handed its start time; the fighters' `pitch` / `squash` / `z` |
 | `lane_lights.event` | drop | the strum background (`underlay.color` / `.alpha` / `.width`) flaring on the beat |
-| `hop.event` | drops | `max(0, sin())` as a bouncing ball, `isDown` to hop toward the middle |
+| `hop.modchart` | drops | `max(0, sin())` as a bouncing ball, `isDown` to hop toward the middle |
 | `dance_routine.event` | the dance | `animate = false`, body parts, eight moves as functions, a mirror flag, `fighter[i]` |
 | `orbit_cam.event` | the dance | `camera.x / .y / .z / .yaw / .pitch` together: circling the fighters |
 | `word_by_word.event` | the dance | six parameters from the parts of one value, `after()` keeping each step, `break` |
 | `fake_death.event` | fake death | `opponent.pose = "death"`, `fx.saturation` draining the colour, the camera looking down |
-| `drop_out.event` | fake death | a sequence of tweens per lane with `after()`: fall off, come back with `"elasticOut"` |
+| `drop_out.event` + `.modchart` | fake death | a sequence of tweens per lane with `after()`: fall off, come back with `"elasticOut"` |
 | `rise.event` | fake death | `opponent.scale` with `"elasticOut"`, a white flash, the colour back |
-| `scroller.event` | breakdown | the lanes across `screen.width`, wrapping round with `%`; an ease written by hand |
+| `scroller.event` + `.modchart` | breakdown | the lanes across `screen.width`, wrapping round with `%`; an ease written by hand |
 | `switcheroo.event` | rebuild, final drop | the fighters jump and swap places: `.x` / `.z` in the fight's frame, `.turn` 180 |
-| `scroll_twist.event` | rebuild | text properties (`strum[lane].scroll`), `player.downscroll` |
+| `scroll_twist.event` + `.modchart` | rebuild | text properties (`strum[lane].scroll`), `player.downscroll` |
 | `kick_hit.event` | final drop | `fx.chromatic` + `fx.bloom` on every beat |
 | `logo_bump.event` | final drop | the song's `logo.png` on the `"lanes"` layer: on the strum background, under the notes |
-| `upside_down.event` | final drop | `hud.angle` 180 with `camera.roll` -180 so the world stays upright, the lanes mirrored with `strums.spacing` |
-| `halo.event` | outro | `.x` / `.y` / `.scale` / `.alpha` from one angle per lane: a ring with depth |
-| `finale.event` | outro | live `player.score` / `player.accuracy` on the `"top"` layer, `onEnd` |
+| `upside_down.event` + `.modchart` | final drop | `hud.angle` 180 with `camera.roll` -180 so the world stays upright, the lanes mirrored with `strums.spacing` |
+| `halo.modchart` | outro | `.x` / `.y` / `.scale` / `.alpha` from one angle per lane: a ring with depth |
+| `finale.event` + `.modchart` | outro | live `player.score` / `player.accuracy` on the `"top"` layer, `onEnd` |
 | `power_off.event` | the end | the same shader played backwards, ending on `screen.color` |
 
 ## The files

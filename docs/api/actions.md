@@ -114,7 +114,7 @@ function onEvent(p)
     end, 8)
 
     every(beats(0.5), function()              -- until cancel("blink")
-        strums.alpha = strums.alpha == 1 ? 0.6 : 1
+        hud.alpha = hud.alpha == 1 ? 0.6 : 1
     end, "blink")
 end
 ```
@@ -168,10 +168,11 @@ unless a script writes to it meanwhile. Tweens on what's reset stop.
 ```lua
 reset(hud.angle)                         -- at once
 reset(hud, beats(1), "backOut")          -- the whole HUD, overshooting a little
-reset(strum[2], beats(0.5))              -- one lane
 reset(text[0], beats(1))                 -- fades out, then empty
-resetAll(beats(2))                       -- everything, over two beats
+resetAll(beats(2))                       -- everything this kind of file writes, over two beats
 ```
+
+The lanes are put back in a `.modchart` file: `reset(strum[2], beats(0.5))` (one lane), `reset(strums)`.
 
 The song's end resets the moving parts by itself - see [When the song ends](properties.md#when-the-song-ends).
 
