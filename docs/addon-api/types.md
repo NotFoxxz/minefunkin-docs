@@ -108,9 +108,14 @@ the host's; an addon names them in its [`FightRequest`](#fightrequest)):
 | `NO_MOD` | NM | x0.5 - 1 | the song's `.modchart` files don't run; less points the more of the song they moved |
 | `ONE_SHOT` | OS | x1 | the first miss ends the run |
 | `SICK_ONLY` | SO | x1 | anything worse than "Sick!" ends the run |
+| `NO_HOLD` | NH | x0.9 | every hold note becomes a normal note |
+| `SLOW` | SL | x0.3 | the song 0.75x as fast, the music keeps its pitch |
+| `AUTOPLAY` | AP | x1 | the song plays itself, nothing counts (never in your fights) |
+| `ADAPTIVE_SPEED` | AS | x0.5 | the speed follows the player (0.75x - 1.5x), nothing counts (Freeplay only - never in your fights) |
 
 `acronym()` = the badge's letters, `pointFactor()` = the factor (`NaN` for `NO_MOD` - its value depends on the song).
-`EASY` and `HARD` exclude each other, so do `ONE_SHOT` and `SICK_ONLY`.
+`EASY` and `HARD` exclude each other, so do `ONE_SHOT` and `SICK_ONLY`, and the speeds (`DOUBLE_TIME`, `SLOW`,
+`ADAPTIVE_SPEED`).
 
 ### Modifiers
 

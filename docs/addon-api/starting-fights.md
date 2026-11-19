@@ -143,7 +143,8 @@ After the fight both players get their place and their look back - unless you gi
 ```
 
 Both fighters play with exactly these. The players' own picks in the song select never apply to your fight - leave
-`.modifiers` out and it's played without any. `EASY` beats `HARD` and `ONE_SHOT` beats `SICK_ONLY` when you name both.
+`.modifiers` out and it's played without any. `EASY` beats `HARD` and `ONE_SHOT` beats `SICK_ONLY` when you name both,
+`DOUBLE_TIME` beats `SLOW`. `AUTOPLAY` and `ADAPTIVE_SPEED` are left out - a fight always counts.
 `SHUFFLE` takes a seed the server makes, the same for both fighters and everyone watching. The points carry the
 modifiers' factor like everywhere ([`Modifier`](types.md#modifier)); `fight.modifiers()` and every result's
 `modifiers()` say what was played.
