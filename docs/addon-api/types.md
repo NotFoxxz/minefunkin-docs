@@ -101,7 +101,7 @@ the host's; an addon names them in its [`FightRequest`](#fightrequest)):
 | Value | Badge | Points | |
 |---|---|---|---|
 | `EASY` | EZ | x0.5 | wider hit windows |
-| `HARD` | HD | x1.06 | narrower hit windows |
+| `HARD` | HR | x1.06 | narrower hit windows |
 | `FADE` | FD | x1.06 | notes fade out before the receptors |
 | `SHUFFLE` | SH | x1 | every note on a random lane (the same for everyone in the run) |
 | `DOUBLE_TIME` | DT | x1.12 | the song 1.5x as fast, the music keeps its pitch |
@@ -111,9 +111,9 @@ the host's; an addon names them in its [`FightRequest`](#fightrequest)):
 | `NO_HOLD` | NH | x0.9 | every hold note becomes a normal note |
 | `SLOW` | SL | x0.3 | the song 0.75x as fast, the music keeps its pitch |
 | `AUTOPLAY` | AP | x1 | the song plays itself, nothing counts (never in your fights) |
-| `ADAPTIVE_SPEED` | AS | x0.5 | the speed follows the players (0.75x - 1.5x), nothing goes on a board (never in your fights) |
-| `HUNGER` | HU | x1 | the health is a hunger bar that sinks by itself while notes come; hits fill it (fights only) |
-| `FAKEOUT` | FO | x1.06 | a few notes show up early at a false place, turn purple and jump back before they're due |
+| `ADAPTIVE_SPEED` | AD | x0.7 | the speed follows the players (0.75x - 1.75x), nothing goes on a board (never in your fights) |
+| `HUNGER` | HG | x1.02 | the health is a hunger bar that keeps sinking down to one point; hits fill it, a miss there ends the run (fights only) |
+| `FAKEOUT` | FK | x1.06 | now and then an extra note that isn't in the chart, fading out on its way up; pressing it is a miss |
 
 `acronym()` = the badge's letters, `pointFactor()` = the factor (`NaN` for `NO_MOD` - its value depends on the song).
 `EASY` and `HARD` exclude each other, so do `ONE_SHOT` and `SICK_ONLY`, `FADE` and `FAKEOUT`, and the speeds
