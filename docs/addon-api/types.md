@@ -111,7 +111,7 @@ the host's; an addon names them in its [`FightRequest`](#fightrequest)):
 | `NO_HOLD` | NH | x0.9 | every hold note becomes a normal note |
 | `SLOW` | SL | x0.3 | the song 0.75x as fast, the music keeps its pitch |
 | `AUTOPLAY` | AP | x1 | the song plays itself, nothing counts (never in your fights) |
-| `ADAPTIVE_SPEED` | AD | x0.7 | the speed follows the players (0.75x - 1.75x), nothing goes on a board (never in your fights) |
+| `ADAPTIVE_SPEED` | AD | x1 | the speed follows the players (0.75x - 1.75x), nothing goes on a board (never in your fights) |
 | `HUNGER` | HG | x1.02 | the health is a hunger bar that keeps sinking down to one point; hits fill it, a miss there ends the run (fights only) |
 | `FAKEOUT` | FK | x1.06 | now and then an extra note that isn't in the chart, fading out on its way up; pressing it is a miss |
 
