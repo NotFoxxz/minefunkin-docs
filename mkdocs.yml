@@ -137,6 +137,7 @@ nav:
   - Songs:
       - songs/index.md
       - Song files: songs/files.md
+      - Mods: songs/mods.md
   - Figura avatars:
       - figura/index.md
   - Addon API:
