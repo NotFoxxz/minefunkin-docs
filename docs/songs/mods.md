@@ -66,7 +66,9 @@ your fingers still. How early it fades follows your scroll speed: it always look
 ### Adaptive
 
 The song's speed follows you: hit well and it gets faster, miss and it gets slower - anywhere from 0.75x to 1.75x.
-The music keeps its pitch. A soft glow at the edges of the screen shows what's happening:
+**Sicks** push it up, **Goods** keep it about where it is, **Bads**, **Shits** and **misses** pull it down - a miss
+also takes a step down at once. It changes slowly: from 1x to the top takes about half a minute of Sicks, however many
+notes the song has. The music keeps its pitch. A soft glow at the edges of the screen shows what's happening:
 
 - **Warm, drifting up** - the song is speeding up.
 - **Blue, drifting down** - the song is slowing down.
